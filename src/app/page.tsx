@@ -1,7 +1,6 @@
 import { Hero } from "@/components/blocks/hero";
 import { TrustedByTicker } from "@/components/blocks/trusted-by-ticker";
 import { TrustStrip } from "@/components/blocks/trust-strip";
-import { FeatureList } from "@/components/blocks/feature-list";
 import { FooterCTA } from "@/components/blocks/footer-cta";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
@@ -22,7 +21,6 @@ export default function Home() {
       {/* Hero Section - TurboTax Style */}
       <Hero
         title="Expert Tax & Financial Planning for US-India Cross-Border Professionals"
-        subtitle="Navigate complex tax laws with confidence"
         description="Get personalized guidance on RNOR status, tax planning, and financial transition strategies. Our experts help you make informed decisions for your return to India."
         ctaText="Start for Free"
         ctaHref="/tools/free-return-to-india-planner"
@@ -254,7 +252,7 @@ export default function Home() {
                   ★★★★★
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  "Settleline made my return to India seamless. Their RNOR expertise saved me thousands in taxes."
+                  &ldquo;Settleline made my return to India seamless. Their RNOR expertise saved me thousands in taxes.&rdquo;
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -274,7 +272,7 @@ export default function Home() {
                   ★★★★★
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  "The personalized guidance was exactly what I needed. Highly recommend their services."
+                  &ldquo;The personalized guidance was exactly what I needed. Highly recommend their services.&rdquo;
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -294,7 +292,7 @@ export default function Home() {
                   ★★★★★
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  "Professional, knowledgeable, and responsive. They handled all the complex tax planning for me."
+                  &ldquo;Professional, knowledgeable, and responsive. They handled all the complex tax planning for me.&rdquo;
                 </p>
               </div>
               <div className="flex items-center gap-3">

@@ -5,7 +5,6 @@ import heroAdvisorPhoto from "../../../public/images/hero-advisor-photo.webp"
 
 interface HeroProps {
   title: string
-  subtitle?: string
   description?: string
   ctaText?: string
   ctaHref?: string
@@ -16,7 +15,6 @@ interface HeroProps {
 
 export function Hero({
   title,
-  subtitle,
   description,
   ctaText = "Get Started",
   ctaHref = "/book",
