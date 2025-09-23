@@ -14,7 +14,6 @@ export default function BookPage() {
     <>
       <Hero
         title="Book a Consultation"
-        subtitle="Get expert guidance for your transition"
         description="Schedule a consultation with our specialists to discuss your specific situation and create a personalized plan for your return to India."
         ctaText="Schedule Now"
         ctaHref="#consultation"

@@ -46,7 +46,6 @@ export default function ServicesPage() {
     <>
       <Hero
         title="Tax & Financial Services"
-        subtitle="Expert guidance for your US-India transition"
         description="Comprehensive services designed specifically for cross-border professionals. From RNOR planning to ongoing compliance support."
         ctaText="Book Consultation"
         ctaHref="/book"

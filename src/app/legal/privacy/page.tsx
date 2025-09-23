@@ -13,7 +13,6 @@ export default function PrivacyPage() {
     <>
       <Hero
         title="Privacy Policy"
-        subtitle="How we protect your information"
         description="Your privacy is important to us. Learn how we collect, use, and protect your personal information."
       />
       

@@ -12,7 +12,6 @@ export default function AboutPage() {
     <>
       <Hero
         title="About Settleline"
-        subtitle="Your trusted partner in US-India transitions"
         description="We specialize in helping cross-border professionals navigate the complex world of US-India tax and financial planning."
       />
       

@@ -14,7 +14,6 @@ export default function ThanksPage() {
     <>
       <Hero
         title="Thank You!"
-        subtitle="We've received your message"
         description="Thank you for reaching out to us. We'll review your information and get back to you within 24 hours."
       />
       

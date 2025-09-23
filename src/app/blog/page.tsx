@@ -19,7 +19,6 @@ export default function BlogPage() {
     <>
       <Hero
         title="Blog & Resources"
-        subtitle="Expert insights for your transition"
         description="Stay informed with the latest updates on US-India tax laws, RNOR planning strategies, and financial transition tips."
         ctaText="Book Consultation"
         ctaHref="/book"

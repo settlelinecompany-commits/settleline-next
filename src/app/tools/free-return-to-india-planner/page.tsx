@@ -37,7 +37,6 @@ export default function PlannerPage() {
     <>
       <Hero
         title="Free Return to India Planner"
-        subtitle="Plan your transition with confidence"
         description="Get personalized insights for your return to India. Our comprehensive planner helps you understand RNOR status, tax implications, and financial strategies."
         ctaText="Start Planning"
         ctaHref="#calculator"
