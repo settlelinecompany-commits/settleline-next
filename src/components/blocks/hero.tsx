@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
+import Image from "next/image"
+import heroAdvisorPhoto from "../../../public/images/hero-advisor-photo.webp"
 
 interface HeroProps {
   title: string
@@ -23,7 +25,7 @@ export function Hero({
   background = "default"
 }: HeroProps) {
   return (
-    <section className={`py-16 lg:py-24 ${
+    <section className={`py-12 lg:py-16 ${
       background === "primary" 
         ? "bg-primary text-primary-foreground" 
         : background === "muted" 
@@ -61,19 +63,17 @@ export function Hero({
           <div className="relative">
             {/* Main Hero Image Area */}
             <div className="relative w-full h-96 lg:h-[500px] bg-gradient-to-br from-muted to-muted/50 rounded-2xl overflow-hidden">
-              {/* Placeholder for advisor image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-4xl">👨‍💼</span>
-                  </div>
-                  <p className="text-lg font-medium text-foreground">
-                    Professional Tax Advisor
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    [Placeholder for advisor photo]
-                  </p>
-                </div>
+              {/* Advisor Image */}
+              <div className="absolute inset-0">
+                <Image 
+                  src={heroAdvisorPhoto}
+                  alt="Professional tax advisor helping NRIs with RNOR & cross-border planning"
+                  fill
+                  className="object-cover rounded-2xl"
+                  priority
+                  placeholder="blur"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
 
               {/* Overlaid Callout Cards */}
