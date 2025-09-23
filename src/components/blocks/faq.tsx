@@ -34,7 +34,7 @@ export function FAQ({
           
           <Accordion>
             {items.map((item, index) => (
-              <AccordionItem key={index} value={item.question}>
+              <AccordionItem key={index}>
                 <AccordionTrigger>{item.question}</AccordionTrigger>
                 <AccordionContent>
                   <div className="prose prose-sm max-w-none">

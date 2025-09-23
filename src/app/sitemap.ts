@@ -4,7 +4,8 @@ import { ENV } from '@/lib/env'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = ENV.siteUrl
-  const { blog, services } = getAllContentSlugs()
+  const { blog } = getAllContentSlugs()
+  const services = ['/services/rnor-planning'] // Static services for now
   
   const staticRoutes = [
     {

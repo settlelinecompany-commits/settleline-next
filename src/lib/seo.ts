@@ -29,10 +29,8 @@ export function generateSEO({
   const url = canonical || SITE_CONFIG.url
   
   return {
-    metadataBase: new URL(SITE_CONFIG.url),
     title: fullTitle,
     description,
-    canonical: url,
     openGraph: {
       title: fullTitle,
       description,

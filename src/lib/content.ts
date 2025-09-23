@@ -76,24 +76,35 @@ export function getServices(): Service[] {
   const servicesDir = path.join(contentDirectory, 'services')
   if (!fs.existsSync(servicesDir)) return []
   
-  const files = fs.readdirSync(servicesDir)
-  const services = files
-    .filter(file => file.endsWith('.md'))
-    .map(file => {
-      const filePath = path.join(servicesDir, file)
-      const fileContent = fs.readFileSync(filePath, 'utf8')
-      const { data, content } = matter(fileContent)
-      
-      return {
-        slug: file.replace('.md', ''),
-        ...data,
-        content,
-      } as Service
-    })
-    .filter(service => !service.draft)
-    .sort((a, b) => a.title.localeCompare(b.title))
-  
-  return services
+  try {
+    const files = fs.readdirSync(servicesDir)
+    const services = files
+      .filter(file => file.endsWith('.md'))
+      .map(file => {
+        try {
+          const filePath = path.join(servicesDir, file)
+          const fileContent = fs.readFileSync(filePath, 'utf8')
+          const { data, content } = matter(fileContent)
+          
+          return {
+            slug: file.replace('.md', ''),
+            ...data,
+            content,
+          } as Service
+        } catch (error) {
+          console.error(`Error reading service file ${file}:`, error)
+          return null
+        }
+      })
+      .filter((service): service is Service => service !== null)
+      .filter(service => !service.draft)
+      .sort((a, b) => a.title.localeCompare(b.title))
+    
+    return services
+  } catch (error) {
+    console.error('Error reading services directory:', error)
+    return []
+  }
 }
 
 export function getService(slug: string): Service | null {

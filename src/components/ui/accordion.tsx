@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface AccordionItemProps {
-  value: string
   children: React.ReactNode
 }
 
@@ -49,13 +48,12 @@ export function Accordion({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function AccordionItem({ value, children }: AccordionItemProps) {
+export function AccordionItem({ children }: AccordionItemProps) {
   return <div className="border rounded-lg">{children}</div>
 }
 
 export function AccordionTrigger({ children, className }: AccordionTriggerProps) {
-  const { openItems, toggleItem } = React.useContext(AccordionContext)
-  const isOpen = openItems.has(React.Children.toArray(children)[0] as string)
+  const { toggleItem } = React.useContext(AccordionContext)
 
   return (
     <button
@@ -72,19 +70,9 @@ export function AccordionTrigger({ children, className }: AccordionTriggerProps)
 }
 
 export function AccordionContent({ children, className }: AccordionContentProps) {
-  const { openItems } = React.useContext(AccordionContext)
-  const isOpen = openItems.has(React.Children.toArray(children)[0] as string)
-
   return (
-    <div
-      className={cn(
-        "overflow-hidden transition-all",
-        isOpen ? "animate-accordion-down" : "animate-accordion-up"
-      )}
-    >
-      <div className={cn("p-4 pt-0", className)}>
-        {children}
-      </div>
+    <div className={cn("p-4 pt-0", className)}>
+      {children}
     </div>
   )
 }
