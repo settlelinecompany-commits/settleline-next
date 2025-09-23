@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
 import { NAVIGATION } from "@/lib/constants"
@@ -10,7 +11,13 @@ export function SiteHeader() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-8">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-h3 font-bold text-primary">Settleline</span>
+              <Image 
+                src="/images/logos/settleline-logo.webp" 
+                alt="Settleline" 
+                width={180} 
+                height={80}
+                className="h-8 w-auto"
+              />
             </Link>
             <nav className="hidden md:flex items-center space-x-6">
               {NAVIGATION.map((item) => (

@@ -20,12 +20,13 @@ export default function Home() {
     <>
       {/* Hero Section - TurboTax Style */}
       <Hero
-        title="Your New Headline Text Here"
+        title="Expert Tax & Financial Planning for US-India Cross-Border Professionals"
         description="Get personalized guidance on RNOR status, tax planning, and financial transition strategies. Our experts help you make informed decisions for your return to India."
         ctaText="Start for Free"
         ctaHref="/tools/free-return-to-india-planner"
         secondaryCtaText="Get Expert Help"
         secondaryCtaHref="/book"
+        variant="complex"
       />
       
       {/* Trusted By Ticker */}

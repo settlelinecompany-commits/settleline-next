@@ -11,6 +11,7 @@ interface HeroProps {
   secondaryCtaText?: string
   secondaryCtaHref?: string
   background?: "default" | "muted" | "primary"
+  variant?: "simple" | "complex"
 }
 
 export function Hero({
@@ -20,10 +21,48 @@ export function Hero({
   ctaHref = "/book",
   secondaryCtaText,
   secondaryCtaHref,
-  background = "default"
+  background = "default",
+  variant = "simple"
 }: HeroProps) {
+  // Simple variant - text-based hero
+  if (variant === "simple") {
+    return (
+      <section className={`py-16 lg:py-24 ${
+        background === "primary" 
+          ? "bg-primary text-primary-foreground" 
+          : background === "muted" 
+          ? "bg-muted" 
+          : "bg-background"
+      }`}>
+        <Container size="lg">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
+              {title}
+            </h1>
+            {description && (
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                {description}
+              </p>
+            )}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" asChild>
+                <a href={ctaHref}>{ctaText}</a>
+              </Button>
+              {secondaryCtaText && secondaryCtaHref && (
+                <Button variant="outline" size="lg" asChild>
+                  <a href={secondaryCtaHref}>{secondaryCtaText}</a>
+                </Button>
+              )}
+            </div>
+          </div>
+        </Container>
+      </section>
+    )
+  }
+
+  // Complex variant - two-column layout with image and cards
   return (
-    <section className={`py-8 lg:py-6 ${
+    <section className={`py-12 lg:py-16 ${
       background === "primary" 
         ? "bg-primary text-primary-foreground" 
         : background === "muted" 
@@ -36,14 +75,14 @@ export function Hero({
           <div className="space-y-4 order-1 lg:order-1">
             {/* Headline */}
             <div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+              <h1 className="text-3xl lg:text-4xl font-medium text-foreground leading-tight">
                 {title}
               </h1>
             </div>
 
             {/* Primary CTA Button */}
             <div>
-              <Button size="lg" asChild className="text-lg px-8 py-4">
+              <Button size="default" asChild className="text-base px-6 py-3">
                 <a href="/tools/free-return-to-india-planner">Free Return to India Planner Tool</a>
               </Button>
             </div>
@@ -96,7 +135,7 @@ export function Hero({
             </div>
 
             {/* Bottom Supplementary Card */}
-            <div className="bg-muted/30 rounded-2xl p-8 border border-border/50">
+            <div className="bg-blue-100/30 rounded-2xl p-8 border border-border/50">
               <div className="text-center space-y-4">
                 <h3 className="text-2xl font-bold text-foreground">
                   Expert Guidance Available
