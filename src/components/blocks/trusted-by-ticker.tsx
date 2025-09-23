@@ -11,16 +11,16 @@ interface TrustedByTickerProps {
 }
 
 export function TrustedByTicker({ logos }: TrustedByTickerProps) {
-  // Default placeholder logos if none provided
+  // Default logos - replace with your actual logo files
   const defaultLogos = [
-    { name: "TechCorp", src: "/api/placeholder/120/60", alt: "TechCorp" },
-    { name: "GlobalTech", src: "/api/placeholder/120/60", alt: "GlobalTech" },
-    { name: "InnovateLabs", src: "/api/placeholder/120/60", alt: "InnovateLabs" },
-    { name: "DataFlow", src: "/api/placeholder/120/60", alt: "DataFlow" },
-    { name: "CloudSync", src: "/api/placeholder/120/60", alt: "CloudSync" },
-    { name: "NextGen", src: "/api/placeholder/120/60", alt: "NextGen" },
-    { name: "FutureSoft", src: "/api/placeholder/120/60", alt: "FutureSoft" },
-    { name: "SmartSys", src: "/api/placeholder/120/60", alt: "SmartSys" },
+    { name: "Your Company 1", src: "/images/logos/deloitte.webp", alt: "deloitte" },
+    { name: "Your Company 2", src: "/images/logos/tcs.webp", alt: "tcs" },
+    { name: "Your Company 3", src: "/images/logos/oracle.webp", alt: "oracle" },
+    { name: "Your Company 4", src: "/images/logos/walmart.webp", alt: "walmart" },
+    { name: "Your Company 5", src: "/images/logos/jpmorganchase.webp", alt: "jpmorganchase" },
+    { name: "Your Company 6", src: "/images/logos/company6.webp", alt: "Your Company 6" },
+    { name: "Your Company 7", src: "/images/logos/company7.webp", alt: "Your Company 7" },
+    { name: "Your Company 8", src: "/images/logos/company8.webp", alt: "Your Company 8" },
   ];
 
   const logoList = logos || defaultLogos;
@@ -47,10 +47,21 @@ export function TrustedByTicker({ logos }: TrustedByTickerProps) {
                 key={`first-${index}`}
                 className="flex-shrink-0 flex items-center justify-center"
               >
-                <div className="w-32 h-16 bg-muted rounded-lg flex items-center justify-center border border-border/50">
-                  <span className="text-xs font-medium text-muted-foreground">
-                    {logo.name}
-                  </span>
+                <div className="w-32 h-16 bg-white rounded-lg flex items-center justify-center border border-border/50 p-2">
+                  <img 
+                    src={logo.src} 
+                    alt={logo.alt}
+                    className="max-w-full max-h-full object-contain"
+                    onError={(e) => {
+                      // Fallback to text if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `<span class="text-xs font-medium text-muted-foreground">${logo.name}</span>`;
+                      }
+                    }}
+                  />
                 </div>
               </div>
             ))}
@@ -61,10 +72,21 @@ export function TrustedByTicker({ logos }: TrustedByTickerProps) {
                 key={`second-${index}`}
                 className="flex-shrink-0 flex items-center justify-center"
               >
-                <div className="w-32 h-16 bg-muted rounded-lg flex items-center justify-center border border-border/50">
-                  <span className="text-xs font-medium text-muted-foreground">
-                    {logo.name}
-                  </span>
+                <div className="w-32 h-16 bg-white rounded-lg flex items-center justify-center border border-border/50 p-2">
+                  <img 
+                    src={logo.src} 
+                    alt={logo.alt}
+                    className="max-w-full max-h-full object-contain"
+                    onError={(e) => {
+                      // Fallback to text if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `<span class="text-xs font-medium text-muted-foreground">${logo.name}</span>`;
+                      }
+                    }}
+                  />
                 </div>
               </div>
             ))}

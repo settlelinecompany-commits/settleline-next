@@ -23,7 +23,7 @@ export function Hero({
   background = "default"
 }: HeroProps) {
   return (
-    <section className={`py-12 lg:py-16 ${
+    <section className={`py-8 lg:py-6 ${
       background === "primary" 
         ? "bg-primary text-primary-foreground" 
         : background === "muted" 
@@ -31,78 +31,87 @@ export function Hero({
         : "bg-background"
     }`}>
       <Container size="lg">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Text Content */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+        <div className="grid lg:grid-cols-2 gap-16 items-start min-h-[510px]">
+          {/* Left Column - Headline + CTA + Image */}
+          <div className="space-y-4 order-1 lg:order-1">
+            {/* Headline */}
+            <div>
+              <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                 {title}
               </h1>
-              {description && (
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  {description}
-                </p>
-              )}
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
+
+            {/* Primary CTA Button */}
+            <div>
               <Button size="lg" asChild className="text-lg px-8 py-4">
-                <a href={ctaHref}>{ctaText}</a>
+                <a href="/tools/free-return-to-india-planner">Free Return to India Planner Tool</a>
               </Button>
-              {secondaryCtaText && secondaryCtaHref && (
-                <Button variant="outline" size="lg" asChild className="text-lg px-8 py-4">
-                  <a href={secondaryCtaHref}>{secondaryCtaText}</a>
-                </Button>
-              )}
             </div>
+
+                  {/* Advisor Image with Overlay Callout */}
+                  <div className="relative w-full h-80 lg:h-96 bg-gradient-to-br from-muted to-muted/50 rounded-2xl overflow-hidden">
+                    <Image 
+                      src={heroAdvisorPhoto}
+                      alt="Professional tax advisor helping NRIs with RNOR & cross-border planning"
+                      fill
+                      className="object-cover object-top rounded-2xl"
+                      priority
+                      placeholder="blur"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    
+                    {/* Overlay Callout Box */}
+                    <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 max-w-[140px] border border-border/20">
+                      <div className="text-xs font-semibold text-gray-600 mb-1">
+                        Foreign Tax Credits
+                      </div>
+                      <div className="text-lg font-bold text-green-600">
+                        $4,000
+                      </div>
+                    </div>
+                  </div>
           </div>
 
-          {/* Right Column - Hero Image with Overlaid Callouts */}
-          <div className="relative">
-            {/* Main Hero Image Area */}
-            <div className="relative w-full h-96 lg:h-[500px] bg-gradient-to-br from-muted to-muted/50 rounded-2xl overflow-hidden">
-              {/* Advisor Image */}
-              <div className="absolute inset-0">
-                <Image 
-                  src={heroAdvisorPhoto}
-                  alt="Professional tax advisor helping NRIs with RNOR & cross-border planning"
-                  fill
-                  className="object-cover rounded-2xl"
-                  priority
-                  placeholder="blur"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-
-              {/* Overlaid Callout Cards */}
-              {/* Top Right - Tax Savings Callout */}
-              <div className="absolute top-6 right-6 bg-white border border-border rounded-xl p-4 shadow-lg max-w-48">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                    <span className="text-green-600 text-sm">✓</span>
-                  </div>
-                  <span className="text-sm font-medium text-foreground">
-                    Great savings!
-                  </span>
-                </div>
-                <div className="text-2xl font-bold text-green-600 mb-1">
-                  $15,000+
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Average Tax Savings
+          {/* Right Column - Two Supplementary Cards */}
+          <div className="flex flex-col gap-10 order-2 lg:order-2">
+            {/* Top Supplementary Card */}
+            <div className="bg-muted/30 rounded-2xl p-8 border border-border/50">
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl font-bold text-foreground">
+                  Expert Guidance Available
+                </h3>
+                <p className="text-muted-foreground">
+                  Get personalized support from our US-India tax specialists. 
+                  Book a consultation to discuss your specific situation.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button variant="outline" asChild>
+                    <a href="/book">Book Consultation</a>
+                  </Button>
+                  <Button variant="ghost" asChild>
+                    <a href="/tools/free-return-to-india-planner">Try Free Planner</a>
+                  </Button>
                 </div>
               </div>
+            </div>
 
-              {/* Bottom Left - Free Assessment Callout */}
-              <div className="absolute bottom-6 left-6 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-lg max-w-52">
-                <div className="text-sm font-semibold text-foreground mb-1">
-                  Free RNOR Assessment
-                </div>
-                <div className="text-xs text-muted-foreground mb-2">
-                  Get your personalized analysis
-                </div>
-                <div className="text-lg font-bold text-blue-600">
-                  FREE
+            {/* Bottom Supplementary Card */}
+            <div className="bg-muted/30 rounded-2xl p-8 border border-border/50">
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl font-bold text-foreground">
+                  Expert Guidance Available
+                </h3>
+                <p className="text-muted-foreground">
+                  Get personalized support from our US-India tax specialists. 
+                  Book a consultation to discuss your specific situation.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button variant="outline" asChild>
+                    <a href="/book">Book Consultation</a>
+                  </Button>
+                  <Button variant="ghost" asChild>
+                    <a href="/tools/free-return-to-india-planner">Try Free Planner</a>
+                  </Button>
                 </div>
               </div>
             </div>
