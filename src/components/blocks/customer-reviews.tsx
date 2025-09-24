@@ -26,7 +26,8 @@ const defaultReviews: Review[] = [
     text: "Settleline is very easy to use. If you do need help, online tax experts are ready to help. I would recommend using this tax planning service instead of paying hundreds of dollars elsewhere. Settleline walks you through US-India tax preparation step by step.",
     reviewer: "Priya2985",
     location: "California",
-    product: "2024 RNOR Planning Service"
+    product: "2024 RNOR Planning Service",
+    rating: 5
   },
   {
     id: 2,
@@ -34,7 +35,8 @@ const defaultReviews: Review[] = [
     text: "Settleline is the only way I complete my US-India tax planning. The service walks you through all the questions in an easy manner and if you need more clarification, there is always additional help. I always feel confident about my cross-border tax strategy.",
     reviewer: "Rajesh320",
     location: "New York",
-    product: "2024 Comprehensive Tax Planning"
+    product: "2024 Comprehensive Tax Planning",
+    rating: 5
   },
   {
     id: 3,
@@ -42,7 +44,8 @@ const defaultReviews: Review[] = [
     text: "Settleline is one of the simplest tax planning services I've ever used for my US-India transition. I've used a few other services in the past, but Settleline's easy to understand guidance for cross-border tax planning comes on top. The service fee is worth it knowing that the experts check for any errors and provide comprehensive support.",
     reviewer: "Anita018",
     location: "Texas",
-    product: "2024 Return to India Planning"
+    product: "2024 Return to India Planning",
+    rating: 5
   }
 ];
 
