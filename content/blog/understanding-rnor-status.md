@@ -9,7 +9,9 @@ date: "2024-01-15"
 updated: "2024-01-20"
 readTime: "8 min read"
 tags: ["RNOR", "Tax Planning", "India Return"]
-cover: "/images/blog/rnor-guide.jpg"
+cover: "/images/blog/rnor-guide.webp"
+category: "Tax Planning"
+featured: true
 draft: false
 faq:
   - question: "What is RNOR status?"
@@ -24,6 +26,14 @@ faq:
 
 Returning to India after years of working in the US can be both exciting and complex, especially when it comes to tax planning. One of the most important concepts to understand is RNOR (Resident but Not Ordinarily Resident) status, which can provide significant tax benefits during your transition period.
 
+## Key Takeaways
+
+- **RNOR status provides a 2-year tax optimization window** for US-India cross-border professionals
+- **Foreign income is generally exempt** from Indian taxation during RNOR period
+- **Strategic planning is crucial** to maximize benefits and maintain compliance
+- **Physical presence tracking** is essential to maintain RNOR eligibility
+- **Early planning** (6-12 months before return) maximizes tax savings opportunities
+
 ## What is RNOR Status?
 
 RNOR status is a special tax classification in India that applies to individuals who are Indian citizens or persons of Indian origin returning to India after being non-resident for a certain period. This status provides a unique opportunity to optimize your tax situation during the initial years of your return.
@@ -35,6 +45,8 @@ To qualify for RNOR status, you must meet one of the following conditions:
 1. **Indian Citizen or Person of Indian Origin**: You must be an Indian citizen or a person of Indian origin
 2. **Non-Resident Period**: You must have been a non-resident in India for at least 9 out of the 10 previous years
 3. **Physical Presence**: You must be physically present in India for at least 60 days in the current financial year
+
+> **Settleline Expert Tip**: Start tracking your physical presence in India from day one of your return. Many clients lose RNOR status due to inadequate record-keeping. Use a simple calendar or app to log your travel dates and maintain supporting documentation like boarding passes and hotel receipts. — Priya Sharma, Senior Tax Advisor
 
 ## Key Tax Benefits
 
@@ -61,6 +73,8 @@ The RNOR period provides a unique window for tax optimization:
 - **Asset Restructuring**: Move assets between countries strategically
 - **Income Timing**: Plan the timing of income recognition
 - **Investment Planning**: Optimize your investment portfolio for the transition
+
+> **Settleline Expert Tip**: The RNOR period is your golden window for tax optimization. We've helped clients save over $50,000 by strategically timing their asset transfers and income recognition during this 2-year period. Don't wait until the last minute - start planning 6-12 months before your return. — Rajesh Kumar, Tax Planning Specialist
 
 ## Planning Strategies
 

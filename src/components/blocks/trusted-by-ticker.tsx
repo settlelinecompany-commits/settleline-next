@@ -30,7 +30,7 @@ export function TrustedByTicker({ logos }: TrustedByTickerProps) {
       <Container>
         <div className="text-center mb-6">
           <p className="text-sm font-bold text-muted-foreground uppercase tracking-wide">
-            Trusted by professionals from top global companies
+            Trusted by businesses & professionals from top global companies
           </p>
         </div>
         

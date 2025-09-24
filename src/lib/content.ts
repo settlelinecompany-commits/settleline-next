@@ -17,6 +17,8 @@ export interface BlogPost {
   readTime: string
   tags: string[]
   cover?: string
+  category: string
+  featured: boolean
   draft: boolean
   faq?: Array<{
     question: string
@@ -70,6 +72,22 @@ export function getBlogPosts(): BlogPost[] {
 export function getBlogPost(slug: string): BlogPost | null {
   const posts = getBlogPosts()
   return posts.find(post => post.slug === slug) || null
+}
+
+export function getFeaturedBlogPosts(limit: number = 3): BlogPost[] {
+  const posts = getBlogPosts()
+  const featuredPosts = posts.filter(post => post.featured)
+  
+  // If we have enough featured posts, return them
+  if (featuredPosts.length >= limit) {
+    return featuredPosts.slice(0, limit)
+  }
+  
+  // Otherwise, fill with latest posts
+  const remainingSlots = limit - featuredPosts.length
+  const latestPosts = posts.filter(post => !post.featured).slice(0, remainingSlots)
+  
+  return [...featuredPosts, ...latestPosts]
 }
 
 export function getServices(): Service[] {

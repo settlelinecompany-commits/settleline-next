@@ -8,6 +8,8 @@ date: "2024-01-10"
 readTime: "6 min read"
 tags: ["Tax Planning", "Checklist", "Preparation"]
 cover: "/images/blog/tax-checklist.jpg"
+category: "Compliance"
+featured: true
 draft: false
 faq:
   - question: "When should I start tax planning for my return to India?"
