@@ -158,7 +158,7 @@ export function Hero({
                 
                 {/* Subtitle */}
                 <p className="text-sm font-medium text-muted-foreground">
-                  Settleline's 2025 NRI 12-Step Checklist Goes Viral
+                  Settleline&apos;s 2025 NRI 12-Step Checklist Goes Viral
                 </p>
                 
                 {/* Optional Link */}
