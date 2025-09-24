@@ -66,8 +66,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   // Get related posts (same category, excluding current post)
   const allPosts = getBlogPosts()
   const relatedPosts = allPosts
-    .filter(p => p.slug !== post.slug && p.category === post.category)
+    .filter(p => p.slug !== post.slug && p.category === post.category && p.cover)
     .slice(0, 3)
+    .map(p => ({
+      slug: p.slug,
+      title: p.title,
+      description: p.description,
+      category: p.category,
+      cover: p.cover!,
+      readTime: p.readTime
+    }))
 
   // Extract key takeaways from content
   const keyTakeaways = extractKeyTakeaways(post.content)
