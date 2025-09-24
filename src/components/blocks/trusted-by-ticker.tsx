@@ -13,24 +13,24 @@ interface TrustedByTickerProps {
 export function TrustedByTicker({ logos }: TrustedByTickerProps) {
   // Default logos - replace with your actual logo files
   const defaultLogos = [
-    { name: "Your Company 1", src: "/images/logos/deloitte.webp", alt: "deloitte" },
-    { name: "Your Company 2", src: "/images/logos/tcs.webp", alt: "tcs" },
-    { name: "Your Company 3", src: "/images/logos/oracle.webp", alt: "oracle" },
-    { name: "Your Company 4", src: "/images/logos/walmart.webp", alt: "walmart" },
-    { name: "Your Company 5", src: "/images/logos/jpmorganchase.webp", alt: "jpmorganchase" },
-    { name: "Your Company 6", src: "/images/logos/company6.webp", alt: "Your Company 6" },
-    { name: "Your Company 7", src: "/images/logos/company7.webp", alt: "Your Company 7" },
-    { name: "Your Company 8", src: "/images/logos/company8.webp", alt: "Your Company 8" },
+    { name: "Apple", src: "/images/logos/apple.webp", alt: "Apple Inc." },
+    { name: "Cognizant", src: "/images/logos/microsoft.webp", alt: "Microsoft Inc." },
+    { name: "Amazon", src: "/images/logos/amazon.webp", alt: "Amazon" },
+    { name: "JPMorgan Chase", src: "/images/logos/jpmorganchase.webp", alt: "JPMorgan Chase & Co." },
+    { name: "Meta", src: "/images/logos/meta.webp", alt: "Meta Platforms" },
+    { name: "Oracle", src: "/images/logos/oracle.webp", alt: "Oracle Corporation" },
+    { name: "TCS", src: "/images/logos/tcs.webp", alt: "Tata Consultancy Services" },
+    { name: "Walmart", src: "/images/logos/walmart.webp", alt: "Walmart Inc." },
   ];
 
   const logoList = logos || defaultLogos;
 
   return (
-    <section className="py-8 bg-muted/20 border-y border-border">
+    <section className="py-6 bg-muted/20 border-y border-border">
       <Container>
         <div className="text-center mb-6">
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-            Trusted by leading companies
+          <p className="text-sm font-bold text-muted-foreground uppercase tracking-wide">
+            Trusted by professionals from top global companies
           </p>
         </div>
         

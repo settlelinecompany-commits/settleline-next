@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
 import Image from "next/image"
 import heroAdvisorPhoto from "../../../public/images/hero-advisor-photo.webp"
+import businessTodayLogo from "../../../public/images/business-today-logo.webp"
 
 interface HeroProps {
   title: string
@@ -27,7 +28,7 @@ export function Hero({
   // Simple variant - text-based hero
   if (variant === "simple") {
     return (
-      <section className={`py-16 lg:py-24 ${
+      <section className={`py-8 lg:py-14 ${
         background === "primary" 
           ? "bg-primary text-primary-foreground" 
           : background === "muted" 
@@ -62,7 +63,7 @@ export function Hero({
 
   // Complex variant - two-column layout with image and cards
   return (
-    <section className={`py-12 lg:py-16 ${
+    <section className={`py-8 lg:py-6 ${
       background === "primary" 
         ? "bg-primary text-primary-foreground" 
         : background === "muted" 
@@ -88,7 +89,7 @@ export function Hero({
             </div>
 
                   {/* Advisor Image with Overlay Callout */}
-                  <div className="relative w-full h-80 lg:h-96 bg-gradient-to-br from-muted to-muted/50 rounded-2xl overflow-hidden">
+                  <div className="relative w-full h-80 lg:h-90 bg-gradient-to-br from-muted to-muted/50 rounded-2xl overflow-hidden">
                     <Image 
                       src={heroAdvisorPhoto}
                       alt="Professional tax advisor helping NRIs with RNOR & cross-border planning"
@@ -112,9 +113,9 @@ export function Hero({
           </div>
 
           {/* Right Column - Two Supplementary Cards */}
-          <div className="flex flex-col gap-10 order-2 lg:order-2">
+          <div className="flex flex-col gap-4 order-2 lg:order-2">
             {/* Top Supplementary Card */}
-            <div className="bg-muted/30 rounded-2xl p-8 border border-border/50">
+            <div className="bg-blue-100/30 rounded-2xl p-8 border border-border/50">
               <div className="text-center space-y-4">
                 <h3 className="text-2xl font-bold text-foreground">
                   Expert Guidance Available
@@ -134,23 +135,42 @@ export function Hero({
               </div>
             </div>
 
-            {/* Bottom Supplementary Card */}
-            <div className="bg-blue-100/30 rounded-2xl p-8 border border-border/50">
+            {/* Press Recognition Card - TurboTax Award Plaque Style */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 relative">
               <div className="text-center space-y-4">
-                <h3 className="text-2xl font-bold text-foreground">
-                  Expert Guidance Available
-                </h3>
-                <p className="text-muted-foreground">
-                  Get personalized support from our US-India tax specialists. 
-                  Book a consultation to discuss your specific situation.
+              
+                {/* Year - Large and Bold */}
+                <div className="text-3xl font-bold text-foreground">
+                  Recognized by
+                </div>
+                {/* Business Today Logo */}
+                <div className="flex justify-center">
+                  <div className="relative w-60 h-25">
+                    <Image 
+                      src={businessTodayLogo}
+                      alt="Business Today Logo"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 200px, 192px"
+                    />
+                  </div>
+                </div>
+                
+                {/* Subtitle */}
+                <p className="text-sm font-medium text-muted-foreground">
+                  Settleline's 2025 NRI 12-Step Checklist Goes Viral
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button variant="outline" asChild>
-                    <a href="/book">Book Consultation</a>
-                  </Button>
-                  <Button variant="ghost" asChild>
-                    <a href="/tools/free-return-to-india-planner">Try Free Planner</a>
-                  </Button>
+                
+                {/* Optional Link */}
+                <div className="pt-2">
+                  <a 
+                    href="https://www.businesstoday.in/nri/invest/story/moving-back-to-india-viral-post-outlines-12-step-checklist-for-nris-to-avoid-tax-shocks-491823-2025-08-31" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-xs text-primary hover:text-primary/80 underline transition-colors duration-200"
+                  >
+                    Read article →
+                  </a>
                 </div>
               </div>
             </div>
