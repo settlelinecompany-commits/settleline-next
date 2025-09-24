@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
 import { NAVIGATION } from "@/lib/constants"
+import { ServicesDropdown } from "./services-dropdown"
 
 export function SiteHeader() {
   return (
@@ -21,13 +22,17 @@ export function SiteHeader() {
             </Link>
             <nav className="hidden md:flex items-center space-x-6">
               {NAVIGATION.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-body-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {item.name}
-                </Link>
+                item.name === "Services" ? (
+                  <ServicesDropdown key={item.name} />
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-body-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </nav>
           </div>

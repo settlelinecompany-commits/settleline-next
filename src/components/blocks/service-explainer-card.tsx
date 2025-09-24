@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { RNORPlanningModal } from "./rnor-planning-modal";
+import Link from "next/link";
 
 const services = [
   {
@@ -130,12 +132,23 @@ export function ServiceExplainerCard() {
               </div>
               
               {/* CTA Button */}
-              <Button size="sm" className="w-full">
-                {service.ctaText}
-              </Button>
+              {index === 0 ? (
+                <Button size="sm" className="w-full" asChild>
+                  <Link href="/services/indian-tax-filing">
+                    {service.ctaText}
+                  </Link>
+                </Button>
+              ) : (
+                <Button size="sm" className="w-full">
+                  {service.ctaText}
+                </Button>
+              )}
             </div>
           ))}
         </div>
+        
+        {/* RNOR Planning Modal for first service */}
+        {/* <RNORPlanningModal /> */}
       </Container>
     </Section>
   );
