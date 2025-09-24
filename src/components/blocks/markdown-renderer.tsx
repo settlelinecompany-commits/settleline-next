@@ -18,7 +18,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
       
       // Lists
       .replace(/^\- (.*$)/gim, '<li class="ml-4 mb-2">$1</li>')
-      .replace(/(<li.*<\/li>)/s, '<ul class="list-disc list-inside mb-4 space-y-2">$1</ul>')
+      .replace(/(<li[^>]*>.*?<\/li>)/g, '<ul class="list-disc list-inside mb-4 space-y-2">$1</ul>')
       
       // Expert tips
       .replace(/^> \*\*(.*?)\*\*: (.*$)/gim, '<div class="bg-blue-50 border-l-4 border-primary p-4 rounded-r-lg my-6"><div class="flex items-start gap-3"><div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg></div><div><div class="text-sm font-semibold text-primary mb-1">Settleline Expert Tip</div><p class="text-foreground">$2</p></div></div></div>')
