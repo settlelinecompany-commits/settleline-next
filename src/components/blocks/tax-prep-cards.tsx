@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import Link from "next/link";
 
 export function TaxPrepCards() {
   return (
@@ -90,7 +91,7 @@ export function TaxPrepCards() {
             </p>
             <div className="text-center">
               <Button asChild>
-                <a href="/blog">Get the checklist</a>
+                <Link href="/blog">Get the checklist</Link>
               </Button>
             </div>
           </div>
@@ -132,7 +133,7 @@ export function TaxPrepCards() {
             </p>
             <div className="text-center">
               <Button asChild>
-                <a href="/blog">Start learning</a>
+                <Link href="/blog">Start learning</Link>
               </Button>
             </div>
           </div>
