@@ -1,3 +1,5 @@
+import { TableOfContents } from './table-of-contents';
+
 interface MarkdownRendererProps {
   content: string;
   className?: string;
@@ -7,10 +9,22 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
   const formatContent = (text: string) => {
     return text
       // Headers
-      .replace(/^# (.*$)/gim, '<h1 id="$1" class="text-4xl font-bold text-foreground mb-6 mt-8">$1</h1>')
-      .replace(/^## (.*$)/gim, '<h2 id="$1" class="text-3xl font-bold text-foreground mb-4 mt-8">$1</h2>')
-      .replace(/^### (.*$)/gim, '<h3 id="$1" class="text-2xl font-semibold text-foreground mb-3 mt-6">$1</h3>')
-      .replace(/^#### (.*$)/gim, '<h4 id="$1" class="text-xl font-semibold text-foreground mb-2 mt-4">$1</h4>')
+      .replace(/^# (.*$)/gim, (match, title) => {
+        const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return `<h1 id="${id}" class="text-4xl font-bold text-foreground mb-6 mt-8">${title}</h1>`;
+      })
+      .replace(/^## (.*$)/gim, (match, title) => {
+        const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return `<h2 id="${id}" class="text-3xl font-bold text-foreground mb-4 mt-8">${title}</h2>`;
+      })
+      .replace(/^### (.*$)/gim, (match, title) => {
+        const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return `<h3 id="${id}" class="text-2xl font-semibold text-foreground mb-3 mt-6">${title}</h3>`;
+      })
+      .replace(/^#### (.*$)/gim, (match, title) => {
+        const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return `<h4 id="${id}" class="text-xl font-semibold text-foreground mb-2 mt-4">${title}</h4>`;
+      })
       
       // Bold and italic
       .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
@@ -34,9 +48,10 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
   };
 
   return (
-    <div 
-      className={`prose prose-lg max-w-none ${className}`}
-      dangerouslySetInnerHTML={{ __html: formatContent(content) }}
-    />
+    <div className={`prose prose-lg max-w-none ${className}`}>
+      <div 
+        dangerouslySetInnerHTML={{ __html: formatContent(content) }}
+      />
+    </div>
   );
 }

@@ -6,12 +6,13 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/lib/utils'
 import { extractKeyTakeaways } from '@/lib/markdown'
-import { TableOfContents } from '@/components/blocks/table-of-contents'
 import { ExpertTip } from '@/components/blocks/expert-tip'
 import { KeyTakeaways } from '@/components/blocks/key-takeaways'
 import { ReadingProgress } from '@/components/blocks/reading-progress'
+import { TableOfContents } from '@/components/blocks/table-of-contents'
 import { RelatedPosts } from '@/components/blocks/related-posts'
 import { MarkdownRenderer } from '@/components/blocks/markdown-renderer'
+import { FAQAccordion } from '@/components/blocks/faq-accordion'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -77,8 +78,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       readTime: p.readTime
     }))
 
-  // Extract key takeaways from content
-  const keyTakeaways = extractKeyTakeaways(post.content)
+  // Hardcoded key takeaways for this specific blog post
+  const keyTakeaways = [
+    "RNOR status provides a 2-year tax optimization window for US-India cross-border professionals",
+    "Foreign income is generally exempt from Indian taxation during RNOR period", 
+    "Strategic planning is crucial to maximize benefits and maintain compliance",
+    "Physical presence tracking is essential to maintain RNOR eligibility",
+    "Early planning (6-12 months before return) maximizes tax savings opportunities"
+  ]
 
   return (
     <>
@@ -104,6 +111,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
         }}
       />
+      {post.faq && post.faq.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": post.faq.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.answer
+                }
+              }))
+            }),
+          }}
+        />
+      )}
       
       <Container className="py-16">
         <div className="max-w-6xl mx-auto">
@@ -141,136 +167,102 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   ))}
                 </div>
                 
-                <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
+                <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
                   {post.title}
                 </h1>
                 
-                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                {/* Author Info - TurboTax Style */}
+                <div className="text-left mb-6">
+                  <p className="text-sm text-muted-foreground">
+                    Written by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">Settleline Expert</Link>
+                    {post.reviewedBy && (
+                      <span> • Reviewed by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">Settleline CA</Link></span>
+                    )}
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Updated for Tax Year 2024 • {formatDate(post.date)} {post.readTime}
+                  </p>
+                </div>
+                
+                <p className="mb-4 leading-relaxed">
                   {post.description}
                 </p>
+
+                {/* Key Takeaways - Right above hero image */}
+                <div className="mb-8">
+                  <KeyTakeaways takeaways={keyTakeaways} />
+                </div>
                 
                 {/* Hero Image */}
                 <div className="relative w-full h-64 lg:h-80 rounded-2xl overflow-hidden mb-8 bg-muted/30">
                   {post.cover ? (
-                    <Image
-                      src={post.cover}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 75vw"
-                      priority
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
+                        <Image
+                          src={post.cover}
+                          alt="RNOR Status Guide: Complete tax planning guide for US-India cross-border professionals returning to India"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 75vw"
+                          priority
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
+                            <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                          </div>
                         </div>
-                        <p className="text-muted-foreground">Article Image</p>
-                      </div>
-                    </div>
-                  )}
+                      )}
                 </div>
-                
-                <div className="flex items-center justify-between text-sm text-muted-foreground border-b border-border pb-6">
-                  <div className="flex items-center space-x-4">
-                    <span>By <strong className="text-foreground">{post.author}</strong></span>
-                    {post.reviewedBy && (
-                      <span>Reviewed by <strong className="text-foreground">{post.reviewedBy}</strong></span>
-                    )}
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <span>{formatDate(post.date)}</span>
-                    {post.updated && <span>Updated {formatDate(post.updated)}</span>}
-                    <span>{post.readTime}</span>
-                  </div>
-                </div>
+
+                {/* Image Caption */}
+                <p className="text-sm text-muted-foreground text-center italic mb-6">
+                  RNOR Status Guide: Complete tax planning guide for US-India cross-border professionals returning to India
+                </p>
               </header>
 
-              {/* Key Takeaways */}
-              <div className="mb-12">
-                <KeyTakeaways takeaways={keyTakeaways} />
+              {/* Table of Contents - Right above article content */}
+              <div className="mb-8">
+                <TableOfContents containerId="article-content" />
               </div>
 
               {/* Article Content */}
               <article className="mb-16">
-                <MarkdownRenderer content={post.content} />
+                <div id="article-content">
+                  <MarkdownRenderer content={post.content} />
+                </div>
               </article>
 
               {/* FAQ Section */}
               {post.faq && post.faq.length > 0 && (
                 <section className="mb-16">
-                  <h2 className="text-3xl font-bold text-foreground mb-8">Frequently Asked Questions</h2>
-                  <div className="space-y-6">
-                    {post.faq.map((faq, index) => (
-                      <div key={index} className="bg-white border border-border rounded-2xl p-6 shadow-sm">
-                        <h3 className="text-xl font-semibold text-foreground mb-3">{faq.question}</h3>
-                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                      </div>
-                    ))}
-                  </div>
+                  <FAQAccordion faqs={post.faq} />
                 </section>
               )}
 
-              {/* CTA Section */}
-              <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 text-center mb-16">
-                <h3 className="text-2xl font-bold text-foreground mb-4">
-                  Ready to Optimize Your US-India Tax Planning?
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Get personalized guidance from our expert team to maximize your RNOR benefits and ensure compliance.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild>
-                    <Link href="/book">Book a Consultation</Link>
-                  </Button>
-                  <Button variant="outline" asChild>
-                    <Link href="/tools/free-return-to-india-planner">Start Free Assessment</Link>
-                  </Button>
-                </div>
-              </div>
             </div>
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-8">
-                <TableOfContents />
+                {/* CTA Section - Desktop: Top of sidebar, Mobile: Sticky bottom */}
+                <div className="hidden lg:block bg-primary/5 border border-primary/20 rounded-2xl p-6">
+                  <h3 className="text-lg font-bold text-foreground mb-3">
+                    Ready to Optimize Your US-India Tax Planning?
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Get personalized guidance from our expert team to maximize your RNOR benefits and ensure compliance.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <Button asChild size="sm">
+                      <Link href="/book">Book a Consultation</Link>
+                    </Button>
+                    <Button variant="outline" asChild size="sm">
+                      <Link href="/tools/free-return-to-india-planner">Start Free Assessment</Link>
+                    </Button>
+                  </div>
+                </div>
                 
-                {/* Author Info */}
-                <div className="bg-white border border-border rounded-2xl p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">About the Author</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <div className="font-medium text-foreground">{post.author}</div>
-                      <div className="text-sm text-muted-foreground">{post.authorRole}</div>
-                    </div>
-                    {post.reviewedBy && (
-                      <div>
-                        <div className="font-medium text-foreground">Reviewed by</div>
-                        <div className="text-sm text-muted-foreground">{post.reviewedBy}</div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Share Buttons */}
-                <div className="bg-white border border-border rounded-2xl p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Share this article</h3>
-                  <div className="flex space-x-3">
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://settleline.com/blog/${post.slug}`)}`} target="_blank" rel="noopener noreferrer">
-                        Twitter
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://settleline.com/blog/${post.slug}`)}`} target="_blank" rel="noopener noreferrer">
-                        LinkedIn
-                      </a>
-                    </Button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -281,6 +273,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {relatedPosts.length > 0 && (
         <RelatedPosts posts={relatedPosts} currentSlug={post.slug} />
       )}
+
+      {/* Mobile Sticky CTA - Only visible on mobile */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-border p-4 shadow-lg z-50">
+        <div className="flex gap-3">
+          <Button asChild className="flex-1">
+            <Link href="/book">Book a Consultation</Link>
+          </Button>
+          <Button variant="outline" asChild className="flex-1">
+            <Link href="/tools/free-return-to-india-planner">Start Free Assessment</Link>
+          </Button>
+        </div>
+      </div>
     </>
   )
 }

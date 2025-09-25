@@ -10,18 +10,19 @@ interface TOCItem {
 
 interface TableOfContentsProps {
   className?: string;
+  containerId?: string;
 }
 
-export function TableOfContents({ className = "" }: TableOfContentsProps) {
+export function TableOfContents({ className = "", containerId = "article-content" }: TableOfContentsProps) {
   const [toc, setToc] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    // Extract headings only from the main article content
-    const article = document.querySelector('article');
-    if (!article) return;
+    // Extract headings only from the specified container
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    const headings = Array.from(article.querySelectorAll('h2, h3, h4'))
+    const headings = Array.from(container.querySelectorAll('h2'))
       .map((heading) => {
         const text = heading.textContent || '';
         const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -36,13 +37,13 @@ export function TableOfContents({ className = "" }: TableOfContentsProps) {
     setToc(headings);
 
     // Add IDs to headings if they don't have them
-    headings.forEach(({ id, title }) => {
-      const heading = Array.from(article.querySelectorAll('h2, h3, h4'))
-        .find(h => h.textContent === title);
-      if (heading && !heading.id) {
-        heading.id = id;
-      }
-    });
+      headings.forEach(({ id, title }) => {
+        const heading = Array.from(container.querySelectorAll('h2'))
+          .find(h => h.textContent === title);
+        if (heading && !heading.id) {
+          heading.id = id;
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -66,34 +67,34 @@ export function TableOfContents({ className = "" }: TableOfContentsProps) {
   if (toc.length === 0) return null;
 
   return (
-    <div className={`bg-muted/30 rounded-2xl p-6 ${className}`}>
+    <div className={`bg-primary/5 border border-primary/20 rounded-2xl p-6 ${className}`}>
       <h3 className="text-lg font-semibold text-foreground mb-4">
-        Table of Contents
+        TABLE OF CONTENTS
       </h3>
-      <nav className="space-y-2">
-        {toc.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className={`block text-sm transition-colors duration-200 hover:text-primary ${
-              item.level === 2 
-                ? 'font-medium text-foreground' 
-                : 'text-muted-foreground ml-4'
-            } ${
-              activeId === item.id 
-                ? 'text-primary font-medium' 
-                : ''
-            }`}
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById(item.id);
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
-          >
-            {item.title}
-          </a>
+      <nav>
+        {toc.map((item, index) => (
+          <div key={item.id}>
+            <a
+              href={`#${item.id}`}
+              className={`block py-2 text-foreground hover:text-primary transition-colors duration-200 ${
+                activeId === item.id 
+                  ? 'font-semibold' 
+                  : 'font-normal'
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById(item.id);
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
+              {item.title}
+            </a>
+            {index < toc.length - 1 && (
+              <div className="border-b border-border"></div>
+            )}
+          </div>
         ))}
       </nav>
     </div>

@@ -28,8 +28,8 @@ export function parseMarkdownContent(content: string) {
         continue
       }
       
-      if (line.startsWith('- **') && line.endsWith('**')) {
-        const takeaway = line.replace('- **', '').replace('**', '').trim()
+      if (line.startsWith('- **') && line.includes('**')) {
+        const takeaway = line.replace(/^- \*\*(.*?)\*\*$/, '$1').trim()
         keyTakeaways.push(takeaway)
       }
       
@@ -92,8 +92,8 @@ export function extractKeyTakeaways(content: string): string[] {
         break
       }
       
-      if (line.startsWith('- **') && line.endsWith('**')) {
-        const takeaway = line.replace('- **', '').replace('**', '').trim()
+      if (line.startsWith('- **') && line.includes('**')) {
+        const takeaway = line.replace(/^- \*\*(.*?)\*\*$/, '$1').trim()
         takeaways.push(takeaway)
       }
     }

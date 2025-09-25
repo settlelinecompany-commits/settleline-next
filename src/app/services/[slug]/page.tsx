@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 
+
 interface ServicePageProps {
   params: {
     slug: string
