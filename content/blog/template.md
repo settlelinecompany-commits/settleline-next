@@ -11,7 +11,7 @@ readTime: "X min read"
 tags: ["Primary Tag", "Secondary Tag", "Third Tag", "Fourth Tag", "Fifth Tag"]
 cover: "/images/blog/[filename].webp"
 category: "[Category Name]"
-featured:etrue
+featured: true
 draft: false
 keywords: ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6", "keyword7", "keyword8", "keyword9"]
 faq:

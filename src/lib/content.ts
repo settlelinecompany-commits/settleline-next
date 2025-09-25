@@ -50,19 +50,25 @@ export function getBlogPosts(): BlogPost[] {
   
   const files = fs.readdirSync(blogDir)
   const posts = files
-    .filter(file => file.endsWith('.md'))
+    .filter(file => file.endsWith('.md') && !file.includes('template'))
     .map(file => {
-      const filePath = path.join(blogDir, file)
-      const fileContent = fs.readFileSync(filePath, 'utf8')
-      const { data, content } = matter(fileContent)
-      
-      return {
-        slug: file.replace('.md', ''),
-        ...data,
-        readTime: readingTime(content).text,
-        content,
-      } as BlogPost
+      try {
+        const filePath = path.join(blogDir, file)
+        const fileContent = fs.readFileSync(filePath, 'utf8')
+        const { data, content } = matter(fileContent)
+        
+        return {
+          slug: file.replace('.md', ''),
+          ...data,
+          readTime: readingTime(content).text,
+          content,
+        } as BlogPost
+      } catch (error) {
+        console.error(`Error reading blog file ${file}:`, error)
+        return null
+      }
     })
+    .filter((post): post is BlogPost => post !== null)
     .filter(post => !post.draft)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   

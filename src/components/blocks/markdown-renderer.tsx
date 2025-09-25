@@ -1,4 +1,4 @@
-import { TableOfContents } from './table-of-contents';
+;
 
 interface MarkdownRendererProps {
   content: string;

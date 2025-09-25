@@ -1,4 +1,3 @@
-import { BlogPost } from './content'
 
 export function parseMarkdownContent(content: string) {
   const lines = content.split('\n')
