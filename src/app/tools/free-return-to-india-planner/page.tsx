@@ -1,8 +1,8 @@
 import { Hero } from "@/components/blocks/hero";
-import { CalculatorMount } from "@/components/blocks/calculator-mount";
 import { FAQ } from "@/components/blocks/faq";
 import { FooterCTA } from "@/components/blocks/footer-cta";
 import { generateSEO } from "@/lib/seo";
+import { RNORCalculator } from "@/components/blocks/rnor-calculator";
 
 export const metadata = generateSEO({
   title: "Free Return to India Planner",
@@ -44,19 +44,7 @@ export default function PlannerPage() {
         secondaryCtaHref="/book"
       />
       
-      <CalculatorMount
-        title="RNOR Calculator"
-        description="Get personalized insights for your return to India planning"
-        features={[
-          "Calculate your RNOR status eligibility",
-          "Understand tax implications and benefits",
-          "Get personalized recommendations",
-          "Plan your financial transition timeline"
-        ]}
-        ctaText="Start Planning"
-        ctaHref="/book"
-        className="py-16"
-      />
+      <RNORCalculator className="py-16" />
       
       <FAQ
         title="RNOR Planning FAQ"
