@@ -1,5 +1,5 @@
 import { Inputs, PlanResult, FYRow, BlockChoice } from '@/lib/types/rnor';
-import { generateDaysByYear } from '@/lib/utils';
+import { generateDaysByYear, generateBlockYearRanges } from '@/lib/utils';
 
 // Map choices to upper bounds (conservative approach)
 const CHOICE_TO_DAYS: Record<BlockChoice, number> = {
@@ -110,16 +110,19 @@ function buildTimeline(inputs: Inputs): FYRow[] {
     finalStatus: 'NR', // Will be calculated later
   });
   
-  // Add next FY (assume resident ~full-year)
-  const nextFY = getNextFinancialYear(arrivalFY);
-  timeline.push({
-    fyLabel: nextFY,
-    daysInIndia: 300, // Assume resident
-    residentTest: 'NR', // Will be calculated later
-    last7Sum: 0, // Will be calculated later
-    residentYearsInLast10: 0, // Will be calculated later
-    finalStatus: 'NR', // Will be calculated later
-  });
+  // Add next 3 FYs (assume full-year residency after return)
+  let nextFY = arrivalFY;
+  for (let i = 0; i < 3; i++) {
+    nextFY = getNextFinancialYear(nextFY);
+    timeline.push({
+      fyLabel: nextFY,
+      daysInIndia: 300, // Assume full-year residency after return
+      residentTest: 'NR', // Will be calculated later
+      last7Sum: 0, // Will be calculated later
+      residentYearsInLast10: 0, // Will be calculated later
+      finalStatus: 'NR', // Will be calculated later
+    });
+  }
   
   return timeline;
 }
@@ -208,18 +211,24 @@ function filterTimelineForUser(timeline: FYRow[], landingDate: Date): FYRow[] {
   
   if (arrivalIndex === -1) return timeline;
   
+  // Create a copy of the timeline and mark arrival year as 'Arrival'
+  const filteredTimeline = timeline.slice(arrivalIndex);
+  if (filteredTimeline.length > 0) {
+    filteredTimeline[0].finalStatus = 'Arrival';
+  }
+  
   // Find first ROR year after landing
   let firstRORIndex = -1;
-  for (let i = arrivalIndex; i < timeline.length; i++) {
-    if (timeline[i].finalStatus === 'ROR') {
+  for (let i = 1; i < filteredTimeline.length; i++) { // Start from index 1 (skip arrival year)
+    if (filteredTimeline[i].finalStatus === 'ROR') {
       firstRORIndex = i;
       break;
     }
   }
   
   // Include from landing date to first ROR (inclusive) or end of timeline
-  const endIndex = firstRORIndex !== -1 ? firstRORIndex + 1 : timeline.length;
-  return timeline.slice(arrivalIndex, endIndex);
+  const endIndex = firstRORIndex !== -1 ? firstRORIndex + 1 : filteredTimeline.length;
+  return filteredTimeline.slice(0, endIndex);
 }
 
 // Generate alerts
@@ -310,4 +319,123 @@ export function computePlan(inputs: Inputs): PlanResult {
     },
     alerts,
   };
+}
+
+// Extended inputs type for individual year choices
+interface InputsWithIndividualChoices extends Inputs {
+  useIndividualChoices: boolean;
+  individualYearChoices: { [yearSpan: string]: 'rarely' | 'sometimes' | 'frequently' | 'mostly' };
+}
+
+// Compute plan with individual year choices
+export function computePlanWithIndividualChoices(inputs: InputsWithIndividualChoices): PlanResult {
+  const landingDate = parseUTCDate(inputs.landingDate);
+  
+  // Create custom timeline using individual year choices
+  const fullTimeline = buildTimelineWithIndividualChoices(inputs);
+  calculateResidentTests(fullTimeline);
+  calculateSums(fullTimeline);
+  calculateFinalStatus(fullTimeline);
+  
+  // Filter timeline to show only from landing date forward until first ROR
+  const timeline = filterTimelineForUser(fullTimeline, landingDate);
+  
+  const arrivalFY = getFinancialYear(landingDate);
+  const rnorFYs = timeline.filter(row => row.finalStatus === 'RNOR').map(row => row.fyLabel);
+  const rorFYs = timeline.filter(row => row.finalStatus === 'ROR').map(row => row.fyLabel);
+  const window = findRNORWindow(fullTimeline, landingDate);
+  
+  const bestTimeToRealizeRSUs = rnorFYs.length > 0 ? 'During RNOR' : 'Not Ideal';
+  
+  const note = `Based on individual year estimates. Resident from landing→Mar 31 and full next FY. Last-7 sum: ${fullTimeline[fullTimeline.length - 1].last7Sum} days. Resident years in last 10: ${fullTimeline[fullTimeline.length - 1].residentYearsInLast10}.`;
+  
+  const alerts = generateAlerts(fullTimeline, landingDate);
+  
+  return {
+    arrivalFY,
+    rnorYears: rnorFYs,
+    rorYears: rorFYs,
+    note,
+    window,
+    timeline,
+    bestTimeToRealizeRSUs,
+    guardrail: {
+      text: `To guarantee NR in FY ${timeline[timeline.length - 1]?.fyLabel || arrivalFY}: ≤59 days`,
+      capDays: 59,
+    },
+    alerts,
+  };
+}
+
+// Build timeline with individual year choices
+function buildTimelineWithIndividualChoices(inputs: InputsWithIndividualChoices): FYRow[] {
+  const landingDate = parseUTCDate(inputs.landingDate);
+  const arrivalFY = getFinancialYear(landingDate);
+  const timeline: FYRow[] = [];
+  
+  // Generate year ranges
+  const { blockA, blockB, blockC } = generateBlockYearRanges(inputs.landingDate);
+  const allYears = [...blockA, ...blockB, ...blockC];
+  
+  // Create days by year using individual choices
+  const daysByYear: { [fy: string]: number } = {};
+  allYears.forEach(yearSpan => {
+    const choice = inputs.individualYearChoices[yearSpan];
+    const days = CHOICE_TO_DAYS[choice];
+    
+    // Convert year span to FY format
+    const startYear = parseInt(yearSpan.split(' ')[1]);
+    const fy = `${startYear}-${(startYear + 1).toString().slice(-2)}`;
+    daysByYear[fy] = days;
+  });
+  
+  // Build 10 prior FYs using individual choices
+  const priorFYs: string[] = [];
+  let currentFY = arrivalFY;
+  
+  for (let i = 0; i < 10; i++) {
+    currentFY = getPreviousFinancialYear(currentFY);
+    priorFYs.unshift(currentFY);
+  }
+  
+  // Add prior FYs with their individual day estimates
+  priorFYs.forEach(fy => {
+    const days = daysByYear[fy] || 0;
+    
+    timeline.push({
+      fyLabel: fy,
+      daysInIndia: days,
+      residentTest: 'NR', // Will be calculated later
+      last7Sum: 0, // Will be calculated later
+      residentYearsInLast10: 0, // Will be calculated later
+      finalStatus: 'NR', // Will be calculated later
+    });
+  });
+  
+  // Add landing FY (computed days from landing to Mar 31)
+  const landingDays = getDaysFromLandingToFYEnd(landingDate);
+  timeline.push({
+    fyLabel: arrivalFY,
+    daysInIndia: landingDays,
+    residentTest: 'NR', // Will be calculated later
+    last7Sum: 0, // Will be calculated later
+    residentYearsInLast10: 0, // Will be calculated later
+    finalStatus: 'NR', // Will be calculated later
+  });
+  
+  // Add next 3 FYs (assume full-year residency after return)
+  let nextFY = arrivalFY;
+  for (let i = 0; i < 3; i++) {
+    nextFY = getNextFinancialYear(nextFY);
+    timeline.push({
+      fyLabel: nextFY,
+      daysInIndia: 300, // Assume full-year residency after return
+      residentTest: 'NR', // Will be calculated later
+      last7Sum: 0, // Will be calculated later
+      residentYearsInLast10: 0, // Will be calculated later
+      finalStatus: 'NR', // Will be calculated later
+    });
+  }
+  
+  return timeline;
 }

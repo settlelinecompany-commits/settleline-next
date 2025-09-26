@@ -18,8 +18,8 @@ interface HeroProps {
 export function Hero({
   title,
   description,
-  ctaText = "Get Started",
-  ctaHref = "/book",
+  ctaText,
+  ctaHref,
   secondaryCtaText,
   secondaryCtaHref,
   background = "default",
@@ -28,7 +28,7 @@ export function Hero({
   // Simple variant - text-based hero
   if (variant === "simple") {
     return (
-      <section className={`py-8 lg:py-14 ${
+      <section className={`py-4 lg:py-8 ${
         background === "primary" 
           ? "bg-primary text-primary-foreground" 
           : background === "muted" 
@@ -45,16 +45,18 @@ export function Hero({
                 {description}
               </p>
             )}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <a href={ctaHref}>{ctaText}</a>
-              </Button>
-              {secondaryCtaText && secondaryCtaHref && (
-                <Button variant="outline" size="lg" asChild>
-                  <a href={secondaryCtaHref}>{secondaryCtaText}</a>
+            {(ctaText && ctaHref) && (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <a href={ctaHref}>{ctaText}</a>
                 </Button>
-              )}
-            </div>
+                {secondaryCtaText && secondaryCtaHref && (
+                  <Button variant="outline" size="lg" asChild>
+                    <a href={secondaryCtaHref}>{secondaryCtaText}</a>
+                  </Button>
+                )}
+              </div>
+            )}
           </div>
         </Container>
       </section>
@@ -151,7 +153,7 @@ export function Hero({
                       alt="Business Today Logo"
                       fill
                       className="object-contain"
-                      sizes="(max-width: 768px) 200px, 192px"
+                      sizes="(max-width: 768px) 400px, 400px"
                     />
                   </div>
                 </div>

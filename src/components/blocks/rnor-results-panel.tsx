@@ -1,158 +1,134 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { PlanResult } from "@/lib/types/rnor";
-import { Calendar } from "lucide-react";
-import Link from "next/link";
 
 interface ResultsPanelProps {
   plan: PlanResult;
+  audience?: 'planning' | 'returned' | 'h1b-laidoff';
 }
 
 export function RNORResultsPanel({ plan }: ResultsPanelProps) {
   const hasRNOR = plan.rnorYears.length > 0;
-  const isShortWindow = plan.rnorYears.length === 1;
-  const firstRORYear = plan.rorYears[0] || 'N/A';
 
   return (
-    <div className="space-y-6">
-      {/* Results Header */}
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold mb-2">Your Plan</h2>
-      </div>
-
-      {/* Green Highlight Box - Dominant */}
-      {hasRNOR ? (
-        <Card className="border-green-200 bg-green-50">
-          <CardContent className="p-6 md:p-8 text-center">
-            <div className="space-y-4">
-              <div className="flex items-center justify-center gap-2">
-                <div className="text-green-600 text-2xl">✅</div>
-                <h3 className="text-2xl font-bold text-green-800">Good news!</h3>
-                {isShortWindow && (
-                  <Badge variant="outline" className="text-orange-600 border-orange-300">
-                    ⚠️ Short window
-                  </Badge>
-                )}
+    <Card className="rounded-2xl shadow-lg border-border">
+      <CardContent className="p-8">
+        {/* Top line bar (visual timeline) */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Your Residency Timeline</h3>
+          <div className="flex items-center justify-center gap-2 overflow-x-auto pb-2">
+            {plan.timeline.map((row, index) => (
+              <div key={index} className="flex flex-col items-center min-w-[80px]">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${
+                  row.finalStatus === 'NR' ? 'bg-blue-500' :
+                  row.finalStatus === 'RNOR' ? 'bg-green-500' :
+                  'bg-red-500'
+                }`}>
+                  {row.finalStatus === 'NR' ? 'NR' :
+                   row.finalStatus === 'RNOR' ? 'RN' : 'ROR'}
+                </div>
+                <span className="text-xs text-muted-foreground mt-1 text-center">
+                  {row.fyLabel}
+                </span>
               </div>
-              <p className="text-lg text-green-700 max-w-2xl mx-auto">
-                You&apos;ll get {plan.rnorYears.length} tax-free year{plan.rnorYears.length > 1 ? 's' : ''}: {plan.rnorYears.join(', ')}. 
-                Sell US assets before then to avoid India tax.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-green-600 hover:bg-green-700 text-white"
-                asChild
-              >
-                <Link href="/book">
-                  Maximize my tax-free years → Talk to a CA
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card className="border-orange-200 bg-orange-50">
-          <CardContent className="p-6 md:p-8 text-center">
-            <div className="space-y-4">
-              <div className="flex items-center justify-center gap-2">
-                <div className="text-orange-600 text-2xl">⚠️</div>
-                <h3 className="text-2xl font-bold text-orange-800">Heads-up</h3>
-              </div>
-              <p className="text-lg text-orange-700 max-w-2xl mx-auto">
-                India will start taxing your worldwide income as soon as you return. 
-                Adjust your return date to add tax-free years.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-orange-600 hover:bg-orange-700 text-white"
-                asChild
-              >
-                <Link href="/book">
-                  Get a date strategy with a CA
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Muted line under highlight box */}
-      <p className="text-sm text-muted-foreground text-center">
-        After {firstRORYear}, India will start taxing your worldwide income.
-      </p>
-
-      {/* Summary Row */}
-      <Card className="border-border">
-        <CardContent className="p-5 md:p-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold text-primary">{plan.arrivalFY}</div>
-              <div className="text-sm text-muted-foreground">Arrival FY</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-green-600">{plan.rnorYears.length}</div>
-              <div className="text-sm text-muted-foreground">Tax-free Years</div>
-              <div className="text-xs text-muted-foreground">{plan.rnorYears.join(', ')}</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-red-600">{plan.rorYears.length}</div>
-              <div className="text-sm text-muted-foreground">Tax Years</div>
-              <div className="text-xs text-muted-foreground">{plan.rorYears.join(', ')}</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-purple-600">
-                {plan.bestTimeToRealizeRSUs === 'During RNOR' ? '✅' : '❌'}
-              </div>
-              <div className="text-sm text-muted-foreground">Best time to sell</div>
-              <div className="text-xs text-muted-foreground">During tax-free years</div>
-            </div>
+            ))}
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* RNOR Window */}
-      {plan.window && (
-        <Card className="border-green-200 bg-green-50">
-          <CardContent className="p-5 md:p-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Calendar className="w-5 h-5 text-green-600" />
-              <h3 className="text-lg font-semibold text-green-800">Tax-free Window</h3>
-            </div>
-            <p className="text-green-700">
-              {plan.window.startFY} to {plan.window.endFY}
-            </p>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Final CTA Section - Reinforcement */}
-      <Card className="border-primary/20 bg-primary/5">
-        <CardContent className="p-6 md:p-8 text-center">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-foreground">
-              Don&apos;t miss your RNOR window
-            </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Get a personalized plan from our CAs before your window closes.
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              asChild
-            >
-              <Link href="/book">
-                Talk to a CA (Free 15-min)
-              </Link>
-            </Button>
-            <p className="text-sm text-primary">
-              Stop optimizing. Start converting.
-            </p>
+        {/* Three numbers (big, simple) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="text-center">
+            <div className="text-3xl font-bold text-primary mb-1">{plan.arrivalFY}</div>
+            <div className="text-sm text-muted-foreground">Arrival FY</div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-green-600 mb-1">{plan.rnorYears.length}</div>
+            <div className="text-sm text-muted-foreground">RNOR years found</div>
+            {plan.rnorYears.length > 0 && (
+              <div className="text-xs text-muted-foreground mt-1">
+                {plan.rnorYears.join(', ')}
+              </div>
+            )}
+          </div>
+          <div className="text-center">
+            <div className="text-lg font-semibold text-blue-600 mb-1">
+              {hasRNOR ? `During FY ${plan.rnorYears[0] || plan.arrivalFY} RNOR` : 'Not Ideal'}
+            </div>
+            <div className="text-sm text-muted-foreground">Best months to sell foreign assets</div>
+          </div>
+        </div>
+
+        {/* Action chips */}
+        <div className="flex flex-wrap justify-center gap-3 mb-6">
+          {hasRNOR && (
+            <>
+              <button className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium hover:bg-green-200 transition-colors">
+                Move return by +45 days → unlock 1 RNOR year
+              </button>
+              <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors">
+                Return after Feb 1 → preserve NRI for current FY
+              </button>
+              <button className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium hover:bg-purple-200 transition-colors">
+                Schedule repatriation during RNOR
+              </button>
+            </>
+          )}
+          {!hasRNOR && (
+            <button className="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium hover:bg-orange-200 transition-colors">
+              Adjust return date to qualify for RNOR
+            </button>
+          )}
+        </div>
+
+        {/* Status message */}
+        <div className="text-center">
+          {hasRNOR ? (
+            <div className="flex items-center justify-center gap-2 text-green-700">
+              <span className="text-2xl">✅</span>
+              <span className="text-lg font-medium">
+                You qualify for {plan.rnorYears.length} tax-free year{plan.rnorYears.length > 1 ? 's' : ''}!
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2 text-orange-700">
+              <span className="text-2xl">⚠️</span>
+              <span className="text-lg font-medium">
+                No RNOR window found with current inputs
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Alerts */}
+        {plan.alerts.length > 0 && (
+          <div className="mt-6 space-y-2">
+            {plan.alerts.map((alert) => (
+              <div 
+                key={alert.id} 
+                className={`p-3 rounded-lg text-sm ${
+                  alert.level === 'danger' ? 'bg-red-50 text-red-700 border border-red-200' :
+                  alert.level === 'warn' ? 'bg-orange-50 text-orange-700 border border-orange-200' :
+                  'bg-blue-50 text-blue-700 border border-blue-200'
+                }`}
+              >
+                <div className="flex items-start gap-2">
+                  <span className="text-lg">
+                    {alert.level === 'danger' ? '🚨' : 
+                     alert.level === 'warn' ? '⚠️' : 'ℹ️'}
+                  </span>
+                  <div className="flex-1">
+                    <p className="font-medium">{alert.text}</p>
+                    <button className="text-xs underline mt-1 hover:no-underline">
+                      {alert.cta}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }

@@ -15,7 +15,7 @@ export interface Inputs {
   };
 }
 
-export type Residency = 'NR' | 'Resident' | 'RNOR' | 'ROR';
+export type Residency = 'NR' | 'Resident' | 'RNOR' | 'ROR' | 'Arrival';
 
 export interface FYRow {
   fyLabel: string;
