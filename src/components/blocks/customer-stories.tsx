@@ -20,61 +20,96 @@ interface CustomerStory {
   imageAlt: string;
 }
 
-interface CustomerStoriesProps {
-  stories?: CustomerStory[];
+interface CaseStudy {
+  slug: string;
+  title: string;
+  description: string;
+  company: string;
+  cover?: string;
 }
 
-const defaultStories: CustomerStory[] = [
-  {
-    id: 1,
-    logo: "/images/logos/microsoft.webp",
-    logoAlt: "Microsoft Corporation",
-    statistic: "3YR",
-    statisticLabel: "tax savings achieved",
-    headline: "Microsoft engineer optimizes US-India transition",
-    description: "With complex stock options and RSUs across both countries, our Microsoft client leveraged strategic RNOR planning to save over $180,000 in taxes while maintaining full compliance across jurisdictions.",
-    ctaText: "See the full story →",
-    ctaHref: "/case-studies/microsoft-engineer",
-    image: "/images/customer-stories/microsoft-office.webp",
-    imageAlt: "Microsoft office building with modern architecture"
-  },
-  {
-    id: 2,
-    logo: "/images/logos/amazon.webp",
-    logoAlt: "Amazon Inc.",
-    statistic: "2YR",
-    statisticLabel: "ROI on tax planning",
-    headline: "Amazon PM streamlines cross-border finances",
-    description: "Our Amazon product manager client successfully navigated complex dual taxation scenarios, optimizing their investment portfolio and reducing tax burden by 40% through strategic planning.",
-    ctaText: "See the full story →",
-    ctaHref: "/case-studies/amazon-pm",
-    image: "/images/customer-stories/amazon-spheres.webp",
-    imageAlt: "Amazon Spheres building in Seattle with glass domes"
-  },
-  {
-    id: 3,
-    logo: "/images/logos/meta.webp",
-    logoAlt: "Meta Platforms",
-    statistic: "5YR",
-    statisticLabel: "compliance maintained",
-    headline: "Meta engineer achieves seamless transition",
-    description: "Facing complex FBAR and FATCA requirements, our Meta client achieved a smooth return to India while maintaining full compliance and optimizing their tax position across both countries.",
-    ctaText: "See the full story →",
-    ctaHref: "/case-studies/meta-engineer",
-    image: "/images/customer-stories/meta-campus.webp",
-    imageAlt: "Meta campus building with modern glass architecture"
-  }
-];
+interface CustomerStoriesProps {
+  stories?: CustomerStory[];
+  caseStudies?: CaseStudy[];
+}
 
-export function CustomerStories({ stories = defaultStories }: CustomerStoriesProps) {
+// Map case studies to customer stories format
+const getDefaultStories = (caseStudies: CaseStudy[]): CustomerStory[] => {
+  const companyLogos: Record<string, { logo: string; logoAlt: string }> = {
+    "Microsoft Corporation": {
+      logo: "/images/logos/microsoft.webp",
+      logoAlt: "Microsoft Corporation"
+    },
+    "Amazon Inc.": {
+      logo: "/images/logos/amazon.webp", 
+      logoAlt: "Amazon Inc."
+    },
+    "Meta Platforms": {
+      logo: "/images/logos/meta.webp",
+      logoAlt: "Meta Platforms"
+    }
+  };
+
+
+  const companyStats: Record<string, { statistic: string; statisticLabel: string }> = {
+    "Microsoft Corporation": {
+      statistic: "₹30L+",
+      statisticLabel: "tax savings achieved"
+    },
+    "Amazon Inc.": {
+      statistic: "40%",
+      statisticLabel: "tax burden reduction"
+    },
+    "Meta Platforms": {
+      statistic: "100%",
+      statisticLabel: "compliance maintained"
+    }
+  };
+
+  return caseStudies.slice(0, 3).map((caseStudy, index) => {
+    const companyInfo = companyLogos[caseStudy.company] || {
+      logo: "/images/logos/default.webp",
+      logoAlt: caseStudy.company || "Company Logo"
+    };
+    
+    const imageInfo = {
+      image: caseStudy.cover || "/images/case-studies/default.webp",
+      imageAlt: `${caseStudy.company || "Company"} case study`
+    };
+    
+    const statsInfo = companyStats[caseStudy.company] || {
+      statistic: "Significant",
+      statisticLabel: "results achieved"
+    };
+
+    return {
+      id: index + 1,
+      logo: companyInfo.logo,
+      logoAlt: companyInfo.logoAlt || "Company Logo",
+      statistic: statsInfo.statistic,
+      statisticLabel: statsInfo.statisticLabel,
+      headline: caseStudy.title || "Case Study",
+      description: caseStudy.description || "Learn more about this case study.",
+      ctaText: "See the full story →",
+      ctaHref: `/case-studies/${caseStudy.slug}`,
+      image: imageInfo.image,
+      imageAlt: imageInfo.imageAlt || "Case study image"
+    };
+  });
+};
+
+export function CustomerStories({ stories, caseStudies }: CustomerStoriesProps) {
+  // Use provided stories or generate from case studies
+  const defaultStories = caseStudies ? getDefaultStories(caseStudies) : [];
+  const finalStories = stories || defaultStories;
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % stories.length);
+    setCurrentSlide((prev) => (prev + 1) % finalStories.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
+    setCurrentSlide((prev) => (prev - 1 + finalStories.length) % finalStories.length);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -85,7 +120,7 @@ export function CustomerStories({ stories = defaultStories }: CustomerStoriesPro
     }
   };
 
-  const currentStory = stories[currentSlide];
+  const currentStory = finalStories[currentSlide];
 
   return (
     <Section className="py-16 lg:py-20 bg-primary">
@@ -139,7 +174,7 @@ export function CustomerStories({ stories = defaultStories }: CustomerStoriesPro
               <div className="relative w-32 h-16">
                 <Image
                   src={currentStory.logo}
-                  alt={currentStory.logoAlt}
+                  alt={currentStory.logoAlt || "Company Logo"}
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 200px, 128px"
@@ -186,7 +221,7 @@ export function CustomerStories({ stories = defaultStories }: CustomerStoriesPro
             <div className="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden">
               <Image
                 src={currentStory.image}
-                alt={currentStory.imageAlt}
+                alt={currentStory.imageAlt || "Case study image"}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -198,7 +233,7 @@ export function CustomerStories({ stories = defaultStories }: CustomerStoriesPro
 
         {/* Slide Indicators */}
         <div className="flex justify-center gap-2 mt-12">
-          {stories.map((_, index) => (
+          {finalStories.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}

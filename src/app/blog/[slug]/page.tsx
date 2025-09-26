@@ -15,9 +15,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -174,11 +174,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <p className="text-sm text-muted-foreground">
                     Written by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">Settleline Expert</Link>
                     {post.reviewedBy && (
-                      <span> • Reviewed by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">Settleline CA</Link></span>
+                      <span> • Reviewed by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">{post.reviewedBy}</Link></span>
                     )}
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Updated for Tax Year 2024 • {formatDate(post.date)} {post.readTime}
+                    Updated for Tax Year {new Date().getFullYear()} • {formatDate(post.date)} • {post.readTime}
                   </p>
                 </div>
                 

@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation'
 
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 // Static service data for now

@@ -15,6 +15,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { generateSEO } from "@/lib/seo";
+import { getCaseStudies } from "@/lib/case-studies";
 
 export const metadata = generateSEO({
   title: "Expert Tax & Financial Planning for US-India Cross-Border Professionals",
@@ -22,6 +23,7 @@ export const metadata = generateSEO({
 });
 
 export default function Home() {
+  const caseStudies = getCaseStudies();
   return (
     <>
       {/* Hero Section - TurboTax Style */}
@@ -51,7 +53,7 @@ export default function Home() {
       <CustomerReviews />
       
       {/* Customer Stories */}
-      <CustomerStories />
+      <CustomerStories caseStudies={caseStudies} />
       
       {/* Featured Blog Posts */}
       <FeaturedBlogPosts />

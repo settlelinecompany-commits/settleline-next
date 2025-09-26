@@ -2,22 +2,22 @@ import { notFound } from 'next/navigation'
 import { getCaseStudy, getCaseStudies } from '@/lib/case-studies'
 import { generateSEO, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { Container } from '@/components/layout/container'
+import { Section } from '@/components/layout/section'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/lib/utils'
 import { KeyTakeaways } from '@/components/blocks/key-takeaways'
 import { ReadingProgress } from '@/components/blocks/reading-progress'
 import { TableOfContents } from '@/components/blocks/table-of-contents'
-import { RelatedPosts } from '@/components/blocks/related-posts'
 import { MarkdownRenderer } from '@/components/blocks/markdown-renderer'
 import { FAQAccordion } from '@/components/blocks/faq-accordion'
 import Link from 'next/link'
 import Image from 'next/image'
 
 interface CaseStudyPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -64,23 +64,34 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   // Get related case studies (same category, excluding current case study)
   const allCaseStudies = getCaseStudies()
-  const relatedCaseStudies = allCaseStudies
-    .filter(cs => cs.slug !== caseStudy.slug && cs.category === caseStudy.category && cs.cover)
-    .slice(0, 3)
-    .map(cs => ({
-      slug: cs.slug,
-      title: cs.title,
-      description: cs.description,
-      category: cs.category,
-      cover: cs.cover!,
-      readTime: cs.readTime
-    }))
+  let relatedCaseStudies: Array<{
+    slug: string;
+    title: string;
+    description: string;
+    category: string;
+    cover: string;
+    readTime: string;
+  }> = []
+  
+  if (Array.isArray(allCaseStudies)) {
+    relatedCaseStudies = allCaseStudies
+      .filter(cs => cs && cs.slug !== caseStudy.slug && cs.category === caseStudy.category && cs.cover)
+      .slice(0, 3)
+      .map(cs => ({
+        slug: cs.slug,
+        title: cs.title,
+        description: cs.description,
+        category: cs.category,
+        cover: cs.cover!,
+        readTime: cs.readTime
+      }))
+  }
 
   // Generate key takeaways based on case study data
   const keyTakeaways = [
     `${caseStudy.company} ${caseStudy.clientRole} achieved ${caseStudy.savings} through strategic planning`,
     `Project timeline: ${caseStudy.timeline} with comprehensive approach`,
-    `Key challenges addressed: ${caseStudy.challenges.slice(0, 2).join(', ')}`,
+    `Key challenges addressed: ${(caseStudy.challenges || []).slice(0, 2).join(', ')}`,
     `Professional guidance essential for complex cross-border tax situations`,
     `Early planning and expert coordination maximize tax optimization results`
   ]
@@ -175,13 +186,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {/* Author Info - TurboTax Style */}
                 <div className="text-left mb-6">
                   <p className="text-sm text-muted-foreground">
-                    Written by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">Settleline Expert</Link>
+                    Written by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">{caseStudy.author}</Link>
                     {caseStudy.reviewedBy && (
-                      <span> • Reviewed by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">Settleline CA</Link></span>
+                      <span> • Reviewed by <Link href="/experts" className="text-primary font-medium hover:text-primary/80 transition-colors">{caseStudy.reviewedBy}</Link></span>
                     )}
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Updated for Tax Year 2024 • {formatDate(caseStudy.date)} {caseStudy.readTime}
+                    Updated for Tax Year {new Date().getFullYear()} • {formatDate(caseStudy.date)} • {caseStudy.readTime}
                   </p>
                 </div>
                 
@@ -272,7 +283,57 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
       {/* Related Case Studies */}
       {relatedCaseStudies.length > 0 && (
-        <RelatedPosts posts={relatedCaseStudies} currentSlug={caseStudy.slug} />
+        <Section className="py-12 bg-muted/20">
+          <Container>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
+                Related Case Studies
+              </h2>
+              <p className="text-muted-foreground">
+                Explore more success stories from our clients
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedCaseStudies.map((cs) => (
+                <Link 
+                  key={cs.slug} 
+                  href={`/case-studies/${cs.slug}`}
+                  className="group block bg-white rounded-2xl overflow-hidden shadow-lg border border-border/20 hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="relative h-48">
+                    <Image
+                      src={cs.cover}
+                      alt={cs.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        {cs.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {cs.readTime}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-200">
+                      {cs.title}
+                    </h3>
+                    
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {cs.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Container>
+        </Section>
       )}
 
       {/* Mobile Sticky CTA - Only visible on mobile */}
