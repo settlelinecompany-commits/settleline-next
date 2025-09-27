@@ -272,7 +272,7 @@ export default function IndianTaxFilingPage() {
 
                 {/* How It's Done */}
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">How It's Done</h2>
+                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">How It&apos;s Done</h2>
                   <p className="text-lg text-muted-foreground mb-8">
                     This plan is equipped with end-to-end online fulfillment via our expert. No hassle, 100% Digital.
                   </p>
