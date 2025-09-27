@@ -1,108 +1,52 @@
 "use client";
 
-import { Hero } from "@/components/blocks/hero";
-import { FooterCTA } from "@/components/blocks/footer-cta";
+import { useState } from "react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { FAQAccordion } from "@/components/blocks/faq-accordion";
-import { generalFAQs } from "@/lib/faq-data";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { FAQAccordion } from "@/components/blocks/faq-accordion";
+import { FooterCTA } from "@/components/blocks/footer-cta";
 
-const serviceFeatures = [
+// Services data
+const repatriationServices = [
   {
-    title: "ITR Filing for NRIs",
-    description: "Complete Income Tax Return preparation and filing for Non-Resident Indians with proper DTAA benefits and foreign income reporting.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14,2 14,8 20,8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
-      </svg>
-    )
-  },
-  {
-    title: "Double Taxation Relief (DTAA)",
-    description: "Maximize tax savings through proper DTAA application, foreign tax credit optimization, and treaty benefit utilization.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-      </svg>
-    )
-  },
-  {
-    title: "Capital Gains Tax Planning",
-    description: "Strategic planning for capital gains on Indian investments, property sales, and equity transactions with tax optimization.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-    )
-  },
-  {
-    title: "NRI Income Tax Returns",
-    description: "Comprehensive NRI tax return preparation covering all income sources, deductions, and compliance requirements.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-    )
-  }
-];
-
-
-// RNOR Services data (moved from modal component)
-const rnorServices = [
-  {
-    title: "RNOR Status Assessment & Planning",
-    description: "Comprehensive evaluation and strategic planning for your RNOR status to maximize tax benefits during your transition to India.",
+    title: "Property Sale & Rental Repatriation",
+    description: "Structuring compliant sale/rent transfers abroad with proper documentation and bank coordination.",
     details: [
-      "Eligibility evaluation for RNOR status based on your specific situation",
-      "Physical presence tracking and documentation requirements",
-      "Tax residency determination and timeline planning",
-      "Pre-return tax optimization strategies",
-      "Transition timeline and milestone planning",
-      "Documentation checklist and compliance requirements"
+      "Structuring compliant sale/rent transfers abroad",
+      "Form 15CA/CB preparation and filing",
+      "Applying DTAA for rental/sale income",
+      "Bank coordination for smooth execution"
     ]
   },
   {
-    title: "Cross-Border Tax Optimization",
-    description: "Strategic tax planning to minimize your tax burden while maintaining full compliance across both US and Indian jurisdictions.",
+    title: "Inheritance & Gift Transfers",
+    description: "Repatriating inherited assets and cash with FEMA/RBI compliance and proper documentation.",
     details: [
-      "Foreign income exemption strategies and implementation",
-      "Capital gains optimization for US and Indian assets",
-      "Asset restructuring and transfer planning",
-      "Tax treaty benefit maximization",
-      "Investment portfolio optimization for dual residency",
-      "Income timing and recognition strategies"
+      "Repatriating inherited assets/cash",
+      "FEMA/RBI rules for cross-border gifts",
+      "Structuring family transfers abroad",
+      "Documentation for tax clearance"
     ]
   },
   {
-    title: "Compliance & Documentation Support",
-    description: "Complete support for all filing requirements, documentation, and ongoing compliance in both US and Indian tax systems.",
+    title: "$1M Desk & RBI Approvals",
+    description: "Advisory on $1M annual repatriation cap with multi-year transfer structuring and RBI approvals.",
     details: [
-      "US tax filing requirements (FBAR, FATCA, Form 8938)",
-      "Indian tax return preparation and filing",
-      "Documentation and record keeping systems",
-      "Ongoing compliance monitoring and alerts",
-      "Audit support and representation",
-      "Quarterly and annual compliance reviews"
+      "Advisory on $1M annual repatriation cap",
+      "Multi-year transfer structuring",
+      "RBI approval workflows for larger amounts",
+      "Escalation handling with banks"
     ]
   },
   {
-    title: "Investment Advisory & Portfolio Management",
-    description: "Expert guidance on cross-border investment strategies, asset allocation, and tax-efficient portfolio management for US-India professionals.",
+    title: "Form 15CA/CB & Bank Coordination",
+    description: "Chartered Accountant certification with purpose codes, documentation, and audit-ready compliance.",
     details: [
-      "Cross-border investment strategy development",
-      "Tax-efficient asset allocation and rebalancing",
-      "Foreign investment compliance and reporting",
-      "Retirement planning across jurisdictions",
-      "Estate planning and wealth transfer strategies",
-      "Risk management and diversification strategies"
+      "Chartered Accountant certification",
+      "Purpose codes and documentation",
+      "Bank escalation resolution",
+      "Audit-ready compliance kits"
     ]
   }
 ];
@@ -114,14 +58,6 @@ const servicesIncluded = [
   "Get a dedicated relationship manager during service fulfillment"
 ];
 
-// Who Should Buy data
-const targetAudience = [
-  { name: "Salaried Individuals", icon: "📄" },
-  { name: "Financial Traders", icon: "📊" },
-  { name: "Freelancers", icon: "💼" },
-  { name: "Business Owners", icon: "🏢" }
-];
-
 // How It's Done data
 const processSteps = [
   { step: "01", title: "Purchase of Plan", description: "Select your consultation package and complete payment" },
@@ -130,7 +66,27 @@ const processSteps = [
   { step: "04", title: "Resolution of Query", description: "Get comprehensive answers and actionable advice. The documents required shall be communicated upon having an analysis of your queries." }
 ];
 
-export default function IndianTaxFilingPage() {
+// FAQ data
+const generalFAQs = [
+  {
+    question: "What is the $1M repatriation limit?",
+    answer: "The $1M limit refers to the annual cap on repatriation of funds from India under the Liberalized Remittance Scheme (LRS). This includes property sale proceeds, rental income, and other legitimate sources."
+  },
+  {
+    question: "Do I need Form 15CB for every transfer?",
+    answer: "Form 15CB is required for transfers exceeding ₹5 lakhs. It's a CA certificate that validates the purpose and compliance of the remittance. We help prepare and file these forms."
+  },
+  {
+    question: "How do I transfer inherited funds abroad?",
+    answer: "Inherited funds can be repatriated under FEMA guidelines with proper documentation including inheritance certificates, tax clearance, and compliance with the $1M annual limit."
+  },
+  {
+    question: "Can I repatriate proceeds from an old sale?",
+    answer: "Yes, you can repatriate proceeds from property sales even if the sale happened years ago, provided you have proper documentation and comply with current FEMA regulations."
+  }
+];
+
+export default function RepatriationMoneyMovementPage() {
   const [selectedService, setSelectedService] = useState<number | null>(null);
   const [selectedDuration, setSelectedDuration] = useState<string>('30');
 
@@ -142,8 +98,8 @@ export default function IndianTaxFilingPage() {
     setSelectedService(null);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Escape') {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
       closeModal();
     }
   };
@@ -161,10 +117,10 @@ export default function IndianTaxFilingPage() {
             {/* Left Column - Service Heading */}
             <div>
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Indian Tax Filing Services
+                Repatriation & Money Movement
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                Professional tax filing services for NRIs with expert guidance on ITR preparation, DTAA benefits, and comprehensive tax compliance.
+                Move your money across borders—property, rent, or inheritance—FEMA compliant and penalty-free.
               </p>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
@@ -199,13 +155,13 @@ export default function IndianTaxFilingPage() {
           </div>
         </Container>
       </Section>
-      
+
       {/* Centered Service Cards Section */}
       <Section className="py-16 lg:py-20 bg-muted/20">
         <Container>
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {rnorServices.map((service, index) => (
+              {repatriationServices.map((service, index) => (
                 <div
                   key={index}
                   className="bg-primary text-primary-foreground rounded-lg p-8 cursor-pointer hover:shadow-lg transition-shadow duration-300"
@@ -228,10 +184,10 @@ export default function IndianTaxFilingPage() {
                   </p>
                   <div className="flex items-center text-primary-foreground hover:underline">
                     <span className="text-sm font-medium">Find out more</span>
-                    <svg 
-                      className="ml-2 w-4 h-4" 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -310,10 +266,10 @@ export default function IndianTaxFilingPage() {
                     </label>
                     <select className="w-full p-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
                       <option value="">Select service type</option>
-                      <option value="rnor-assessment">RNOR Status Assessment & Planning</option>
-                      <option value="cross-border-optimization">Cross-Border Tax Optimization</option>
-                      <option value="compliance-support">Compliance & Documentation Support</option>
-                      <option value="investment-advisory">Investment Advisory & Portfolio Management</option>
+                      <option value="property-rental-repatriation">Property Sale & Rental Repatriation</option>
+                      <option value="inheritance-gift-transfers">Inheritance & Gift Transfers</option>
+                      <option value="1m-desk-rbi-approvals">$1M Desk & RBI Approvals</option>
+                      <option value="form-15ca-cb-coordination">Form 15CA/CB & Bank Coordination</option>
                     </select>
                   </div>
 
@@ -419,7 +375,6 @@ export default function IndianTaxFilingPage() {
         </Container>
       </Section>
 
-      
       {/* FAQ Section */}
       <Section className="py-16 lg:py-20 bg-background">
         <Container>
@@ -443,7 +398,7 @@ export default function IndianTaxFilingPage() {
               </div>
               <span className="text-sm text-muted-foreground">Average Rating</span>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
                 <div className="flex items-center gap-1 mb-4">
@@ -463,7 +418,7 @@ export default function IndianTaxFilingPage() {
                   My wife and I wanted to start a business. We had the business plan but had no idea how to go about it. We bought the Settleline Ask an Expert Plan and an expert solved all our queries related to mandatory registration requirements...
                 </p>
               </div>
-              
+
               <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
                 <div className="flex items-center gap-1 mb-4">
                   <span className="font-semibold text-foreground">Seema Vimlan</span>
@@ -483,7 +438,7 @@ export default function IndianTaxFilingPage() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex justify-between items-center">
               <Button variant="outline" asChild>
                 <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
@@ -506,25 +461,25 @@ export default function IndianTaxFilingPage() {
           </div>
         </Container>
       </Section>
-      
+
       {/* CTA Section */}
       <FooterCTA
-        title="Ready to File Your Indian Taxes?"
-        description="Let our experts handle your Indian tax filing with maximum savings and complete compliance. Get started today."
-        ctaText="Start Tax Filing"
+        title="Ready to simplify your cross-border finances?"
+        description="In just 30 minutes, we'll map the fastest, compliant path for your taxes, property, and wealth."
+        ctaText="Talk to an Expert"
         ctaHref="https://rzp.io/l/settleline-consultation"
-        secondaryCtaText="Get Free Consultation"
+        secondaryCtaText="Book a 30-min Consult"
         secondaryCtaHref="https://rzp.io/l/settleline-consultation"
       />
 
       {/* Modal */}
       {selectedService !== null && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
           onClick={closeModal}
           onKeyDown={handleKeyDown}
         >
-          <div 
+          <div
             className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
@@ -534,7 +489,7 @@ export default function IndianTaxFilingPage() {
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <h3 id="modal-title" className="text-2xl font-bold text-foreground">
-                  {rnorServices[selectedService].title}
+                  {repatriationServices[selectedService].title}
                 </h3>
                 <button
                   onClick={closeModal}
@@ -546,13 +501,13 @@ export default function IndianTaxFilingPage() {
                   </svg>
                 </button>
               </div>
-              
+
               <div className="mb-6">
                 <h4 className="text-lg font-semibold text-foreground mb-4">
                   How we can help you:
                 </h4>
                 <ul className="space-y-3">
-                  {rnorServices[selectedService].details.map((detail, index) => (
+                  {repatriationServices[selectedService].details.map((detail, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <span className="text-primary mt-1">•</span>
                       <span className="text-muted-foreground">{detail}</span>
@@ -560,7 +515,7 @@ export default function IndianTaxFilingPage() {
                   ))}
                 </ul>
               </div>
-              
+
               <div className="flex justify-end gap-3">
                 <Button variant="outline" onClick={closeModal}>
                   Close

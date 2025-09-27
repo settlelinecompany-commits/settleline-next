@@ -11,10 +11,10 @@ export const metadata = generateSEO({
 });
 const services = [
   {
-    title: "Indian Tax Filing",
-    description: "Comprehensive compliance and advisory services for both international and Indian tax requirements.",
-    tags: ["ITR Filing", "Double Taxation Relief (DTAA)", "Capital Gains Tax", "NRI Income Tax Returns"],
-    ctaText: "File Your Indian Taxes →",
+    title: "Residency, Tax & Investment Planning",
+    description: "Plan your return with clarity—RNOR years, DTAA relief, Form 67, and global asset exits made simple.",
+    tags: ["RNOR & Residency Planning", "Double Taxation Relief (Form 67 / DTAA)", "Investment & RSU Tax Planning", "Compliance & Global Disclosures"],
+    ctaText: "Plan Your Taxes & Investments →",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
@@ -22,37 +22,21 @@ const services = [
     )
   },
   {
-    title: "Tax Consultancy Services",
-    description: "Professional NRI-focused tax consultancy covering planning, compliance, and cross-border strategies.",
-    tags: ["Cross-Border Tax", "Investment Advisory", "NRI Tax Strategy", "Double Taxation Relief"],
-    ctaText: "Get Expert Tax Advice →",
+    title: "Property & Real Estate Advisory",
+    description: "Buy, sell, rent, or maintain Indian property without stress—secure, tax-efficient, and FEMA compliant.",
+    tags: ["Property Sale & Taxation", "Rental Income & Tenant Management", "Property Protection & Maintenance", "Repatriation of Sale Proceeds"],
+    ctaText: "Get Property Advisory →",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14,2 14,8 20,8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9,22 9,12 15,12 15,22"/>
       </svg>
     )
   },
   {
-    title: "NRI Returning India Tax Plan",
-    description: "Tailored tax planning for NRIs returning to India, helping you save on taxes and manage income.",
-    tags: ["Tax Residency Advisory", "DTAA Guidance", "Wealth & Asset Structuring", "Repatriation Support"],
-    ctaText: "Plan Your Return Taxes →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-        <path d="M18 8l2 2-2 2"/>
-      </svg>
-    )
-  },
-  {
-    title: "Repatriation of Funds",
-    description: "Secure and legal transfer of funds from India to abroad with expert guidance on NRO, NRE accounts.",
-    tags: ["NRO to NRE Transfers", "FCNR Guidance", "RBI Compliance", "FEMA Advisory"],
+    title: "Repatriation & Money Movement",
+    description: "Move your money across borders—property, rent, or inheritance—FEMA compliant and penalty-free.",
+    tags: ["Property Sale & Rental Repatriation", "Inheritance & Gift Transfers", "$1M Desk & RBI Approvals", "Form 15CA/CB & Bank Coordination"],
     ctaText: "Repatriate Funds Safely →",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
@@ -64,22 +48,38 @@ const services = [
     )
   },
   {
-    title: "Business Incorporation Service",
-    description: "Complete assistance in company registration, compliance, and bank account setup for NRIs.",
-    tags: ["Company Registration", "PAN/TAN Setup", "Compliance Support", "Bank Account Opening"],
-    ctaText: "Start Your Business →",
+    title: "Business & Hiring Structures",
+    description: "Set up or expand your business in India with tax-efficient structures, payroll, and global compliance.",
+    tags: ["Entity Incorporation & Structuring", "FEMA & RBI Compliance", "Employer of Record / Hiring Advisory", "Transfer Pricing & Cross-Border Tax"],
+    ctaText: "Start or Scale Your Business →",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9,22 9,12 15,12 15,22"/>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        <path d="M18 8l2 2-2 2"/>
       </svg>
     )
   },
   {
-    title: "Notices Handling",
-    description: "Expert handling of tax notice responses, documentation, and representation on your behalf.",
-    tags: ["Income Tax Notices", "Representation Services", "Documentation Support", "Expert Assistance"],
-    ctaText: "Resolve Your Tax Notice →",
+    title: "Wealth & Retirement Planning",
+    description: "Protect your future—retirement accounts, pensions, trusts, and estate planning tailored for global Indians.",
+    tags: ["Global Retirement Accounts (401k, Roth, UK pensions)", "Safe Withdrawal & Asset Allocation", "Estate & Family Trust Planning", "Succession & Inheritance Advisory"],
+    ctaText: "Plan Your Wealth & Retirement →",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14,2 14,8 20,8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+    )
+  },
+  {
+    title: "Compliance & Risk Assurance",
+    description: "Stay audit-ready and penalty-free with strong internal controls, Schedule FA reporting, and risk defense.",
+    tags: ["Internal Controls & Reporting", "Technology & Cyber Assurance", "Black Money Act & Schedule FA", "Regulatory Risk & Penalty Defense"],
+    ctaText: "Protect Your Compliance →",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -143,8 +143,10 @@ export default function ServicesPage() {
                 </div>
                 
                 {/* CTA Button */}
-                <Button size="sm" className="w-full">
-                  {service.ctaText}
+                <Button size="sm" className="w-full" asChild>
+                  <a href={`/services/${service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`}>
+                    {service.ctaText}
+                  </a>
                 </Button>
               </div>
             ))}
