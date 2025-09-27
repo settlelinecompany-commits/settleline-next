@@ -153,7 +153,7 @@ export function Hero({
                       alt="Business Today Logo"
                       fill
                       className="object-contain"
-                      sizes="(max-width: 768px) 400px, 400px"
+                      sizes="(max-width: 768px) 200px, 192px"
                     />
                   </div>
                 </div>

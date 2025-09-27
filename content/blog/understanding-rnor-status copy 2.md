@@ -20,7 +20,7 @@ faq:
   - question: "How long does RNOR status last?"
     answer: "RNOR status typically lasts for 2 years from the date of return to India, provided you meet the conditions. After this period, you become a Resident and Ordinarily Resident (ROR)."
   - question: "What are the main tax benefits of RNOR status?"
-    answer: "RNOR status offers exemption from tax on foreign income (except income from a business controlled in India or a profession set up in India), and favorable treatment of capital gains from foreign assets."
+    answer: "RNOR status offers exemption from tax on foreign income (except income fro m a business controlled in India or a profession set up in India), and favorable treatment of capital gains from foreign assets."
 ---
 
 Returning to India after years of working in the US can be both exciting and complex, especially when it comes to tax planning. One of the most important concepts to understand is RNOR (Resident but Not Ordinarily Resident) status, which can provide significant tax benefits during your transition period.
