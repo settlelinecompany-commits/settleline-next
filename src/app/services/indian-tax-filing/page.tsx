@@ -134,6 +134,7 @@ const processSteps = [
 
 export default function IndianTaxFilingPage() {
   const [selectedService, setSelectedService] = useState<number | null>(null);
+  const [selectedDuration, setSelectedDuration] = useState<string>('30');
 
   const openModal = (index: number) => {
     setSelectedService(index);
@@ -147,6 +148,10 @@ export default function IndianTaxFilingPage() {
     if (event.key === 'Escape') {
       closeModal();
     }
+  };
+
+  const handleDurationChange = (duration: string) => {
+    setSelectedDuration(duration);
   };
 
   return (
@@ -241,160 +246,176 @@ export default function IndianTaxFilingPage() {
         </Container>
       </Section>
 
-      {/* Payment/Booking Flow Section */}
+      {/* Services Included + Payment Flow Section */}
       <Section className="py-16 lg:py-20 bg-background">
         <Container>
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20">
-              {/* Service Type Selector */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Service Type
-                </label>
-                <select className="w-full p-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-                  <option value="">Select service type</option>
-                  <option value="rnor-assessment">RNOR Status Assessment & Planning</option>
-                  <option value="cross-border-optimization">Cross-Border Tax Optimization</option>
-                  <option value="compliance-support">Compliance & Documentation Support</option>
-                  <option value="investment-advisory">Investment Advisory & Portfolio Management</option>
-                </select>
-              </div>
-
-              {/* Base Price Display */}
-              <div className="text-center mb-6">
-                <div className="text-4xl font-bold text-foreground mb-2">$2</div>
-                <div className="text-lg text-muted-foreground">per minute</div>
-              </div>
-
-              {/* Instructional Text */}
-              <div className="text-center mb-8">
-                <p className="text-foreground">
-                  To consult our Cross-Border Experts, select your consultation duration
-                </p>
-              </div>
-
-              {/* Time Estimate Options */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="border border-border rounded-lg p-4 cursor-pointer hover:border-primary transition-colors">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-semibold text-foreground">15 minutes</div>
-                      <div className="text-2xl font-bold text-primary">$30</div>
-                    </div>
-                    <input type="radio" name="duration" value="15" className="w-4 h-4 text-primary" />
-                  </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Left Column - Services Included + How It's Done */}
+              <div className="space-y-12">
+                {/* Services Included */}
+                <div>
+                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">Services Included</h2>
+                  <ul className="space-y-4">
+                    {servicesIncluded.map((service, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <span className="text-muted-foreground">{service}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                
-                <div className="border border-primary bg-primary/5 rounded-lg p-4 cursor-pointer">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-semibold text-foreground">30 minutes</div>
-                      <div className="text-2xl font-bold text-primary">$60</div>
-                      <div className="text-xs text-orange-600 font-medium">Recommended</div>
-                    </div>
-                    <input type="radio" name="duration" value="30" className="w-4 h-4 text-primary" defaultChecked />
-                  </div>
-                </div>
-                
-                <div className="border border-border rounded-lg p-4 cursor-pointer hover:border-primary transition-colors">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-semibold text-foreground">1 hour</div>
-                      <div className="text-2xl font-bold text-primary">$120</div>
-                    </div>
-                    <input type="radio" name="duration" value="60" className="w-4 h-4 text-primary" />
-                  </div>
-                </div>
-              </div>
 
-              {/* Buy Now Button */}
-              <Button size="lg" className="w-full" asChild>
-                <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
-                  Buy now
-                </a>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Services Included Section */}
-      <Section className="py-16 lg:py-20 bg-background">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">Services Included</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <ul className="space-y-4">
-                  {servicesIncluded.map((service, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                {/* How It's Done */}
+                <div>
+                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">How It's Done</h2>
+                  <p className="text-lg text-muted-foreground mb-8">
+                    This plan is equipped with end-to-end online fulfillment via our expert. No hassle, 100% Digital.
+                  </p>
+                  <div className="text-2xl font-bold text-foreground mb-8">2 Days Estimate</div>
+                  
+                  <div className="space-y-6">
+                    {processSteps.map((step, index) => (
+                      <div key={index} className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm ${
+                            index === 3 ? 'bg-green-500 text-white' : 'bg-primary text-primary-foreground'
+                          }`}>
+                            {step.step}
+                          </div>
+                        </div>
+                        <div className="flex-grow">
+                          <h3 className="text-lg font-semibold text-foreground mb-2">
+                            {step.title}
+                          </h3>
+                          <p className="text-muted-foreground leading-relaxed text-sm">
+                            {step.description}
+                          </p>
+                        </div>
                       </div>
-                      <span className="text-muted-foreground">{service}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="text-center">
-                <div className="w-64 h-64 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full mx-auto flex items-center justify-center">
-                  <div className="text-6xl">💼</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Who Should Buy Section */}
-      <Section className="py-16 lg:py-20 bg-muted/20">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">Who Should Buy</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {targetAudience.map((audience, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-4xl mb-3">{audience.icon}</div>
-                  <h3 className="font-semibold text-foreground">{audience.name}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* How It's Done Section */}
-      <Section className="py-16 lg:py-20 bg-background">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">How It's Done</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              This plan is equipped with end-to-end online fulfillment via our expert. No hassle, 100% Digital.
-            </p>
-            <div className="text-2xl font-bold text-foreground mb-12">2 Days Estimate</div>
-            
-            <div className="space-y-8">
-              {processSteps.map((step, index) => (
-                <div key={index} className="flex items-start gap-6">
-                  <div className="flex-shrink-0">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center font-bold text-lg ${
-                      index === 3 ? 'bg-green-500 text-white' : 'bg-primary text-primary-foreground'
-                    }`}>
-                      {step.step}
-                    </div>
+                    ))}
                   </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {step.description}
+                </div>
+              </div>
+
+              {/* Right Column - Payment/Booking Flow */}
+              <div>
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20">
+                  {/* Service Type Selector */}
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Service Type
+                    </label>
+                    <select className="w-full p-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      <option value="">Select service type</option>
+                      <option value="rnor-assessment">RNOR Status Assessment & Planning</option>
+                      <option value="cross-border-optimization">Cross-Border Tax Optimization</option>
+                      <option value="compliance-support">Compliance & Documentation Support</option>
+                      <option value="investment-advisory">Investment Advisory & Portfolio Management</option>
+                    </select>
+                  </div>
+
+                  {/* Base Price Display */}
+                  <div className="text-center mb-6">
+                    <div className="text-4xl font-bold text-foreground mb-2">$2</div>
+                    <div className="text-lg text-muted-foreground">per minute</div>
+                  </div>
+
+                  {/* Instructional Text */}
+                  <div className="text-center mb-8">
+                    <p className="text-foreground">
+                      To consult our Cross-Border Experts, select your consultation duration
                     </p>
                   </div>
+
+                  {/* Time Estimate Options */}
+                  <div className="grid grid-cols-1 gap-4 mb-6">
+                    <div 
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedDuration === '15' 
+                          ? 'border-primary bg-primary/5' 
+                          : 'border-border hover:border-primary'
+                      }`}
+                      onClick={() => handleDurationChange('15')}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-foreground">15 minutes</div>
+                          <div className="text-2xl font-bold text-primary">$30</div>
+                        </div>
+                        <input 
+                          type="radio" 
+                          name="duration" 
+                          value="15" 
+                          checked={selectedDuration === '15'}
+                          onChange={() => handleDurationChange('15')}
+                          className="w-4 h-4 text-primary" 
+                        />
+                      </div>
+                    </div>
+                    
+                    <div 
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedDuration === '30' 
+                          ? 'border-primary bg-primary/5' 
+                          : 'border-border hover:border-primary'
+                      }`}
+                      onClick={() => handleDurationChange('30')}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-foreground">30 minutes</div>
+                          <div className="text-2xl font-bold text-primary">$60</div>
+                          <div className="text-xs text-orange-600 font-medium">Recommended</div>
+                        </div>
+                        <input 
+                          type="radio" 
+                          name="duration" 
+                          value="30" 
+                          checked={selectedDuration === '30'}
+                          onChange={() => handleDurationChange('30')}
+                          className="w-4 h-4 text-primary" 
+                        />
+                      </div>
+                    </div>
+                    
+                    <div 
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedDuration === '60' 
+                          ? 'border-primary bg-primary/5' 
+                          : 'border-border hover:border-primary'
+                      }`}
+                      onClick={() => handleDurationChange('60')}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-foreground">1 hour</div>
+                          <div className="text-2xl font-bold text-primary">$120</div>
+                        </div>
+                        <input 
+                          type="radio" 
+                          name="duration" 
+                          value="60" 
+                          checked={selectedDuration === '60'}
+                          onChange={() => handleDurationChange('60')}
+                          className="w-4 h-4 text-primary" 
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Buy Now Button */}
+                  <Button size="lg" className="w-full" asChild>
+                    <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
+                      Buy now
+                    </a>
+                  </Button>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </Container>
