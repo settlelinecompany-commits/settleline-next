@@ -110,9 +110,7 @@ const rnorServices = [
 // Services Included data
 const servicesIncluded = [
   "Advisory for salaried individuals, freelancers, financial traders",
-  "45 minutes call session with a Settleline expert",
   "Get answers to your tax related queries",
-  "Plan excludes any GST or startup related queries",
   "Get a dedicated relationship manager during service fulfillment"
 ];
 
@@ -128,8 +126,8 @@ const targetAudience = [
 const processSteps = [
   { step: "01", title: "Purchase of Plan", description: "Select your consultation package and complete payment" },
   { step: "02", title: "Share your Requirements", description: "Provide your tax situation and specific questions" },
-  { step: "03", title: "Session with Settleline Expert", description: "45-minute consultation with our tax specialist" },
-  { step: "04", title: "Resolution of Query", description: "Get comprehensive answers and actionable advice" }
+  { step: "03", title: "Session with Settleline Expert", description: "Our cross-border team will call within the next hour or so" },
+  { step: "04", title: "Resolution of Query", description: "Get comprehensive answers and actionable advice. The documents required shall be communicated upon having an analysis of your queries." }
 ];
 
 export default function IndianTaxFilingPage() {
@@ -192,10 +190,10 @@ export default function IndianTaxFilingPage() {
                 <div className="text-4xl font-bold text-primary mb-2">$2</div>
                 <div className="text-lg text-muted-foreground">per minute</div>
               </div>
-              <Button size="lg" className="w-full" asChild>
-                <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
-                  Buy now
-                </a>
+              <Button size="lg" className="w-full" onClick={() => {
+                document.getElementById('payment-widget')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
+                Buy now
               </Button>
             </div>
           </div>
@@ -304,7 +302,7 @@ export default function IndianTaxFilingPage() {
 
               {/* Right Column - Payment/Booking Flow */}
               <div>
-                <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20">
+                <div id="payment-widget" className="bg-white rounded-2xl p-10 shadow-lg border border-border/20">
                   {/* Service Type Selector */}
                   <div className="mb-6">
                     <label className="block text-sm font-medium text-foreground mb-2">
@@ -421,24 +419,6 @@ export default function IndianTaxFilingPage() {
         </Container>
       </Section>
 
-      {/* Documents Required Section */}
-      <Section className="py-16 lg:py-20 bg-muted/20">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">Documents Required</h2>
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-green-500 rounded flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <p className="text-muted-foreground">
-                The documents required shall be communicated upon having an analysis of your queries.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
       
       {/* FAQ Section */}
       <Section className="py-16 lg:py-20 bg-background">
@@ -585,10 +565,11 @@ export default function IndianTaxFilingPage() {
                 <Button variant="outline" onClick={closeModal}>
                   Close
                 </Button>
-                <Button asChild>
-                  <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
-                    Book Consultation
-                  </a>
+                <Button onClick={() => {
+                  closeModal();
+                  document.getElementById('payment-widget')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  Book Consultation
                 </Button>
               </div>
             </div>
