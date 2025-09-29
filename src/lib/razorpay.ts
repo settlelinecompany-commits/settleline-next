@@ -12,7 +12,7 @@ export interface PaymentData {
   amount: number;
   currency: string;
   receipt: string;
-  notes?: Record<string, any>;
+  notes?: Record<string, string | number | boolean>;
 }
 
 // Create Razorpay order (server-side)
@@ -54,6 +54,13 @@ export async function verifyPayment(paymentData: {
   return result.verified;
 }
 
+// Razorpay payment response interface
+export interface RazorpayPaymentResponse {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+}
+
 // Client-side Razorpay options
 export interface RazorpayOptions {
   key: string;
@@ -62,15 +69,18 @@ export interface RazorpayOptions {
   name: string;
   description: string;
   order_id: string;
-  handler: (response: any) => void;
+  handler: (response: RazorpayPaymentResponse) => void;
   prefill?: {
     name?: string;
     email?: string;
     contact?: string;
   };
-  notes?: Record<string, any>;
+  notes?: Record<string, string | number | boolean>;
   theme?: {
     color: string;
+  };
+  modal?: {
+    ondismiss: () => void;
   };
 }
 
@@ -87,7 +97,7 @@ export function loadRazorpayScript(): Promise<boolean> {
 
 // Open Razorpay checkout
 export async function openRazorpayCheckout(options: RazorpayOptions): Promise<void> {
-  const Razorpay = (window as any).Razorpay;
+  const Razorpay = (window as { Razorpay?: new (options: RazorpayOptions) => { open: () => void } }).Razorpay;
   
   if (!Razorpay) {
     throw new Error('Razorpay script not loaded');

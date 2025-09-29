@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { createRazorpayOrder, loadRazorpayScript, openRazorpayCheckout, verifyPayment } from '@/lib/razorpay';
+import { createRazorpayOrder, loadRazorpayScript, openRazorpayCheckout, verifyPayment, RazorpayPaymentResponse } from '@/lib/razorpay';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Container } from '@/components/layout/container';
-import { Section } from '@/components/layout/section';
+import Link from 'next/link';
 
 interface FormData {
   firstName: string;
@@ -38,7 +38,7 @@ export default function ConsultationForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [consultationId, setConsultationId] = useState<string | null>(null);
+  const [, setConsultationId] = useState<string | null>(null);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   // Load Razorpay script on component mount
@@ -158,7 +158,7 @@ export default function ConsultationForm() {
         theme: {
           color: '#071a3c' // Your brand color
         },
-        handler: async (response: any) => {
+        handler: async (response: RazorpayPaymentResponse) => {
           console.log('Payment response:', response);
           
           try {
@@ -220,12 +220,12 @@ export default function ConsultationForm() {
           <p className="text-lg text-muted-foreground mb-4">
             Your consultation has been booked and payment confirmed.
           </p>
-          <p className="text-sm text-muted-foreground mb-8">
-            We'll contact you within 24 hours to schedule your {formData.duration}-minute {formData.serviceType} consultation.
-          </p>
+                  <p className="text-sm text-muted-foreground mb-8">
+                    We&apos;ll contact you within 24 hours to schedule your {formData.duration}-minute {formData.serviceType} consultation.
+                  </p>
           <div className="space-y-4">
             <Button asChild>
-              <a href="/">Return to Home</a>
+              <Link href="/">Return to Home</Link>
             </Button>
             <div>
               <Button variant="outline" asChild>
