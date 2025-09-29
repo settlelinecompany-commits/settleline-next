@@ -364,8 +364,8 @@ export default function ComplianceRiskAssurancePage() {
 
                   {/* Buy Now Button */}
                   <Button size="lg" className="w-full" asChild>
-                    <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
-                      Buy now
+                    <a href="/book/consultation">
+                      Book Consultation
                     </a>
                   </Button>
                 </div>

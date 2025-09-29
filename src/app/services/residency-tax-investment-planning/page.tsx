@@ -362,10 +362,10 @@ export default function ResidencyTaxInvestmentPlanningPage() {
                     </div>
                   </div>
 
-                  {/* Buy Now Button */}
+                  {/* Book Consultation Button */}
                   <Button size="lg" className="w-full" asChild>
-                    <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
-                      Buy now
+                    <a href="/book/consultation">
+                      Book Consultation
                     </a>
                   </Button>
                 </div>
@@ -520,11 +520,10 @@ export default function ResidencyTaxInvestmentPlanningPage() {
                 <Button variant="outline" onClick={closeModal}>
                   Close
                 </Button>
-                <Button onClick={() => {
-                  closeModal();
-                  document.getElementById('payment-widget')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  Book Consultation
+                <Button asChild>
+                  <a href="/book/consultation" onClick={closeModal}>
+                    Book Consultation
+                  </a>
                 </Button>
               </div>
             </div>
