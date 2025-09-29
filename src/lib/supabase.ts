@@ -2,10 +2,21 @@ import { createClient } from '@supabase/supabase-js'
 
 // Function to get Supabase client (lazy initialization)
 export function getSupabaseClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  console.log('🔍 Supabase env check:', {
+    url: supabaseUrl ? '✅ Present' : '❌ Missing',
+    key: supabaseKey ? '✅ Present' : '❌ Missing',
+    urlValue: supabaseUrl?.substring(0, 20) + '...',
+    keyValue: supabaseKey?.substring(0, 20) + '...'
+  })
   
   if (!supabaseUrl || !supabaseKey) {
+    console.error('❌ Missing Supabase environment variables:', {
+      NEXT_PUBLIC_SUPABASE_URL: supabaseUrl,
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: supabaseKey
+    })
     throw new Error('Missing Supabase environment variables')
   }
   
