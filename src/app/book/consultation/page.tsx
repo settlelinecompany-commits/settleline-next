@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { getSupabaseClient } from '@/lib/supabase';
+// Removed direct Supabase import - using API routes instead
 import { createRazorpayOrder, loadRazorpayScript, openRazorpayCheckout, verifyPayment, RazorpayPaymentResponse } from '@/lib/razorpay';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -62,36 +62,29 @@ export default function ConsultationForm() {
     try {
       console.log('Submitting form data:', formData);
       
-      // Save to Supabase first
-      const supabase = getSupabaseClient();
-      const { data, error } = await supabase
-        .from('consultations')
-        .insert([{
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          country: formData.country,
-          state: formData.state || null,
-          city: formData.city || null,
-          service_type: formData.serviceType,
-          duration_minutes: parseInt(formData.duration)
-        }])
-        .select()
-        .single();
+      // Save to database via API route
+      const response = await fetch('/api/consultations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (error) {
-        console.error('Error saving consultation:', error);
-        alert(`Error saving consultation: ${error.message}`);
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error('Error saving consultation:', result);
+        alert(`Error saving consultation: ${result.details || result.error}`);
         setIsSubmitting(false);
         return;
       }
 
-      console.log('Consultation saved successfully:', data);
-      setConsultationId(data.id);
+      console.log('Consultation saved successfully:', result.data);
+      setConsultationId(result.data.id);
 
       // Proceed to payment
-      await handlePayment(data.id);
+      await handlePayment(result.data.id);
 
     } catch (err) {
       console.error('Error:', err);
@@ -173,19 +166,24 @@ export default function ConsultationForm() {
             console.log('Payment verified:', verified);
 
             if (verified) {
-              // Update consultation with payment details
-              const supabase = getSupabaseClient();
-              const { error: updateError } = await supabase
-                .from('consultations')
-                .update({
+              // Update consultation with payment details via API route
+              const updateResponse = await fetch('/api/consultations', {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  consultation_id: consultationId,
                   razorpay_order_id: response.razorpay_order_id,
                   amount_paid: amount * 100, // Store in cents
                   payment_status: 'completed'
-                })
-                .eq('id', consultationId);
+                }),
+              });
 
-              if (updateError) {
-                console.error('Error updating consultation:', updateError);
+              const updateResult = await updateResponse.json();
+
+              if (!updateResponse.ok) {
+                console.error('Error updating consultation:', updateResult);
                 alert('Payment successful but failed to update consultation. Please contact support.');
               } else {
                 console.log('Consultation updated with payment details');
