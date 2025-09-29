@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 import { createRazorpayOrder, loadRazorpayScript, openRazorpayCheckout, verifyPayment, RazorpayPaymentResponse } from '@/lib/razorpay';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -63,6 +63,7 @@ export default function ConsultationForm() {
       console.log('Submitting form data:', formData);
       
       // Save to Supabase first
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('consultations')
         .insert([{
@@ -173,6 +174,7 @@ export default function ConsultationForm() {
 
             if (verified) {
               // Update consultation with payment details
+              const supabase = getSupabaseClient();
               const { error: updateError } = await supabase
                 .from('consultations')
                 .update({

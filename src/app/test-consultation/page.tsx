@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,6 +17,7 @@ export default function TestConsultation() {
     try {
       console.log('Testing consultation insert...');
       
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('consultations')
         .insert([{
