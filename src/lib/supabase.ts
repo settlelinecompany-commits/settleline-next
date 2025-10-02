@@ -9,7 +9,13 @@ export function getSupabaseClient() {
     throw new Error('Missing Supabase environment variables')
   }
   
-  return createClient(supabaseUrl, supabaseKey)
+  return createClient(supabaseUrl, supabaseKey, {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    }
+  })
 }
 
 // For backward compatibility, export a getter function
@@ -47,4 +53,23 @@ export interface Service {
   base_price_per_minute: number;
   is_active: boolean;
   created_at: string;
+}
+
+// Auth types
+export interface User {
+  id: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  created_at: string;
+  updated_at: string;
+  user_metadata?: {
+    first_name?: string;
+    last_name?: string;
+  };
+}
+
+export interface AuthState {
+  user: User | null;
+  loading: boolean;
 }

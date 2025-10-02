@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 // Removed direct Supabase import - using API routes instead
 import { createRazorpayOrder, loadRazorpayScript, openRazorpayCheckout, verifyPayment, RazorpayPaymentResponse } from '@/lib/razorpay';
+import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -24,6 +25,7 @@ interface FormData {
 }
 
 export default function ConsultationForm() {
+  const { user } = useAuth();
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -40,6 +42,18 @@ export default function ConsultationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [, setConsultationId] = useState<string | null>(null);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+
+  // Pre-fill form data if user is authenticated
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        firstName: user.user_metadata?.first_name || prev.firstName,
+        lastName: user.user_metadata?.last_name || prev.lastName,
+        email: user.email || prev.email,
+      }));
+    }
+  }, [user]);
 
   // Load Razorpay script on component mount
   useEffect(() => {
@@ -247,6 +261,30 @@ export default function ConsultationForm() {
             Get personalized guidance for your return to India
           </p>
         </div>
+
+        {/* Auth Benefits Banner */}
+        {!user && (
+          <Card className="mb-6 bg-blue-50 border-blue-200">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-blue-900">Sign in for a better experience</h3>
+                  <p className="text-sm text-blue-700">
+                    Track your consultations, view payment history, and get personalized recommendations.
+                  </p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  asChild
+                  className="border-blue-300 text-blue-700 hover:bg-blue-100"
+                >
+                  <Link href="/auth">Sign In</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form */}

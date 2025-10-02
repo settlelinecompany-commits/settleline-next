@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
 import { NAVIGATION } from "@/lib/constants"
 import { ServicesDropdown } from "./services-dropdown"
+import { UserMenu } from "@/components/auth/user-menu"
 
 export function SiteHeader() {
   return (
@@ -37,6 +38,7 @@ export function SiteHeader() {
             </nav>
           </div>
           <div className="flex items-center space-x-4">
+            <UserMenu />
             <Button asChild>
               <Link href="/book">Book Consultation</Link>
             </Button>
