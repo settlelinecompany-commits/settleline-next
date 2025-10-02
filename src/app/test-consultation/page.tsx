@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { getSupabaseClient } from '@/lib/supabase';
+// Using API route instead of direct Supabase
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,27 +17,30 @@ export default function TestConsultation() {
     try {
       console.log('Testing consultation insert...');
       
-      const supabase = getSupabaseClient();
-      const { data, error } = await supabase
-        .from('consultations')
-        .insert([{
-          first_name: 'Test',
-          last_name: 'User',
+      const response = await fetch('/api/consultations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: 'Test',
+          lastName: 'User',
           email: 'test@example.com',
           phone: '+1234567890',
           country: 'US',
-          service_type: 'rnor-planning',
-          duration_minutes: 30
-        }])
-        .select()
-        .single();
+          serviceType: 'rnor-planning',
+          duration: '30'
+        }),
+      });
 
-      if (error) {
-        console.error('Error:', error);
-        setResult(`Error: ${error.message}`);
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error('Error:', result);
+        setResult(`Error: ${result.details || result.error}`);
       } else {
-        console.log('Success:', data);
-        setResult(`Success: ${JSON.stringify(data, null, 2)}`);
+        console.log('Success:', result.data);
+        setResult(`Success: ${JSON.stringify(result.data, null, 2)}`);
       }
     } catch (err) {
       console.error('Exception:', err);

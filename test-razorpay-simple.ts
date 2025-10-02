@@ -31,5 +31,5 @@ try {
   })
   
 } catch (error) {
-  console.error('❌ Error importing Razorpay:', error)
+  console.error('❌ Error importing Razorpay:', error)  
 }
