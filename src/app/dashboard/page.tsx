@@ -103,7 +103,7 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold mb-2">My Dashboard</h1>
           <p className="text-gray-600">
             Welcome back, {user.user_metadata?.first_name || user.email?.split('@')[0]}! 
-            Here's your consultation history and payment status.
+            Here&apos;s your consultation history and payment status.
           </p>
         </div>
 
@@ -111,7 +111,7 @@ export default function DashboardPage() {
           <Card className="p-8 text-center">
             <h2 className="text-xl font-semibold mb-4">No Consultations Yet</h2>
             <p className="text-gray-600 mb-6">
-              You haven't booked any consultations yet. Get started with our expert guidance.
+              You haven&apos;t booked any consultations yet. Get started with our expert guidance.
             </p>
             <Button asChild>
               <Link href="/book">Book Your First Consultation</Link>

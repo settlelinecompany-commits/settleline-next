@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,7 +11,7 @@ import { signIn, signUp, resetPassword, signInWithGoogle } from '@/lib/auth'
 import { useAuth } from '@/lib/auth'
 import Link from 'next/link'
 
-export default function AuthPage() {
+function AuthForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, loading } = useAuth()
@@ -80,7 +80,7 @@ export default function AuthPage() {
           setMessage('Password reset email sent! Check your inbox.')
         }
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred')
     } finally {
       setAuthLoading(false)
@@ -98,7 +98,7 @@ export default function AuthPage() {
         setAuthLoading(false)
       }
       // If successful, user will be redirected automatically
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred')
       setAuthLoading(false)
     }
@@ -297,7 +297,7 @@ export default function AuthPage() {
                       onClick={() => setMode('signup')}
                       className="text-blue-600 hover:text-blue-800 text-sm"
                     >
-                      Don't have an account? Sign up
+                      Don&apos;t have an account? Sign up
                     </button>
                   </div>
                 </>
@@ -361,5 +361,20 @@ export default function AuthPage() {
         </div>
       </div>
     </Container>
+  )
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <Container className="py-16">
+        <div className="max-w-md mx-auto text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </Container>
+    }>
+      <AuthForm />
+    </Suspense>
   )
 }

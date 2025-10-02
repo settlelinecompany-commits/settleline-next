@@ -101,7 +101,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'signin', redirectTo 
           </Button>
           
           <div className="text-sm text-gray-500">
-            You'll be redirected to our secure authentication page
+            You&apos;ll be redirected to our secure authentication page
           </div>
         </div>
       </Card>
