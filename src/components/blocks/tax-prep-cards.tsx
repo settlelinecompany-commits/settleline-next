@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import Link from "next/link";
+import Image from "next/image";
 
 export function TaxPrepCards() {
   return (
@@ -9,129 +10,95 @@ export function TaxPrepCards() {
       <Container>
         <div className="text-center mb-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            We can help you get ready for tax time
+            Plan your return to India the right way
           </h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Tax Refund Estimate */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <div className="text-center mb-6">
-              {/* Calculator Icon */}
+              {/* Planner Mockup Image */}
               <div className="relative inline-block">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <svg 
-                    width="32" 
-                    height="32" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    className="text-primary"
-                  >
-                    <rect x="4" y="2" width="16" height="20" rx="2"/>
-                    <path d="M8 6h8M8 10h8M8 14h4M8 18h4"/>
-                  </svg>
-                </div>
-                {/* Dollar Sign Badge */}
-                <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">$</span>
+                <div className="w-24 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <Image
+                    src="/images/planner-mockup.webp"
+                    alt="Return to India Planner"
+                    width={96}
+                    height={64}
+                    className="w-full h-full object-cover object-top rounded-lg"
+                  />
                 </div>
               </div>
             </div>
             
             <h3 className="text-xl font-bold text-foreground mb-4 text-center">
-              Estimate Your Tax Refund
+              Check Your Tax Benefits
             </h3>
-            <p className="text-muted-foreground mb-6 text-center leading-relaxed">
-              Use our RNOR Calculator to preview your refund, or see what you&apos;ll owe when returning to India.
+            <p className="text-muted-foreground mb-6 text-center leading-relaxed flex-grow">
+              Discover how much you can save with proper timing. Our Return to India Planner shows your potential tax benefits.
             </p>
-            <div className="text-center">
+            <div className="text-center mt-auto">
               <Button asChild>
-                <a href="/tools/free-return-to-india-planner">Estimate your taxes</a>
+                <a href="/tools/free-return-to-india-planner">Start Free Assessment</a>
               </Button>
             </div>
           </div>
 
           {/* Card 2: Handy Checklist */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <div className="text-center mb-6">
-              {/* Checklist Icon */}
+              {/* Checklist Blog Image */}
               <div className="relative inline-block">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <svg 
-                    width="32" 
-                    height="32" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    className="text-primary"
-                  >
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14,2 14,8 20,8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                  </svg>
-                </div>
-                {/* Checkmark Badge */}
-                <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                <div className="w-24 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <Image
+                    src="/images/blog/return-to-india-checklist-2025.webp"
+                    alt="Return to India Checklist"
+                    width={96}
+                    height={64}
+                    className="w-full h-full object-cover object-top rounded-lg"
+                  />
                 </div>
               </div>
             </div>
             
             <h3 className="text-xl font-bold text-foreground mb-4 text-center">
-              Get Your Tax Checklist
+              Get Your Moving Checklist
             </h3>
-            <p className="text-muted-foreground mb-6 text-center leading-relaxed">
-              Keep track of which docs you&apos;ll need when it&apos;s time to file your US-India taxes.
+            <p className="text-muted-foreground mb-6 text-center leading-relaxed flex-grow">
+              Everything you need to prepare before moving back to India. From documents to financial planning.
             </p>
-            <div className="text-center">
+            <div className="text-center mt-auto">
               <Button asChild>
-                <Link href="/blog">Get the checklist</Link>
+                <Link href="/blog/return-to-india-financial-checklist-2025">Get the checklist</Link>
               </Button>
             </div>
           </div>
 
           {/* Card 3: Tax Tips, Guides, and Videos */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <div className="text-center mb-6">
-              {/* Laptop Icon */}
+              {/* Microsoft Case Study Image */}
               <div className="relative inline-block">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <svg 
-                    width="32" 
-                    height="32" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    className="text-primary"
-                  >
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                    <line x1="8" y1="21" x2="16" y2="21"/>
-                    <line x1="12" y1="17" x2="12" y2="21"/>
-                  </svg>
-                </div>
-                {/* Checkmark Badge */}
-                <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                <div className="w-24 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <Image
+                    src="/images/case-studies/microsoft-manager-save-lakhs.webp"
+                    alt="Microsoft Case Study"
+                    width={96}
+                    height={64}
+                    className="w-full h-full object-cover object-top rounded-lg"
+                  />
                 </div>
               </div>
             </div>
             
             <h3 className="text-xl font-bold text-foreground mb-4 text-center">
-              Learn Tax Strategies
+              Learn Return Strategies
             </h3>
-            <p className="text-muted-foreground mb-6 text-center leading-relaxed">
-              Everything you need to know about US-India cross-border taxes that you didn&apos;t learn in school.
+            <p className="text-muted-foreground mb-6 text-center leading-relaxed flex-grow">
+              Expert guides on timing your return, managing assets, and maximizing your financial benefits when moving back to India.
             </p>
-            <div className="text-center">
+            <div className="text-center mt-auto">
               <Button asChild>
                 <Link href="/blog">Start learning</Link>
               </Button>

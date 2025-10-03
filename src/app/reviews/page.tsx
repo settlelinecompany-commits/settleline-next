@@ -6,98 +6,98 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const metadata = generateSEO({
-  title: "Customer Reviews - What NRIs Say About Settleline",
-  description: "Read authentic Google reviews from NRIs who trust Settleline for their US-India tax planning, RNOR guidance, and financial transition needs."
+  title: "Customer Reviews - What Indians Around the Globe Say About Settleline",
+  description: "Read authentic Google reviews from Indians around the globe who trust Settleline for their cross-border tax planning, RNOR guidance, and financial transition needs."
 });
 
 const reviews = [
   {
     id: 1,
     rating: 5,
-    excerpt: "Settleline made my transition back to India seamless. Their RNOR planning saved me over $25,000 in taxes. The team is knowledgeable, responsive, and truly understands the complexities of US-India cross-border taxation.",
-    reviewer: "Priya S.",
+    excerpt: "I had RSUs from my US company and was scared of double taxation. Settleline not only helped me file Form 67 but also planned my vesting in a way that saved me lakhs. Couldn't have managed it on my own.",
+    reviewer: "Pawan",
     country: "California, USA",
-    date: "2024-01-15",
+    date: "2024-11-15",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 2,
     rating: 5,
-    excerpt: "Exceptional service! They handled my Indian tax filing and DTAA optimization perfectly. The team explained everything clearly and ensured I was compliant in both countries. Highly recommend for any NRI.",
-    reviewer: "Rajesh K.",
-    country: "Texas, USA", 
-    date: "2024-01-10",
+    excerpt: "After talking to 3-4 regular CAs in India, I realized none of them understood NRI tax in depth. Settleline stood out because they actually specialize in US-India cross-border cases. They solved my tax mess in weeks.",
+    reviewer: "Kamal",
+    country: "London, UK", 
+    date: "2024-11-10",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 3,
     rating: 5,
-    excerpt: "Professional, efficient, and cost-effective. Settleline helped me with my capital gains tax planning and repatriation of funds. Their expertise in NRI tax matters is unmatched. Will definitely use their services again.",
-    reviewer: "Anita M.",
-    country: "New York, USA",
-    date: "2024-01-08",
+    excerpt: "I was scared about Schedule FA penalties because I had multiple US bank accounts. Settleline guided me through disclosures properly and avoided unnecessary fines. Worth every rupee!",
+    reviewer: "Beetu",
+    country: "Toronto, Canada",
+    date: "2024-11-08",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 4,
     rating: 5,
-    excerpt: "Outstanding support throughout my tax planning journey. They helped me understand RNOR status and optimized my tax position before returning to India. The savings were significant and the process was stress-free.",
-    reviewer: "Vikram R.",
-    country: "Washington, USA",
-    date: "2024-01-05",
+    excerpt: "I moved money from my US brokerage to India and thought I'd get stuck with huge taxes. Settleline planned it during my RNOR window, and the difference was unbelievable. I highly recommend them to every returning NRI.",
+    reviewer: "Ranjit",
+    country: "Sydney, Australia",
+    date: "2024-11-05",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 5,
     rating: 5,
-    excerpt: "Settleline's team is incredibly knowledgeable about US-India tax treaties and compliance requirements. They helped me with FBAR filing and FATCA compliance. Professional service with personal attention.",
-    reviewer: "Sunita P.",
-    country: "Illinois, USA",
-    date: "2024-01-03",
+    excerpt: "What sets them apart is their cross-border expertise. Any CA can file a return, but Settleline understands both US and Indian systems. That's what gave me the confidence to trust them with my finances.",
+    reviewer: "Ajit",
+    country: "Singapore",
+    date: "2024-11-03",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 6,
     rating: 5,
-    excerpt: "Excellent service for NRI tax planning. They provided comprehensive guidance on my investment advisory needs and helped structure my portfolio for optimal tax efficiency. Highly professional team.",
-    reviewer: "Arjun T.",
-    country: "California, USA",
-    date: "2024-01-01",
+    excerpt: "I've tried big firms before, but none gave me the personal attention that Settleline did. From my first free consultation, I knew they were different. They actually care about solving your problems.",
+    reviewer: "Munni",
+    country: "Dubai, UAE",
+    date: "2024-11-01",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 7,
     rating: 5,
-    excerpt: "Settleline made my tax notice handling effortless. They represented me professionally and resolved all issues quickly. Their expertise in Indian tax law is impressive. Great value for money.",
-    reviewer: "Meera L.",
-    country: "Florida, USA",
-    date: "2023-12-28",
+    excerpt: "Settleline's WhatsApp support and quick calls made my life easy. I had a million doubts about NRO/NRE conversion and filing returns, but they explained everything patiently.",
+    reviewer: "Kanhaiya",
+    country: "New York, USA",
+    date: "2024-10-28",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 8,
     rating: 5,
-    excerpt: "Comprehensive tax consultancy that exceeded my expectations. They helped with my business incorporation in India and ongoing compliance. The team is responsive and always available for questions.",
-    reviewer: "Kiran D.",
-    country: "New Jersey, USA",
-    date: "2023-12-25",
+    excerpt: "Super transparent, quick responses and no jargon. They don't scare you with complicated terms - they actually explain how things work.",
+    reviewer: "Sanjay",
+    country: "Melbourne, Australia",
+    date: "2024-10-25",
     source: "Google",
     sourceUrl: "https://google.com"
   },
   {
     id: 9,
     rating: 5,
-    excerpt: "Outstanding RNOR planning service. They saved me thousands in taxes and made my return to India financially optimal. The team's knowledge of both US and Indian tax systems is exceptional.",
-    reviewer: "Ravi N.",
-    country: "Massachusetts, USA",
-    date: "2023-12-22",
+    excerpt: "I had no clue about RNOR rules or how my US investments would be taxed here. Settleline explained everything with patience and helped me avoid mistakes that could have cost me lakhs.",
+    reviewer: "Anshu",
+    country: "Vancouver, Canada",
+    date: "2024-10-22",
     source: "Google",
     sourceUrl: "https://google.com"
   }
@@ -141,7 +141,7 @@ function GoogleRatingBadge() {
         <span className="text-2xl font-bold text-foreground">4.9</span>
       </div>
       <div className="text-sm text-muted-foreground">
-        <div className="font-medium">Based on 127 reviews</div>
+        <div className="font-medium">Reviews of Settleline</div>
         <div className="text-xs">on Google</div>
       </div>
     </div>
@@ -156,11 +156,11 @@ export default function ReviewsPage() {
         <Container>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              What NRIs say about Settleline
+              What Indians around the globe say about Settleline
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Don&apos;t just take our word for it. Read authentic reviews from NRIs who have trusted 
-              Settleline for their US-India tax planning and financial transition needs.
+              Don&apos;t just take our word for it. Read authentic reviews from Indians around the globe who have trusted 
+              Settleline for their cross-border tax planning and financial transition needs.
             </p>
             
             {/* Google Rating Badge */}
@@ -170,7 +170,7 @@ export default function ReviewsPage() {
             
             {/* Read on Google Button */}
             <Button asChild size="lg">
-              <Link href="https://google.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://share.google/aqatYAre363d8pImv" target="_blank" rel="noopener noreferrer">
                 Read on Google
               </Link>
             </Button>

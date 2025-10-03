@@ -32,8 +32,8 @@ export function FooterCTA({
     } ${className}`}>
       <Container>
         <div className="text-center space-y-6 max-w-3xl mx-auto">
-          <h2 className="text-h2">{title}</h2>
-          <p className="text-body-lg text-muted-foreground">
+          <h2 className="text-h2 text-primary-foreground">{title}</h2>
+          <p className="text-body-lg text-primary-foreground/90">
             {description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -47,7 +47,7 @@ export function FooterCTA({
             {secondaryCtaText && secondaryCtaHref && (
               <Button 
                 size="lg" 
-                variant={background === "primary" ? "outline" : "outline"}
+                variant={background === "primary" ? "secondary" : "default"}
                 asChild
               >
                 <a href={secondaryCtaHref}>{secondaryCtaText}</a>

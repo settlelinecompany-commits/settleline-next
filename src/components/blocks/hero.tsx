@@ -133,7 +133,7 @@ export function Hero({
                   Expert Guidance Available
                 </h3>
                 <p className="text-muted-foreground">
-                  Get personalized support from our US-India tax specialists. 
+                  Get personalized support from our cross-border tax specialists. 
                   Book a consultation to discuss your specific situation.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">

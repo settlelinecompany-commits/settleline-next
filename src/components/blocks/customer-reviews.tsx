@@ -22,36 +22,36 @@ interface CustomerReviewsProps {
 const defaultReviews: Review[] = [
   {
     id: 1,
-    title: "Settleline is awesome",
-    text: "Settleline is very easy to use. If you do need help, online tax experts are ready to help. I would recommend using this tax planning service instead of paying hundreds of dollars elsewhere. Settleline walks you through US-India tax preparation step by step.",
-    reviewer: "Priya2985",
-    location: "California",
-    product: "2024 RNOR Planning Service",
+    title: "Saved me lakhs with RNOR planning",
+    text: "I had RSUs from my US company and was scared of double taxation. Settleline not only helped me file Form 67 but also planned my vesting in a way that saved me lakhs. Couldn't have managed it on my own.",
+    reviewer: "Pawan",
+    location: "California, USA",
+    product: "RNOR Tax Planning",
     rating: 5
   },
   {
     id: 2,
-    title: "Settleline is great",
-    text: "Settleline is the only way I complete my US-India tax planning. The service walks you through all the questions in an easy manner and if you need more clarification, there is always additional help. I always feel confident about my cross-border tax strategy.",
-    reviewer: "Rajesh320",
-    location: "New York",
-    product: "2024 Comprehensive Tax Planning",
+    title: "Cross-border expertise that actually works",
+    text: "After talking to 3-4 regular CAs in India, I realized none of them understood NRI tax in depth. Settleline stood out because they actually specialize in cross-border tax cases. They solved my tax mess in weeks.",
+    reviewer: "Kamal",
+    location: "London, UK",
+    product: "Comprehensive Tax Planning",
     rating: 5
   },
   {
     id: 3,
-    title: "Two thumbs up for Settleline",
-    text: "Settleline is one of the simplest tax planning services I've ever used for my US-India transition. I've used a few other services in the past, but Settleline's easy to understand guidance for cross-border tax planning comes on top. The service fee is worth it knowing that the experts check for any errors and provide comprehensive support.",
-    reviewer: "Anita018",
-    location: "Texas",
-    product: "2024 Return to India Planning",
+    title: "Avoided Schedule FA penalties completely",
+    text: "I was scared about Schedule FA penalties because I had multiple US bank accounts. Settleline guided me through disclosures properly and avoided unnecessary fines. Worth every rupee!",
+    reviewer: "Beetu",
+    location: "Toronto, Canada",
+    product: "Compliance & Filing",
     rating: 5
   }
 ];
 
 export function CustomerReviews({ 
-  overallRating = 4.6, 
-  totalReviews = 1247, 
+  overallRating = 4.9, 
+  totalReviews = 39, 
   reviewsLink = "/reviews",
   reviews = defaultReviews 
 }: CustomerReviewsProps) {
@@ -114,7 +114,7 @@ export function CustomerReviews({
               href={reviewsLink}
               className="text-primary hover:text-primary/80 underline text-sm"
             >
-              ({totalReviews.toLocaleString()} reviews of Settleline)
+              Google Reviews of Settleline
             </a>
             <p className="text-xs text-muted-foreground mt-2">
               Star rating is aggregated from ratings across all Settleline services.

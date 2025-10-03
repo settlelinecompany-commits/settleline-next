@@ -20,7 +20,7 @@ import { getFeaturedBlogPosts } from "@/lib/content";
 
 export const metadata = generateSEO({
   title: "Expert Financial, Tax & Business Planning for Global Indians",
-  description: "Navigate complex US-India tax laws with confidence. Get expert guidance on RNOR status, tax planning, and financial transition strategies.",
+  description: "Navigate complex cross-border tax laws with confidence. Get expert guidance on RNOR status, tax planning, and financial transition strategies.",
 });
 
 export default function Home() {
@@ -65,7 +65,7 @@ export default function Home() {
         items={[
           "100% Accurate Tax Planning, Guaranteed",
           "Your Return to India, Backed for Life™",
-          "Expert US-India Tax Specialists",
+          "Expert Cross-Border Tax Specialists",
           "500+ Successful Transitions"
         ]}
       />

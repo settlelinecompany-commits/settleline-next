@@ -94,7 +94,7 @@ export function ServiceExplainerCard() {
             Our Services
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive tax and financial services tailored for US-India cross-border professionals
+            Comprehensive tax and financial services tailored for cross-border professionals
           </p>
         </div>
         

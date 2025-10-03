@@ -6,8 +6,8 @@ import { generateSEO } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 
 export const metadata = generateSEO({
-  title: "Our Services - Expert Tax & Financial Services for US-India Cross-Border Professionals",
-  description: "Comprehensive tax planning, RNOR guidance, investment advisory, and compliance services. Strategic solutions for your US-India financial transition."
+  title: "Our Services - Expert Tax & Financial Services for Cross-Border Professionals",
+  description: "Comprehensive tax planning, RNOR guidance, investment advisory, and compliance services. Strategic solutions for your cross-border financial transition."
 });
 const services = [
   {
@@ -95,7 +95,7 @@ export default function ServicesPage() {
     <>
       <Hero
         title="Our Services"
-        description="Comprehensive tax and financial services tailored for US-India cross-border professionals"
+        description="Comprehensive tax and financial services tailored for cross-border professionals"
       />
       
       <Section className="py-16 bg-muted/20">
@@ -105,7 +105,7 @@ export default function ServicesPage() {
               Our Services
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive tax and financial services tailored for US-India cross-border professionals
+              Comprehensive tax and financial services tailored for cross-border professionals
             </p>
           </div>
           

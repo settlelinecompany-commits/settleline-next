@@ -15,6 +15,9 @@ featured: true
 draft: false
 keywords: ["NRI tax filing", "RNOR planning", "RSU taxation", "Form 67 India", "Schedule FA penalty", "2025 tax slabs", "cross border tax planning"]
 company: "Microsoft Corporation"
+clientRole: "Senior Manager"
+savings: "₹30L+"
+timeline: "8 months"
 faq:
   - question: "Will my RSUs be taxed twice if I move mid-year?"
     answer: "Not if you allocate workdays correctly and file Form 67 that ensures DTAA credit in India."

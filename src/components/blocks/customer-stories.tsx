@@ -137,7 +137,7 @@ export function CustomerStories({ stories, caseStudies }: CustomerStoriesProps) 
           </h2>
           
           <p className="text-lg text-primary-foreground/90 max-w-3xl mx-auto mb-8">
-            Our customers achieve significant tax savings, maintain compliance, and streamline their US-India transitions. See how you can too.
+            Our customers achieve significant tax savings, maintain compliance, and streamline their cross-border transitions. See how you can too.
           </p>
           
           {/* Navigation Arrows */}

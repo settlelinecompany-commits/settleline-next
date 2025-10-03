@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export const metadata = generateSEO({
   title: "Meet Our Tax Experts",
-  description: "Our team of qualified CPAs, tax advisors, and financial specialists with deep expertise in US-India cross-border taxation and RNOR planning.",
+  description: "Our team of qualified CPAs, tax advisors, and financial specialists with deep expertise in cross-border taxation and RNOR planning.",
 })
 
 export default function ExpertsPage() {
