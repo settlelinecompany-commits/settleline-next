@@ -74,7 +74,7 @@ const generalFAQs = [
   },
   {
     question: "How can I avoid Permanent Establishment risk?",
-    answer: "PE risk can be avoided through proper contractor structuring, EoR arrangements, and ensuring business activities don't create a fixed place of business or dependent agent relationship in India."
+    answer: "PE risk can be avoided through proper contractor structuring, EoR arrangements, and ensuring business activities don&apos;t create a fixed place of business or dependent agent relationship in India."
   },
   {
     question: "What's the difference between EoR and contractors?",

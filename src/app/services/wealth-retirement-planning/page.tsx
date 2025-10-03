@@ -78,7 +78,7 @@ const generalFAQs = [
   },
   {
     question: "Do I need a will in India and abroad?",
-    answer: "Yes, it's recommended to have wills in both jurisdictions to ensure smooth succession. Each country has different inheritance laws, and proper estate planning can avoid complications and delays."
+    answer: "Yes, it&apos;s recommended to have wills in both jurisdictions to ensure smooth succession. Each country has different inheritance laws, and proper estate planning can avoid complications and delays."
   },
   {
     question: "How do I structure inheritance for children overseas?",

@@ -64,7 +64,7 @@ const reviews = [
   {
     id: 6,
     rating: 5,
-    excerpt: "I've tried big firms before, but none gave me the personal attention that Settleline did. From my first free consultation, I knew they were different. They actually care about solving your problems.",
+    excerpt: "I&apos;ve tried big firms before, but none gave me the personal attention that Settleline did. From my first free consultation, I knew they were different. They actually care about solving your problems.",
     reviewer: "Munni",
     country: "Dubai, UAE",
     date: "2024-11-01",
@@ -84,7 +84,7 @@ const reviews = [
   {
     id: 8,
     rating: 5,
-    excerpt: "Super transparent, quick responses and no jargon. They don't scare you with complicated terms - they actually explain how things work.",
+    excerpt: "Super transparent, quick responses and no jargon. They don&apos;t scare you with complicated terms - they actually explain how things work.",
     reviewer: "Sanjay",
     country: "Melbourne, Australia",
     date: "2024-10-25",

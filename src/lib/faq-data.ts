@@ -25,7 +25,7 @@ export const generalFAQs: FAQItem[] = [
     answer: "Yes, we provide comprehensive support for both US and Indian tax filings, including FBAR, FATCA, Form 8938, and Indian ITR preparation. Our team understands the complexities of dual tax obligations and ensures full compliance in both jurisdictions."
   },
   {
-    question: "What if I'm already in India? Can I still benefit from RNOR planning?",
+    question: "What if I&apos;m already in India? Can I still benefit from RNOR planning?",
     answer: "If you've recently returned to India and meet the RNOR eligibility criteria, you can still benefit from RNOR planning. We'll assess your situation and help optimize your tax position for the remaining RNOR period, including strategic asset transfers and income timing."
   },
   {

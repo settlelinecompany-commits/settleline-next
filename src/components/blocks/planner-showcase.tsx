@@ -29,7 +29,7 @@ export function PlannerShowcase() {
                 Moving back to India? You could be losing lakhs.
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Most people don't realize that timing your return to India can save or cost you lakhs in taxes. Our free Return to India Planner shows you exactly what you're missing and how to fix it.
+                Most people don&apos;t realize that timing your return to India can save or cost you lakhs in taxes. Our free Return to India Planner shows you exactly what you&apos;re missing and how to fix it.
               </p>
               <Button size="lg" className="text-lg px-8 py-4" asChild>
                 <a href="/tools/free-return-to-india-planner">Start Free Assessment</a>

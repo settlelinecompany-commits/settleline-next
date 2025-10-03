@@ -81,7 +81,7 @@ const generalFAQs = [
     answer: "Yes, you can claim Foreign Tax Credit (FTC) on RSUs and stock sales by filing Form 67. This helps avoid double taxation on the same income in both countries."
   },
   {
-    question: "What happens if I don't report foreign assets?",
+    question: "What happens if I don&apos;t report foreign assets?",
     answer: "Non-disclosure of foreign assets can result in penalties under the Black Money Act, including up to ₹10 lakh annual penalty and potential prosecution. It's crucial to maintain accurate Schedule FA reporting."
   }
 ];
