@@ -85,7 +85,7 @@ export function Hero({
 
             {/* Primary CTA Button */}
             <div>
-              <Button size="default" asChild className="text-base px-6 py-3">
+              <Button size="lg" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-200 text-lg font-semibold px-8 py-4 rounded-xl w-full">
                 <a href="/tools/free-return-to-india-planner">Free Return to India Planner Tool</a>
               </Button>
             </div>
@@ -102,13 +102,23 @@ export function Hero({
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     
-                    {/* Overlay Callout Box */}
+                    {/* Overlay Callout Box - Top Right */}
                     <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 max-w-[140px] border border-border/20">
                       <div className="text-xs font-semibold text-gray-600 mb-1">
                         Foreign Tax Credits
                       </div>
                       <div className="text-lg font-bold text-green-600">
                         $4,000
+                      </div>
+                    </div>
+
+                    {/* Overlay Callout Box - Top Left */}
+                    <div className="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 max-w-[140px] border border-border/20">
+                      <div className="text-xs font-semibold text-gray-600 mb-1">
+                        Countries Served
+                      </div>
+                      <div className="text-lg font-bold text-blue-600">
+                        10+
                       </div>
                     </div>
                   </div>
@@ -130,7 +140,7 @@ export function Hero({
                   <Button variant="outline" asChild>
                     <a href="/book">Book Consultation</a>
                   </Button>
-                  <Button variant="ghost" asChild>
+                  <Button className="bg-blue-900 text-white hover:bg-blue-800" asChild>
                     <a href="/tools/free-return-to-india-planner">Try Free Planner</a>
                   </Button>
                 </div>

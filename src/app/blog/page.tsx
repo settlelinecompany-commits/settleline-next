@@ -6,6 +6,7 @@ import { generateSEO } from "@/lib/seo";
 import { getBlogPosts } from "@/lib/content";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 export const metadata = generateSEO({
   title: "Blog & Resources",
@@ -27,7 +28,18 @@ export default function BlogPage() {
       <Container className="py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <Card key={post.slug} className="h-full">
+            <Card key={post.slug} className="h-full overflow-hidden">
+              {/* Blog Image */}
+              <div className="relative w-full h-48">
+                <Image
+                  src={post.cover || "/images/blog/401k-catchup.webp"}
+                  alt={`${post.title} - Blog post cover`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              
               <CardHeader>
                 <div className="flex items-center space-x-2 mb-2">
                   <Badge variant="outline">{post.tags[0]}</Badge>

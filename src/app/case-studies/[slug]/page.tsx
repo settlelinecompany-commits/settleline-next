@@ -87,14 +87,40 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       }))
   }
 
-  // Generate key takeaways based on case study data
-  const keyTakeaways = [
-    `${caseStudy.company} ${caseStudy.clientRole} achieved ${caseStudy.savings} through strategic planning`,
-    `Project timeline: ${caseStudy.timeline} with comprehensive approach`,
-    `Key challenges addressed: ${(caseStudy.challenges || []).slice(0, 2).join(', ')}`,
-    `Professional guidance essential for complex cross-border tax situations`,
-    `Early planning and expert coordination maximize tax optimization results`
-  ]
+  // Function to get key takeaways for specific case studies
+  function getCaseStudyKeyTakeaways(slug: string): string[] {
+    const takeawaysMap: Record<string, string[]> = {
+      'microsoft-manager-save-lakhs': [
+        "RSU allocation based on workdays prevents double taxation",
+        "RNOR status provides 2-year tax optimization window for foreign income",
+        "Schedule FA compliance prevents ₹10L penalty per year",
+        "Form 67 and DTAA credits save lakhs in tax liability",
+        "Strategic planning during RNOR period maximizes savings opportunities"
+      ],
+      'customer-story-buying-property-investing-india': [
+        "Section 54 exemption available for foreign property sales if reinvested in India",
+        "FEMA-compliant funding through NRE/NRO accounts or inward remittances",
+        "RNOR period provides tax-advantaged window for major investments",
+        "SIP investments during RNOR optimize long-term tax efficiency",
+        "Proper documentation and compliance prevent penalties and delays"
+      ],
+      'customer-story-business-setup-india-offshore-compliance': [
+        "Singapore-India DTAA provides significant tax benefits for cross-border business",
+        "FEMA compliance requires FC-GPR filing within 30 days of share allotment",
+        "Transfer pricing documentation (Rule 10D) is essential for related-party transactions",
+        "Schedule FA disclosures prevent Black Money Act penalties",
+        "Proper entity structuring from the start is cheaper than restructuring later"
+      ]
+    };
+    
+    return takeawaysMap[slug] || [
+      "Professional guidance essential for complex cross-border tax situations",
+      "Early planning and expert coordination maximize tax optimization results",
+      "Every case is unique and requires individual analysis"
+    ];
+  }
+
+  const keyTakeaways = getCaseStudyKeyTakeaways(caseStudy.slug)
 
   return (
     <>

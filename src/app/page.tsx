@@ -16,19 +16,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { generateSEO } from "@/lib/seo";
 import { getCaseStudies } from "@/lib/case-studies";
+import { getFeaturedBlogPosts } from "@/lib/content";
 
 export const metadata = generateSEO({
-  title: "Expert Tax & Financial Planning for US-India Cross-Border Professionals",
+  title: "Expert Financial, Tax & Business Planning for Global Indians",
   description: "Navigate complex US-India tax laws with confidence. Get expert guidance on RNOR status, tax planning, and financial transition strategies.",
 });
 
 export default function Home() {
   const caseStudies = getCaseStudies();
+  const featuredPosts = getFeaturedBlogPosts();
   return (
     <>
       {/* Hero Section - TurboTax Style */}
       <Hero
-        title="Expert Tax & Financial Planning for US-India Cross-Border Professionals"
+        title="Expert Financial, Tax & Business Planning for Global Indians"
         description="Get personalized guidance on RNOR status, tax planning, and financial transition strategies. Our experts help you make informed decisions for your return to India."
         ctaText="Start for Free"
         ctaHref="/tools/free-return-to-india-planner"
@@ -56,7 +58,7 @@ export default function Home() {
       <CustomerStories caseStudies={caseStudies} />
       
       {/* Featured Blog Posts */}
-      <FeaturedBlogPosts />
+      <FeaturedBlogPosts posts={featuredPosts} />
       
       {/* Trust Strip - TurboTax Style */}
       <TrustStrip

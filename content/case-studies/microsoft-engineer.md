@@ -5,8 +5,8 @@ description: "See how Settleline helped a Microsoft professional returning from 
 author: "Settleline Expert"
 authorRole: "US-India Tax Specialist"
 reviewedBy: "Settleline CPA"
-date: "2025-09-25"
-updated: "2025-09-25"
+date: "2025-09-28"
+updated: "2025-09-28"
 readTime: "8 min read"
 tags: ["RNOR", "NRI Tax", "RSU", "India Return", "Property Planning"]
 cover: "/images/case-studies/microsoft-manager-save-lakhs.webp"

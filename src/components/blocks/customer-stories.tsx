@@ -26,6 +26,7 @@ interface CaseStudy {
   description: string;
   company: string;
   cover?: string;
+  savings?: string;
 }
 
 interface CustomerStoriesProps {
@@ -77,9 +78,9 @@ const getDefaultStories = (caseStudies: CaseStudy[]): CustomerStory[] => {
       imageAlt: `${caseStudy.company || "Company"} case study`
     };
     
-    const statsInfo = companyStats[caseStudy.company] || {
-      statistic: "Significant",
-      statisticLabel: "results achieved"
+    const statsInfo = {
+      statistic: caseStudy.savings || "Significant",
+      statisticLabel: caseStudy.savings ? "savings achieved" : "results achieved"
     };
 
     return {

@@ -76,14 +76,61 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       readTime: p.readTime
     }))
 
-  // Hardcoded key takeaways for this specific blog post
-  const keyTakeaways = [
-    "RNOR status provides a 2-year tax optimization window for US-India cross-border professionals",
-    "Foreign income is generally exempt from Indian taxation during RNOR period", 
-    "Strategic planning is crucial to maximize benefits and maintain compliance",
-    "Physical presence tracking is essential to maintain RNOR eligibility",
-    "Early planning (6-12 months before return) maximizes tax savings opportunities"
-  ]
+  // Function to get key takeaways for specific blog posts
+  function getKeyTakeaways(slug: string): string[] {
+    const takeawaysMap: Record<string, string[]> = {
+      '401k-catchup-roth-rule-2026': [
+        "High earners over 50 must use Roth-only catch-up contributions from 2027",
+        "No more upfront tax deduction for catch-up contributions",
+        "Higher AGI in working years but tax-free withdrawals in retirement",
+        "Check if your employer offers Roth 401(k) options now",
+        "Revisit retirement strategy to balance pretax and Roth buckets"
+      ],
+      'form-67-nri-global-ror': [
+        "Form 67 is the gateway to Foreign Tax Credit for returning NRIs",
+        "RNORs need Form 67 only when foreign income is taxable in India",
+        "RORs must file Form 67 whenever claiming Foreign Tax Credit",
+        "Proper documentation and timing are crucial for successful FTC claims",
+        "DTAA benefits can save lakhs in double taxation"
+      ],
+      'laid-off-h1b-visa-guide': [
+        "You have a 60-day grace period to find new employment or change status",
+        "Consider return-to-India planning to leverage RNOR benefits",
+        "Manage US tax obligations and exit filing requirements",
+        "Plan for double taxation risks and DTAA relief opportunities",
+        "Maintain compliance with Schedule FA and other reporting requirements"
+      ],
+      'nri-us-home-sale-eliminate-taxes': [
+        "Section 121 exclusion can eliminate up to $250K/$500K in capital gains",
+        "Maximize your adjusted basis with documented improvements",
+        "Time your sale for long-term capital gains treatment",
+        "Consider installment sales to spread tax burden",
+        "State taxes may still apply even with federal exclusion"
+      ],
+      'return-to-india-financial-checklist-2025': [
+        "Run your RNOR calculation to confirm tax benefits",
+        "Build your digital file of key documents before leaving",
+        "Decide on your US property strategy: sell, rent, or hold",
+        "Consult a cross-border expert to align US–India compliance",
+        "Protect foreign income with RNOR planning"
+      ],
+      'uae-india-tax-rules-nri': [
+        "UAE offers tax-free salary but India's global taxation rules apply on return",
+        "RNOR timing is crucial for tax optimization when returning from UAE",
+        "DTAA provisions can help avoid double taxation",
+        "Form 67 and Schedule FA compliance are essential",
+        "Plan your return strategy to maximize tax benefits"
+      ]
+    };
+    
+    return takeawaysMap[slug] || [
+      "Contact our experts for personalized guidance on your specific situation",
+      "Every case is unique and requires individual analysis",
+      "Early planning maximizes tax optimization opportunities"
+    ];
+  }
+
+  const keyTakeaways = getKeyTakeaways(post.slug)
 
   return (
     <>

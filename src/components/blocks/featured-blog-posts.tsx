@@ -6,64 +6,22 @@ import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  cover: string;
-  date: string;
-  readTime: string;
-  featured: boolean;
-}
+import type { BlogPost } from "@/lib/content";
 
 interface FeaturedBlogPostsProps {
-  posts?: BlogPost[];
+  posts: BlogPost[];
 }
 
-const defaultPosts: BlogPost[] = [
-  {
-    slug: "understanding-rnor-status",
-    title: "Understanding RNOR Status for US-India Transitions",
-    description: "Complete guide to Resident but Not Ordinarily Resident status and how it impacts your tax planning when returning to India.",
-    category: "Tax Planning",
-    cover: "/images/blog/rnor-guide-cover.webp",
-    date: "2024-01-15",
-    readTime: "8 min read",
-    featured: true
-  },
-  {
-    slug: "tax-planning-checklist",
-    title: "Essential Tax Planning Checklist for NRIs",
-    description: "A comprehensive checklist covering all the critical steps and documents you need for successful US-India tax planning.",
-    category: "Compliance",
-    cover: "/images/blog/tax-checklist-cover.webp",
-    date: "2024-01-10",
-    readTime: "6 min read",
-    featured: true
-  },
-  {
-    slug: "investment-optimization-strategies",
-    title: "Cross-Border Investment Optimization Strategies",
-    description: "Learn how to optimize your investment portfolio across US and India while maintaining tax efficiency and compliance.",
-    category: "Investment",
-    cover: "/images/blog/investment-strategies-cover.webp",
-    date: "2024-01-05",
-    readTime: "10 min read",
-    featured: true
-  }
-];
-
-export function FeaturedBlogPosts({ posts = defaultPosts }: FeaturedBlogPostsProps) {
+export function FeaturedBlogPosts({ posts }: FeaturedBlogPostsProps) {
+  const featuredPosts = posts;
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % posts.length);
+    setCurrentSlide((prev) => (prev + 1) % featuredPosts.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + posts.length) % posts.length);
+    setCurrentSlide((prev) => (prev - 1 + featuredPosts.length) % featuredPosts.length);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -131,14 +89,14 @@ export function FeaturedBlogPosts({ posts = defaultPosts }: FeaturedBlogPostsPro
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
-            {posts.map((post, index) => (
+            {featuredPosts.map((post, index) => (
               <div key={post.slug} className="w-full flex-shrink-0 px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                   {/* Left Column - Image */}
                   <div className="lg:col-span-1">
                     <div className="relative w-full h-64 lg:h-80 rounded-2xl overflow-hidden">
                       <Image
-                        src={post.cover}
+                        src={post.cover || "/images/blog/401k-catchup.webp"}
                         alt={`${post.title} - Featured blog post`}
                         fill
                         className="object-cover"
@@ -196,7 +154,7 @@ export function FeaturedBlogPosts({ posts = defaultPosts }: FeaturedBlogPostsPro
 
         {/* Slide Indicators */}
         <div className="flex justify-center gap-2 mt-12">
-          {posts.map((_, index) => (
+          {featuredPosts.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
