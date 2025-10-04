@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Container } from '@/components/layout/container';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 interface FormData {
   firstName: string;
@@ -21,6 +22,14 @@ interface FormData {
 }
 
 export default function ConsultationForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ConsultationFormContent />
+    </Suspense>
+  );
+}
+
+function ConsultationFormContent() {
   const { user } = useAuth();
   const searchParams = useSearchParams();
   const urlServiceType = searchParams.get('serviceType') || '';
