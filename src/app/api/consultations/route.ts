@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabaseClient } from '@/lib/supabase';
+import { getSupabaseServiceClient } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     
     console.log('📝 Saving consultation:', body);
     
-    const supabase = getSupabaseClient();
+    const supabase = getSupabaseServiceClient();
     const { data, error } = await supabase
       .from('consultations')
       .insert([{
@@ -50,7 +50,7 @@ export async function PATCH(request: NextRequest) {
     
     console.log('🔄 Updating consultation:', body);
     
-    const supabase = getSupabaseClient();
+    const supabase = getSupabaseServiceClient();
     const { error } = await supabase
       .from('consultations')
       .update({
