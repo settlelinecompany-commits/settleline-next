@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Container } from '@/components/layout/container';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface FormData {
   firstName: string;
@@ -26,6 +27,9 @@ interface FormData {
 
 export default function ConsultationForm() {
   const { user } = useAuth();
+  const searchParams = useSearchParams();
+  const urlServiceType = searchParams.get('serviceType');
+  const urlDuration = searchParams.get('duration');
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -34,8 +38,8 @@ export default function ConsultationForm() {
     country: '',
     state: '',
     city: '',
-    serviceType: '',
-    duration: ''
+    serviceType: urlServiceType || '',
+    duration: urlDuration || '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);

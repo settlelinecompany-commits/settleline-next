@@ -182,6 +182,7 @@ const serviceCategories = [
 export default function ReturnToIndiaFinancialPlanningPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const [activeServiceCategory, setActiveServiceCategory] = useState('rnor-planning');
+  const [selectedDuration, setSelectedDuration] = useState('30');
 
   return (
     <>
@@ -250,11 +251,22 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                 <div className="text-sm text-green-600 font-medium mb-2">✓ If we can&apos;t help, we&apos;ll refund it</div>
                 <div className="text-sm text-green-600 font-medium">✓ If we can help, we&apos;ll credit this toward planning</div>
               </div>
-              <Button size="lg" className="w-full" onClick={() => {
-                document.getElementById('consultation-booking')?.scrollIntoView({ behavior: 'smooth' });
-              }}>
-                Start with Risk-Free Assessment
-              </Button>
+              
+              
+              <Button 
+              size="lg" 
+              className="w-full bg-primary hover:bg-primary/90"
+              onClick={() => {
+                const params = new URLSearchParams({
+                  serviceType: 'return-to-india-financial-planning',
+                  duration: selectedDuration, // e.g., '30'
+                  price: (parseInt(selectedDuration) * 2).toString() // e.g., '60'
+                });
+                window.location.href = `/book/consultation?${params.toString()}`;
+              }}
+            >
+              Book Risk-Free Assessment
+            </Button>   
             </div>
           </div>
         </Container>
@@ -443,7 +455,7 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-lg font-bold text-foreground">$30</span>
-                        <input type="radio" name="duration" value="15" className="w-4 h-4" />
+                        <input type="radio" name="duration" value="15" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" />
                       </div>
                     </label>
                     
@@ -455,7 +467,7 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-lg font-bold text-foreground">$60</span>
-                        <input type="radio" name="duration" value="30" className="w-4 h-4" defaultChecked />
+                        <input type="radio" name="duration" value="30" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" defaultChecked />
                       </div>
                     </label>
                     
@@ -466,7 +478,7 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-lg font-bold text-foreground">$120</span>
-                        <input type="radio" name="duration" value="60" className="w-4 h-4" />
+                        <input type="radio" name="duration" value="60" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" />
                       </div>
                     </label>
                   </div>
