@@ -257,12 +257,7 @@ export default function ReturnToIndiaFinancialPlanningPage() {
               size="lg" 
               className="w-full bg-primary hover:bg-primary/90"
               onClick={() => {
-                const params = new URLSearchParams({
-                  serviceType: 'return-to-india-financial-planning',
-                  duration: selectedDuration, // e.g., '30'
-                  price: (parseInt(selectedDuration) * 2).toString() // e.g., '60'
-                });
-                window.location.href = `/book/consultation?${params.toString()}`;
+                document.getElementById('consultation-booking')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
               Book Risk-Free Assessment
@@ -485,9 +480,19 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                 </div>
 
                 {/* Book Button */}
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg">
-                  Book Consultation
-                </Button>
+                <Button 
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg"
+                onClick={() => {
+                  const params = new URLSearchParams({
+                    serviceType: 'return-to-india-financial-planning',
+                    duration: selectedDuration,
+                    price: (parseInt(selectedDuration) * 2).toString()
+                  });
+                  window.location.href = `/book/consultation?${params.toString()}`;
+                }}
+              >
+                Book Consultation
+              </Button>
               </div>
             </div>
           </div>

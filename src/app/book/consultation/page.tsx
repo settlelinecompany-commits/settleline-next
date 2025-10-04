@@ -18,28 +18,18 @@ interface FormData {
   lastName: string;
   email: string;
   phone: string;
-  country: string;
-  state: string;
-  city: string;
-  serviceType: string;
-  duration: string;
 }
 
 export default function ConsultationForm() {
   const { user } = useAuth();
   const searchParams = useSearchParams();
-  const urlServiceType = searchParams.get('serviceType');
-  const urlDuration = searchParams.get('duration');
+  const urlServiceType = searchParams.get('serviceType') || '';
+  const urlDuration = searchParams.get('duration') || '';
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    country: '',
-    state: '',
-    city: '',
-    serviceType: urlServiceType || '',
-    duration: urlDuration || '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,7 +61,7 @@ export default function ConsultationForm() {
     setIsSubmitting(true);
 
     // Validate required fields
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.country || !formData.serviceType || !formData.duration) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       alert('Please fill in all required fields.');
       setIsSubmitting(false);
       return;
@@ -119,7 +109,7 @@ export default function ConsultationForm() {
     }
 
     try {
-      const amount = parseInt(formData.duration) * 2; // $2 per minute
+      const amount = parseInt(urlDuration) * 2; // $2 per minute
       console.log('Creating Razorpay order for amount:', amount);
       
       // Create Razorpay order
@@ -129,8 +119,8 @@ export default function ConsultationForm() {
         receipt: `cons_${consultationId.substring(0, 8)}`,
         notes: {
           consultation_id: consultationId,
-          service_type: formData.serviceType,
-          duration: formData.duration,
+          service_type: urlServiceType,
+          duration: urlDuration,
           customer_name: `${formData.firstName} ${formData.lastName}`,
           customer_email: formData.email
         }
@@ -142,8 +132,8 @@ export default function ConsultationForm() {
         receipt: `cons_${consultationId.substring(0, 8)}`, // Short receipt ID
         notes: {
           consultation_id: consultationId,
-          service_type: formData.serviceType,
-          duration: formData.duration,
+          service_type: urlServiceType,
+          duration: urlDuration,
           customer_name: `${formData.firstName} ${formData.lastName}`,
           customer_email: formData.email
         }
@@ -157,7 +147,7 @@ export default function ConsultationForm() {
         amount: order.amount,
         currency: order.currency,
         name: 'Settleline',
-        description: `${formData.serviceType} Consultation - ${formData.duration} minutes`,
+        description: `${urlServiceType} Consultation - ${urlDuration} minutes`,
         order_id: order.id,
         prefill: {
           name: `${formData.firstName} ${formData.lastName}`,
@@ -239,7 +229,7 @@ export default function ConsultationForm() {
             Your consultation has been booked and payment confirmed.
           </p>
                   <p className="text-sm text-muted-foreground mb-8">
-                    We&apos;ll contact you within 24 hours to schedule your {formData.duration}-minute {formData.serviceType} consultation.
+                    We&apos;ll contact you within 24 hours to schedule your {urlDuration}-minute {urlServiceType} consultation.
                   </p>
           <div className="space-y-4">
             <Button asChild>
@@ -331,80 +321,17 @@ export default function ConsultationForm() {
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Phone</Label>
+                  <Label htmlFor="phone">Phone Number</Label>
                   <Input
                     id="phone"
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    placeholder="+1 (555) 123-4567"
                     required
                   />
-                </div>
-
-                <div>
-                  <Label htmlFor="country">Country</Label>
-                  <Select value={formData.country} onValueChange={(value) => setFormData({...formData, country: value})}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select country" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="US">United States</SelectItem>
-                      <SelectItem value="UK">United Kingdom</SelectItem>
-                      <SelectItem value="Canada">Canada</SelectItem>
-                      <SelectItem value="Australia">Australia</SelectItem>
-                      <SelectItem value="Singapore">Singapore</SelectItem>
-                      <SelectItem value="UAE">UAE</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="state">State</Label>
-                    <Input
-                      id="state"
-                      value={formData.state}
-                      onChange={(e) => setFormData({...formData, state: e.target.value})}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="city">City</Label>
-                    <Input
-                      id="city"
-                      value={formData.city}
-                      onChange={(e) => setFormData({...formData, city: e.target.value})}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="serviceType">Service Type</Label>
-                  <Select value={formData.serviceType} onValueChange={(value) => setFormData({...formData, serviceType: value})}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select service" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="rnor-planning">RNOR & Residency Planning</SelectItem>
-                      <SelectItem value="property-advisory">Property & Real Estate Advisory</SelectItem>
-                      <SelectItem value="repatriation">Repatriation & Money Movement</SelectItem>
-                      <SelectItem value="business-structures">Business & Hiring Structures</SelectItem>
-                      <SelectItem value="wealth-planning">Wealth & Retirement Planning</SelectItem>
-                      <SelectItem value="compliance">Compliance & Risk Assurance</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <Label htmlFor="duration">Duration</Label>
-                  <Select value={formData.duration} onValueChange={(value) => setFormData({...formData, duration: value})}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select duration" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="15">15 minutes - $30</SelectItem>
-                      <SelectItem value="30">30 minutes - $60</SelectItem>
-                      <SelectItem value="60">60 minutes - $120</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Include country code (e.g., +1 for US, +44 for UK)
+                  </p>
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isSubmitting || !razorpayLoaded}>
@@ -423,23 +350,23 @@ export default function ConsultationForm() {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span>Service:</span>
-                  <span>{formData.serviceType || 'Not selected'}</span>
+                  <span>{urlServiceType || 'Not selected'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Duration:</span>
-                  <span>{formData.duration ? `${formData.duration} minutes` : 'Not selected'}</span>
+                  <span>{urlDuration ? `${urlDuration} minutes` : 'Not selected'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Price:</span>
                   <span>
-                    {formData.duration ? `$${parseInt(formData.duration) * 2}` : '$0'}
+                    {urlDuration ? `$${parseInt(urlDuration) * 2}` : '$0'}
                   </span>
                 </div>
                 <hr />
                 <div className="flex justify-between font-bold">
                   <span>Total:</span>
                   <span>
-                    {formData.duration ? `$${parseInt(formData.duration) * 2}` : '$0'}
+                    {urlDuration ? `$${parseInt(urlDuration) * 2}` : '$0'}
                   </span>
                 </div>
               </div>
