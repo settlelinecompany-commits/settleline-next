@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
 import Image from "next/image"
+import Link from "next/link"
 import heroAdvisorPhoto from "../../../public/images/hero-advisor-photo.webp"
 import businessTodayLogo from "../../../public/images/business-today-logo.webp"
 
