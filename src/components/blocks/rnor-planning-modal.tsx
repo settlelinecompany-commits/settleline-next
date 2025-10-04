@@ -149,7 +149,7 @@ export function RNORPlanningModal() {
                   Close
                 </Button>
                 <Button asChild>
-                  <a href="/#services">Book Consultation</a>
+                  <Link href="/#services-grid">Book Consultation</Link>
                 </Button>
               </div>
             </div>

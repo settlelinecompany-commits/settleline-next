@@ -517,7 +517,7 @@ export function RNORCalculator({ className }: RNORCalculatorProps) {
                     <Link href="/services/return-to-india-financial-planning/">Book Your Risk-Free Consultation</Link>
                   </Button>
                   <div className="text-sm text-muted-foreground">
-                    <span className="text-green-600 font-medium">100% refund if we can't help</span>
+                    <span className="text-green-600 font-medium">100% refund if we can&apos;t help</span>
                   </div>
                 </div>
               </CardContent>
