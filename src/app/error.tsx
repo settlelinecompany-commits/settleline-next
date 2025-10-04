@@ -33,7 +33,7 @@ export default function Error({
             <Link href="/">Go Home</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/book">Contact Support</Link>
+            <Link href="/#services">Contact Support</Link>
           </Button>
         </div>
       </div>

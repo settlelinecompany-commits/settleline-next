@@ -14,7 +14,7 @@ const services = {
     description: 'Comprehensive RNOR tax planning service to maximize your tax benefits during your return to India.',
     priceFrom: '$2,500',
     ctaText: 'Book RNOR Consultation',
-    ctaHref: '/book?service=rnor-planning',
+    ctaHref: '/#services',
   }
 }
 

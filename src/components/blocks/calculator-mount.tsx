@@ -21,7 +21,7 @@ export function CalculatorMount({
     "Plan your financial transition"
   ],
   ctaText = "Start Planning",
-  ctaHref = "/book",
+  ctaHref = "/#services",
   className
 }: CalculatorMountProps) {
   return (
