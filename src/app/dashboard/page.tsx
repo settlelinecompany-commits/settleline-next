@@ -115,7 +115,7 @@ export default function DashboardPage() {
               You haven&apos;t booked any consultations yet. Get started with our expert guidance.
             </p>
             <Button asChild>
-              <Link href="/book">Book Your First Consultation</Link>
+              <Link href="/#services">Book Your First Consultation</Link>
             </Button>
           </Card>
         ) : (
@@ -123,7 +123,7 @@ export default function DashboardPage() {
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold">Your Consultations</h2>
               <Button asChild variant="outline">
-                <Link href="/book">Book Another Consultation</Link>
+                <Link href="/#services">Book Another Consultation</Link>
               </Button>
             </div>
 

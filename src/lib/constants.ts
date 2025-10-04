@@ -29,7 +29,7 @@ export const FOOTER_LINKS = {
   ],
   company: [
     { name: "About", href: "/about" },
-    { name: "Book Consultation", href: "/book" },
+    { name: "Book Consultation", href: "/#services" },
     { name: "Contact", href: "/contact" },
   ],
   legal: [

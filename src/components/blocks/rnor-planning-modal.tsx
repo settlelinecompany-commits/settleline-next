@@ -149,7 +149,7 @@ export function RNORPlanningModal() {
                   Close
                 </Button>
                 <Button asChild>
-                  <a href="/book">Book Consultation</a>
+                  <a href="/#services">Book Consultation</a>
                 </Button>
               </div>
             </div>

@@ -84,7 +84,7 @@ const benefits = [
 const generalFAQs = [
   {
     question: "How long does a consultation take?",
-    answer: "Start with our 15-minute risk-free intro call. During this call, we'll assess your situation and determine exactly how many sessions you'll need for complete planning. We can only provide this guidance after understanding your specific circumstances."
+    answer: "Start with our 30-minute risk-free intro call. During this call, we'll assess your situation and determine exactly how many sessions you'll need for complete planning. We can only provide this guidance after understanding your specific circumstances."
   },
   {
     question: "How much can I save with proper planning?",
@@ -96,7 +96,7 @@ const generalFAQs = [
   },
   {
     question: "What if you can't help me?",
-    answer: "We offer a 100% risk-free guarantee. If we can't help you with your specific situation, we'll provide a full refund for your 15-minute consultation. We're honest about our capabilities and will refer you to appropriate specialists if needed."
+    answer: "We offer a 100% risk-free guarantee. If we can't help you with your specific situation, we'll provide a full refund for your 30-minute consultation. We're honest about our capabilities and will refer you to appropriate specialists if needed."
   }
 ];
 
@@ -182,7 +182,7 @@ const serviceCategories = [
 export default function ReturnToIndiaFinancialPlanningPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const [activeServiceCategory, setActiveServiceCategory] = useState('rnor-planning');
-  const [selectedDuration, setSelectedDuration] = useState('30');
+  const [selectedDuration, setSelectedDuration] = useState('60'); // Default to 1 hour
 
   return (
     <>
@@ -245,11 +245,10 @@ export default function ReturnToIndiaFinancialPlanningPage() {
               <div className="text-center mb-6">
                 <div className="text-4xl font-bold text-primary mb-2">$2</div>
                 <div className="text-lg text-muted-foreground">per minute</div>
-                <div className="text-sm text-muted-foreground mt-2">15-minute minimum</div>
+                <div className="text-sm text-muted-foreground mt-2">30-minute minimum</div>
               </div>
               <div className="text-center mb-6">
-                <div className="text-sm text-green-600 font-medium mb-2">✓ If we can&apos;t help, we&apos;ll refund it</div>
-                <div className="text-sm text-green-600 font-medium">✓ If we can help, we&apos;ll credit this toward planning</div>
+                <div className="text-sm text-green-600 font-medium">✓ If we can&apos;t help, we&apos;ll refund it</div>
               </div>
               
               
@@ -396,7 +395,7 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                       <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">03</div>
                       <div className="flex-1">
                         <div className="text-base font-semibold text-foreground mb-1">Session with Settleline Expert</div>
-                        <div className="text-sm text-muted-foreground leading-relaxed">Our cross-border team will call within the next hour or so</div>
+                        <div className="text-sm text-muted-foreground leading-relaxed">Our cross-border team will contact you within 4-6 working hours</div>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -414,18 +413,15 @@ export default function ReturnToIndiaFinancialPlanningPage() {
               <div className="bg-muted/20 rounded-lg p-8 border border-border/30 shadow-sm">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Book Your Risk-Free Consultation</h3>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Start with 15 minutes. If we can&apos;t help you, we&apos;ll refund it. Otherwise, it&apos;s credited to your full planning service.
+                  Start with 30 minutes. If we can&apos;t help you, we&apos;ll refund it. Otherwise, it&apos;s credited to your full planning service.
                 </p>
                 
                 {/* Service Type */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-foreground mb-2">Service Type</label>
-                  <select className="w-full p-3 border border-border rounded-lg bg-background text-foreground">
-                    <option>Select service type</option>
-                    <option>Return to India Financial Planning</option>
-                    <option>RNOR Planning</option>
-                    <option>Comprehensive Planning</option>
-                  </select>
+                  <div className="text-center">
+                    <div className="text-sm text-muted-foreground mb-1">Service</div>
+                    <div className="text-lg font-semibold text-foreground">Return to India Financial Planning</div>
+                  </div>
                 </div>
 
                 {/* Pricing */}
@@ -444,36 +440,25 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                   <div className="space-y-3">
                     <label className="flex items-center justify-between p-4 border border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
                       <div>
-                        <div className="font-medium text-foreground">15 minutes</div>
+                        <div className="font-medium text-foreground">30 minutes</div>
                         <div className="text-sm text-muted-foreground">Risk-free assessment & basic guidance</div>
                         <div className="text-xs text-green-600 font-medium mt-1">100% refund if we can&apos;t help</div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-lg font-bold text-foreground">$30</span>
-                        <input type="radio" name="duration" value="15" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" />
+                        <span className="text-lg font-bold text-foreground">$60</span>
+                        <input type="radio" name="duration" value="30" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" />
                       </div>
                     </label>
                     
                     <label className="flex items-center justify-between p-4 border-2 border-primary rounded-lg cursor-pointer bg-primary/5 transition-colors">
                       <div>
-                        <div className="font-medium text-foreground">30 minutes</div>
+                        <div className="font-medium text-foreground">1 hour</div>
                         <div className="text-sm text-muted-foreground">Comprehensive consultation & strategy overview</div>
                         <div className="text-xs text-orange-600 font-medium mt-1">Recommended</div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-lg font-bold text-foreground">$60</span>
-                        <input type="radio" name="duration" value="30" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" defaultChecked />
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center justify-between p-4 border border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
-                      <div>
-                        <div className="font-medium text-foreground">1 hour</div>
-                        <div className="text-sm text-muted-foreground">Deep dive analysis & detailed planning</div>
-                      </div>
-                      <div className="flex items-center gap-3">
                         <span className="text-lg font-bold text-foreground">$120</span>
-                        <input type="radio" name="duration" value="60" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" />
+                        <input type="radio" name="duration" value="60" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" defaultChecked />
                       </div>
                     </label>
                   </div>
@@ -582,7 +567,7 @@ export default function ReturnToIndiaFinancialPlanningPage() {
                   </h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Get perspectives from CA, CPA, Property Lawyer, and CFA - all via Settleline. Start with a 15-minute risk-free consultation.
+                  Get perspectives from CA, CPA, Property Lawyer, and CFA - all via Settleline. Start with a 30-minute risk-free consultation.
                 </p>
               </div>
               
@@ -625,9 +610,9 @@ export default function ReturnToIndiaFinancialPlanningPage() {
       {/* Footer CTA */}
       <FooterCTA
         title="Ready to Plan Your Return to India?"
-        description="Start with a 15-minute risk-free consultation. If we can't help you, we'll refund it. Otherwise, it's credited to your full planning service."
+        description="Start with a 30-minute risk-free consultation. If we can't help you, we'll refund it."
         ctaText="Book Risk-Free Consultation"
-        ctaHref="/book"
+        ctaHref="/#services"
         secondaryCtaText="Try Free Planner"
         secondaryCtaHref="/tools/free-return-to-india-planner"
       />

@@ -138,7 +138,7 @@ export function Hero({
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button variant="outline" asChild>
-                    <a href="/book">Book Consultation</a>
+                    <a href="/#services">Book Consultation</a>
                   </Button>
                   <Button className="bg-blue-900 text-white hover:bg-blue-800" asChild>
                     <a href="/tools/free-return-to-india-planner">Try Free Planner</a>

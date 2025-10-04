@@ -51,77 +51,158 @@ const propertyServices = [
   }
 ];
 
-// Services Included data
-const servicesIncluded = [
-  "Advisory for salaried individuals, freelancers, financial traders",
-  "Get answers to your tax related queries",
-  "Get a dedicated relationship manager during service fulfillment"
-];
-
 // How It's Done data
 const processSteps = [
-  { step: "01", title: "Purchase of Plan", description: "Select your consultation package and complete payment" },
-  { step: "02", title: "Share your Requirements", description: "Provide your tax situation and specific questions" },
-  { step: "03", title: "Session with Settleline Expert", description: "Our cross-border team will call within the next hour or so" },
-  { step: "04", title: "Resolution of Query", description: "Get comprehensive answers and actionable advice. The documents required shall be communicated upon having an analysis of your queries." }
+  { step: "01", title: "Book Your Session", description: "Choose your consultation type and select preferred time slot" },
+  { step: "02", title: "Connect with Expert", description: "Get matched with qualified CA/CPA/Property Lawyer via Zoom or phone call" },
+  { step: "03", title: "Get Your Plan", description: "Receive comprehensive strategy and actionable roadmap" },
+  { step: "04", title: "Follow-up Support", description: "Additional sessions as needed with ongoing guidance" }
+];
+
+// Benefits data
+const benefits = [
+  {
+    title: "Instant Expert Access",
+    description: "Connect instantly through Zoom calls or high-quality phone calls with qualified CA, CPA, and Property Lawyers"
+  },
+  {
+    title: "No Travel Required",
+    description: "Start an instant consultation with the expert of your choice - no travel, no waiting, no hassle"
+  },
+  {
+    title: "100% Safe Consultations", 
+    description: "Be assured that your online consultation will be fully private and secured with bank-level encryption"
+  }
 ];
 
 // FAQ data
 const generalFAQs = [
   {
-    question: "How much TDS applies on NRI property sales?",
-    answer: "TDS of 20% applies on property sales by NRIs, but this can be reduced to 10% with proper documentation and tax residency certificates. We help optimize this through proper structuring."
+    question: "How long does a consultation take?",
+    answer: "Start with our 30-minute risk-free intro call. During this call, we'll assess your property situation and determine exactly how many sessions you'll need for complete planning. We can only provide this guidance after understanding your specific circumstances."
   },
   {
-    question: "Can I sell property while abroad?",
-    answer: "Yes, NRIs can sell property while abroad through Power of Attorney or by appointing a representative. We help set up proper documentation and ensure compliance."
+    question: "How much can I save with proper property planning?",
+    answer: "Our clients typically save ₹5-15L in taxes through proper property sale structuring, TDS optimization, and capital gains exemptions. The ROI on our consultation is usually 1000%+."
   },
   {
-    question: "How do I repatriate rent or sale proceeds?",
-    answer: "Rent and sale proceeds can be repatriated under FEMA guidelines. We help with Form 15CA/CB filing, bank coordination, and ensuring compliance with the $1M annual limit."
+    question: "What if I need follow-up sessions?",
+    answer: "You can book additional sessions anytime at $2/minute. We also offer ongoing advisory packages for year-round support, compliance monitoring, and strategy updates."
   },
   {
-    question: "How do I protect property left vacant in India?",
-    answer: "We help set up proper monitoring systems, Power of Attorney arrangements, and regular compliance checks to prevent encroachment and maintain property value."
+    question: "What if you can't help me?",
+    answer: "We offer a 100% risk-free guarantee. If we can't help you with your specific situation, we'll provide a full refund for your 30-minute consultation. We're honest about our capabilities and will refer you to appropriate specialists if needed."
+  }
+];
+
+// Service Categories for Interactive Section
+const serviceCategories = [
+  {
+    id: 'property-sale',
+    title: 'Property Sale & Taxation',
+    content: {
+      title: 'Strategic Property Sale Planning',
+      description: 'We help you structure property sales for maximum tax efficiency and smooth repatriation.',
+      features: [
+        'Capital gains exemption planning (Section 54, 54F)',
+        'TDS management and buyer coordination',
+        'Property valuation and documentation',
+        'Tax-efficient sale timing strategies',
+        'Repatriation planning for proceeds'
+      ]
+    }
+  },
+  {
+    id: 'rental-management',
+    title: 'Rental Income & Tenant Management',
+    content: {
+      title: 'Complete Rental Property Management',
+      description: 'Maximize your rental income while ensuring full compliance and tenant satisfaction.',
+      features: [
+        'Compliant rental agreement drafting',
+        'Rent collection and dispute resolution',
+        'ITR filing with DTAA relief',
+        'Deduction optimization strategies',
+        'Tenant screening and management'
+      ]
+    }
+  },
+  {
+    id: 'property-protection',
+    title: 'Property Protection & Maintenance',
+    content: {
+      title: 'Property Security and Compliance',
+      description: 'Protect your Indian property from risks and ensure proper maintenance and compliance.',
+      features: [
+        'Encroachment prevention strategies',
+        'Municipal compliance and filings',
+        'Power of Attorney setup',
+        'Regular property inspections',
+        'Dispute resolution and litigation support'
+      ]
+    }
+  },
+  {
+    id: 'repatriation',
+    title: 'Repatriation of Sale Proceeds',
+    content: {
+      title: 'FEMA-Compliant Money Transfer',
+      description: 'Transfer your property sale proceeds abroad legally and efficiently.',
+      features: [
+        'FEMA compliance under $1M scheme',
+        'Form 15CA/CB preparation',
+        'NRO/NRE account optimization',
+        'Multi-year transfer planning',
+        'Bank coordination and documentation'
+      ]
+    }
   }
 ];
 
 export default function PropertyRealEstateAdvisoryPage() {
-  const [selectedService, setSelectedService] = useState<number | null>(null);
-  const [selectedDuration, setSelectedDuration] = useState<string>('30');
-
-  const openModal = (index: number) => {
-    setSelectedService(index);
-  };
-
-  const closeModal = () => {
-    setSelectedService(null);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  };
-
-  const handleDurationChange = (duration: string) => {
-    setSelectedDuration(duration);
-  };
+  const [activeTab, setActiveTab] = useState('overview');
+  const [activeServiceCategory, setActiveServiceCategory] = useState('property-sale');
+  const [selectedDuration, setSelectedDuration] = useState('60'); // Default to 1 hour
 
   return (
     <>
-      {/* Two Column Cover Section */}
+      {/* Hero Section */}
       <Section className="py-16 lg:py-20 bg-background">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Service Heading */}
             <div>
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Property & Real Estate Advisory
+                We Protect Your Indian Property
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                Buy, sell, rent, or maintain Indian property without stress—secure, tax-efficient, and FEMA compliant.
+                Buy, sell, or manage Indian property with full tax efficiency and compliance from qualified cross-border experts.
               </p>
+              
+              {/* Key Value Props */}
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  <span className="text-foreground">Save ₹5-15L in property taxes and capital gains</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  <span className="text-foreground">FEMA-compliant repatriation of sale proceeds</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  <span className="text-foreground">Complete property management and protection</span>
+                </div>
+              </div>
+
+              {/* Expert Credentials */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">CA</span>
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">Property Lawyer</span>
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">FEMA Expert</span>
+              </div>
+
+              {/* Social Proof */}
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
                   <span className="text-2xl font-bold text-foreground">4.9</span>
@@ -133,404 +214,386 @@ export default function PropertyRealEstateAdvisoryPage() {
                     ))}
                   </div>
                 </div>
-                <a href="/experts" className="text-sm text-primary hover:text-primary/80 underline">
-                  Meet our experts
-                </a>
+                <span className="text-sm text-muted-foreground">200+ property transactions</span>
               </div>
             </div>
 
             {/* Right Column - Pricing Card */}
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-border/20">
-              <h3 className="text-2xl font-bold text-primary text-center mb-4">Ask Our Cross-Border Expert</h3>
+              <h3 className="text-2xl font-bold text-primary text-center mb-4">Risk-Free Assessment</h3>
               <div className="text-center mb-6">
                 <div className="text-4xl font-bold text-primary mb-2">$2</div>
                 <div className="text-lg text-muted-foreground">per minute</div>
+                <div className="text-sm text-muted-foreground mt-2">30-minute minimum</div>
               </div>
-              <Button size="lg" className="w-full" onClick={() => {
-                document.getElementById('payment-widget')?.scrollIntoView({ behavior: 'smooth' });
-              }}>
-                Buy now
+              <div className="text-center mb-6">
+                <div className="text-sm text-green-600 font-medium">✓ If we can&apos;t help, we&apos;ll refund it</div>
+              </div>
+              
+              <Button 
+              size="lg" 
+              className="w-full bg-primary hover:bg-primary/90"
+              onClick={() => {
+                document.getElementById('consultation-booking')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Book Risk-Free Assessment
               </Button>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* Centered Service Cards Section */}
+      {/* What's Included Section - Interactive */}
       <Section className="py-16 lg:py-20 bg-muted/20">
         <Container>
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {propertyServices.map((service, index) => (
-                <div
-                  key={index}
-                  className="bg-primary text-primary-foreground rounded-lg p-8 cursor-pointer hover:shadow-lg transition-shadow duration-300"
-                  onClick={() => openModal(index)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      openModal(index);
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`Learn more about ${service.title}`}
-                >
-                  <h3 className="text-xl font-semibold mb-4 leading-tight">
-                    {service.title}
-                  </h3>
-                  <p className="text-primary-foreground/90 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <div className="flex items-center text-primary-foreground hover:underline">
-                    <span className="text-sm font-medium">Find out more</span>
-                    <svg
-                      className="ml-2 w-4 h-4"
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">What&apos;s Included in Your Property Planning</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Your complete property management roadmap with expert guidance, tax optimization, and ongoing support.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left Column - Categories */}
+              <div className="space-y-2">
+                {serviceCategories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => setActiveServiceCategory(category.id)}
+                    className={`w-full text-left p-4 rounded-lg transition-all duration-200 flex items-center justify-between ${
+                      activeServiceCategory === category.id
+                        ? 'bg-primary text-primary-foreground shadow-md'
+                        : 'bg-white hover:bg-muted/50 text-foreground border border-border/20'
+                    }`}
+                  >
+                    <span className="font-medium">{category.title}</span>
+                    <svg 
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        activeServiceCategory === category.id ? 'rotate-90' : ''
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
+                  </button>
+                ))}
+              </div>
+
+              {/* Right Column - Content */}
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
+                {(() => {
+                  const activeCategory = serviceCategories.find(cat => cat.id === activeServiceCategory);
+                  if (!activeCategory) return null;
+                  
+                  return (
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground mb-3">
+                        {activeCategory.content.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        {activeCategory.content.description}
+                      </p>
+                      <ul className="space-y-2">
+                        {activeCategory.content.features.map((feature, index) => (
+                          <li key={index} className="flex items-start gap-2">
+                            <svg className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-sm text-muted-foreground">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                   </div>
+                  );
+                })()}
                 </div>
-              ))}
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* Services Included + Payment Flow Section */}
-      <Section className="py-16 lg:py-20 bg-background">
+      {/* How It Works & Consultation Booking Section */}
+      <Section id="consultation-booking" className="py-16 lg:py-20 bg-background">
         <Container>
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Left Column - Services Included + How It's Done */}
-              <div className="space-y-12">
-                {/* Services Included */}
-                <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">Services Included</h2>
-                  <ul className="space-y-4">
-                    {servicesIncluded.map((service, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                        <span className="text-muted-foreground">{service}</span>
-                      </li>
-                    ))}
-                  </ul>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">How We Protect Your Property</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Simple 4-step process to get your complete property management and tax optimization roadmap.
+              </p>
                 </div>
 
-                {/* How It's Done */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+              {/* Left Column - Process & Service Details */}
+              <div className="space-y-6">
+                {/* Process Steps */}
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">How It&apos;s Done</h2>
-                  <p className="text-lg text-muted-foreground mb-8">
-                    This plan is equipped with end-to-end online fulfillment via our expert. No hassle, 100% Digital.
-                  </p>
-                  <div className="text-2xl font-bold text-foreground mb-8">2 Days Estimate</div>
-                  
-                  <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-6">How It Works</h3>
+                  <div className="space-y-5">
                     {processSteps.map((step, index) => (
                       <div key={index} className="flex items-start gap-4">
-                        <div className="flex-shrink-0">
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm ${
-                            index === 3 ? 'bg-green-500 text-white' : 'bg-primary text-primary-foreground'
-                          }`}>
+                        <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                             {step.step}
-                          </div>
                         </div>
-                        <div className="flex-grow">
-                          <h3 className="text-lg font-semibold text-foreground mb-2">
-                            {step.title}
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            {step.description}
-                          </p>
+                        <div className="flex-1">
+                          <h4 className="text-base font-semibold text-foreground mb-1">{step.title}</h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                {/* Timeline */}
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground mb-6">2 Days Estimate</h3>
+                  <p className="text-sm text-muted-foreground mb-5">
+                    This plan is equipped with end-to-end online fulfillment via our expert. No hassle, 100% Digital.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">01</div>
+                      <div className="flex-1">
+                        <div className="text-base font-semibold text-foreground mb-1">Purchase of Plan</div>
+                        <div className="text-sm text-muted-foreground leading-relaxed">Select your consultation package and complete payment</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">02</div>
+                      <div className="flex-1">
+                        <div className="text-base font-semibold text-foreground mb-1">Share your Requirements</div>
+                        <div className="text-sm text-muted-foreground leading-relaxed">Provide your property situation and specific questions</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">03</div>
+                      <div className="flex-1">
+                        <div className="text-base font-semibold text-foreground mb-1">Session with Settleline Expert</div>
+                        <div className="text-sm text-muted-foreground leading-relaxed">Our cross-border team will contact you within 4-6 working hours</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">04</div>
+                      <div className="flex-1">
+                        <div className="text-base font-semibold text-foreground mb-1">Resolution of Query</div>
+                        <div className="text-sm text-muted-foreground leading-relaxed">Get comprehensive answers and actionable advice. The documents required shall be communicated upon having an analysis of your situation.</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column - Payment/Booking Flow */}
-              <div>
-                <div id="payment-widget" className="bg-white rounded-2xl p-10 shadow-lg border border-border/20">
-                  {/* Service Type Selector */}
+              {/* Right Column - Consultation Booking */}
+              <div className="bg-muted/20 rounded-lg p-8 border border-border/30 shadow-sm">
+                <h3 className="text-2xl font-bold text-foreground mb-2">Book Your Risk-Free Consultation</h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Start with 30 minutes. If we can&apos;t help you, we&apos;ll refund it.
+                </p>
+                
+                {/* Service Type */}
                   <div className="mb-6">
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Service Type
-                    </label>
-                    <select className="w-full p-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-                      <option value="">Select service type</option>
-                      <option value="property-sale-taxation">Property Sale & Taxation</option>
-                      <option value="rental-tenant-management">Rental Income & Tenant Management</option>
-                      <option value="property-protection">Property Protection & Maintenance</option>
-                      <option value="repatriation-proceeds">Repatriation of Sale Proceeds</option>
-                    </select>
+                  <div className="text-center">
+                    <div className="text-sm text-muted-foreground mb-1">Service</div>
+                    <div className="text-lg font-semibold text-foreground">Property & Real Estate Advisory</div>
+                  </div>
                   </div>
 
-                  {/* Base Price Display */}
-                  <div className="text-center mb-6">
-                    <div className="text-4xl font-bold text-foreground mb-2">$2</div>
-                    <div className="text-lg text-muted-foreground">per minute</div>
+                {/* Pricing */}
+                <div className="mb-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-primary mb-1">$2</div>
+                    <div className="text-muted-foreground">per minute</div>
+                  </div>
                   </div>
 
-                  {/* Instructional Text */}
-                  <div className="text-center mb-8">
-                    <p className="text-foreground">
+                {/* Duration Selection */}
+                <div className="mb-6">
+                  <p className="text-sm text-muted-foreground mb-4">
                       To consult our Cross-Border Experts, select your consultation duration
                     </p>
-                  </div>
-
-                  {/* Time Estimate Options */}
-                  <div className="grid grid-cols-1 gap-4 mb-6">
-                    <div 
-                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                        selectedDuration === '15' 
-                          ? 'border-primary bg-primary/5' 
-                          : 'border-border hover:border-primary'
-                      }`}
-                      onClick={() => handleDurationChange('15')}
-                    >
-                      <div className="flex items-center justify-between">
+                  <div className="space-y-3">
+                    <label className="flex items-center justify-between p-4 border border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
                         <div>
-                          <div className="font-semibold text-foreground">15 minutes</div>
-                          <div className="text-2xl font-bold text-primary">$30</div>
+                        <div className="font-medium text-foreground">30 minutes</div>
+                        <div className="text-sm text-muted-foreground">Risk-free assessment & basic guidance</div>
+                        <div className="text-xs text-green-600 font-medium mt-1">100% refund if we can&apos;t help</div>
                         </div>
-                        <input 
-                          type="radio" 
-                          name="duration" 
-                          value="15" 
-                          checked={selectedDuration === '15'}
-                          onChange={() => handleDurationChange('15')}
-                          className="w-4 h-4 text-primary" 
-                        />
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg font-bold text-foreground">$60</span>
+                        <input type="radio" name="duration" value="30" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" />
                       </div>
-                    </div>
+                    </label>
                     
-                    <div 
-                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                        selectedDuration === '30' 
-                          ? 'border-primary bg-primary/5' 
-                          : 'border-border hover:border-primary'
-                      }`}
-                      onClick={() => handleDurationChange('30')}
-                    >
-                      <div className="flex items-center justify-between">
+                    <label className="flex items-center justify-between p-4 border-2 border-primary rounded-lg cursor-pointer bg-primary/5 transition-colors">
                         <div>
-                          <div className="font-semibold text-foreground">30 minutes</div>
-                          <div className="text-2xl font-bold text-primary">$60</div>
-                          <div className="text-xs text-orange-600 font-medium">Recommended</div>
-                        </div>
-                        <input 
-                          type="radio" 
-                          name="duration" 
-                          value="30" 
-                          checked={selectedDuration === '30'}
-                          onChange={() => handleDurationChange('30')}
-                          className="w-4 h-4 text-primary" 
-                        />
+                        <div className="font-medium text-foreground">1 hour</div>
+                        <div className="text-sm text-muted-foreground">Comprehensive consultation & strategy overview</div>
+                        <div className="text-xs text-orange-600 font-medium mt-1">Recommended</div>
                       </div>
-                    </div>
-                    
-                    <div 
-                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                        selectedDuration === '60' 
-                          ? 'border-primary bg-primary/5' 
-                          : 'border-border hover:border-primary'
-                      }`}
-                      onClick={() => handleDurationChange('60')}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-semibold text-foreground">1 hour</div>
-                          <div className="text-2xl font-bold text-primary">$120</div>
-                        </div>
-                        <input 
-                          type="radio" 
-                          name="duration" 
-                          value="60" 
-                          checked={selectedDuration === '60'}
-                          onChange={() => handleDurationChange('60')}
-                          className="w-4 h-4 text-primary" 
-                        />
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg font-bold text-foreground">$120</span>
+                        <input type="radio" name="duration" value="60" onChange={(e) => setSelectedDuration(e.target.value)} className="w-4 h-4" defaultChecked />
                       </div>
-                    </div>
+                    </label>
                   </div>
+                </div>
 
-                  {/* Buy Now Button */}
-                  <Button size="lg" className="w-full" asChild>
-                    <a href="/book/consultation">
-                      Book Consultation
-                    </a>
-                  </Button>
+                {/* Book Button */}
+                <Button 
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg"
+                onClick={() => {
+                  const params = new URLSearchParams({
+                    serviceType: 'property-real-estate-advisory',
+                    duration: selectedDuration,
+                    price: (parseInt(selectedDuration) * 2).toString()
+                  });
+                  window.location.href = `/book/consultation?${params.toString()}`;
+                }}
+              >
+                Book Consultation
+              </Button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Benefits of Online Consultation Section */}
+      <Section className="py-8 lg:py-12 bg-background">
+        <Container>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">Benefits of Online Consultation</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Get expert guidance from anywhere in the world with our secure online consultation platform.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">{benefit.title}</h3>
+                  <p className="text-muted-foreground">{benefit.description}</p>
+                </div>
+              ))}
+            </div>
+            
+            {/* Meeting Types */}
+            <div className="mt-12 text-center">
+              <h3 className="text-xl font-semibold text-foreground mb-6">Choose Your Preferred Meeting Type</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-border/20">
+                  <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <span className="text-sm font-medium">Video Meeting</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-border/20">
+                  <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <span className="text-sm font-medium">Phone Meeting</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-border/20">
+                  <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <span className="text-sm font-medium">WhatsApp Meeting</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-border/20">
+                  <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <span className="text-sm font-medium">Google Meet</span>
                 </div>
               </div>
             </div>
           </div>
+        </Container>
+      </Section>
+
+      {/* Settleline Advantage Section */}
+      <Section className="py-16 lg:py-20 bg-muted/20">
+        <Container>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">Settleline Advantage</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Why choose us for your property management and tax optimization needs
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    Talk to Multiple Experts
+                  </h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Get perspectives from CA, CPA, and Property Lawyers - all via Settleline. Start with a 30-minute risk-free consultation.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    Secure and Confidential
+                  </h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Your property information is protected with bank-level security. All consultations are completely confidential.
+                </p>
+              </div>
+            </div>
+              </div>
         </Container>
       </Section>
 
       {/* FAQ Section */}
       <Section className="py-16 lg:py-20 bg-background">
         <Container>
-          <FAQAccordion faqs={generalFAQs} />
-        </Container>
-      </Section>
-
-      {/* Reviews Section */}
-      <Section className="py-16 lg:py-20 bg-muted/20">
-        <Container>
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">Reviews</h2>
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-3xl font-bold text-foreground">4.17</span>
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="text-sm text-muted-foreground">Average Rating</span>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
+              <p className="text-lg text-muted-foreground">
+                Common questions about our property advisory services
+              </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
-                <div className="flex items-center gap-1 mb-4">
-                  <span className="font-semibold text-foreground">Prabhu Pareek</span>
-                  <div className="flex">
-                    {[...Array(4)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                    <svg className="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  My wife and I wanted to start a business. We had the business plan but had no idea how to go about it. We bought the Settleline Ask an Expert Plan and an expert solved all our queries related to mandatory registration requirements...
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-border/20">
-                <div className="flex items-center gap-1 mb-4">
-                  <span className="font-semibold text-foreground">Seema Vimlan</span>
-                  <div className="flex">
-                    {[...Array(4)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                    <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  I am self-employed and had entered into a few trade transactions in the share market. I had losses which I skipped reporting in my tax report. Later I got a notice from the department and had a panic attack. I desperately needed an...
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center">
-              <Button variant="outline" asChild>
-                <a href="https://rzp.io/l/settleline-consultation" target="_blank" rel="noopener noreferrer">
-                  Write a review
-                </a>
-              </Button>
-              <div className="flex gap-2">
-                <button className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
-                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
-                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+            
+            <FAQAccordion title="" faqs={generalFAQs} />
           </div>
         </Container>
       </Section>
 
-      {/* CTA Section */}
+      {/* Footer CTA */}
       <FooterCTA
-        title="Ready to simplify your cross-border finances?"
-        description="In just 30 minutes, we'll map the fastest, compliant path for your taxes, property, and wealth."
-        ctaText="Talk to an Expert"
-        ctaHref="https://rzp.io/l/settleline-consultation"
-        secondaryCtaText="Book a 30-min Consult"
-        secondaryCtaHref="https://rzp.io/l/settleline-consultation"
+        title="Ready to Protect Your Indian Property?"
+        description="Start with a 30-minute risk-free consultation. If we can't help you, we'll refund it."
+        ctaText="Book Risk-Free Consultation"
+        ctaHref="/#services"
+        secondaryCtaText="Try Free Planner"
+        secondaryCtaHref="/tools/free-return-to-india-planner"
       />
-
-      {/* Modal */}
-      {selectedService !== null && (
-        <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-          onClick={closeModal}
-          onKeyDown={handleKeyDown}
-        >
-          <div
-            className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-          >
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <h3 id="modal-title" className="text-2xl font-bold text-foreground">
-                  {propertyServices[selectedService].title}
-                </h3>
-                <button
-                  onClick={closeModal}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Close modal"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-foreground mb-4">
-                  How we can help you:
-                </h4>
-                <ul className="space-y-3">
-                  {propertyServices[selectedService].details.map((detail, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="text-primary mt-1">•</span>
-                      <span className="text-muted-foreground">{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex justify-end gap-3">
-                <Button variant="outline" onClick={closeModal}>
-                  Close
-                </Button>
-                <Button onClick={() => {
-                  closeModal();
-                  document.getElementById('payment-widget')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  Book Consultation
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

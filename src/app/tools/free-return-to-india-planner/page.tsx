@@ -23,7 +23,7 @@ export default function PlannerPage() {
         title="Need Personalized Guidance?"
         description="Our experts can help you create a comprehensive plan for your return to India. Book a consultation to get started."
         ctaText="Book Consultation"
-        ctaHref="/book"
+        ctaHref="/#services"
         secondaryCtaText="Learn More"
         secondaryCtaHref="/services"
       />

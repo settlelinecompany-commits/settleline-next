@@ -484,58 +484,41 @@ export function RNORCalculator({ className }: RNORCalculatorProps) {
             {/* CTA Section */}
             <Card className="rounded-2xl shadow-lg border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
               <CardContent className="p-6 text-center">
-                <h3 className="text-lg font-bold mb-4">
-                  Get your $549 Full Report + 1-hour 1:1 consultation with a cross-border Chartered Accountant
+                <h3 className="text-xl font-bold mb-4">
+                  Get Your Personalized Return-to-India Plan
                 </h3>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-left text-sm">
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-2">
-                      <span className="text-primary mt-1">✓</span>
-                      <span>RNOR date strategy (exact return date windows + &quot;what if&quot; map)</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-primary mt-1">✓</span>
-                      <span>Asset-by-asset plan (stocks, retirement accounts, property, investments)</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-primary mt-1">✓</span>
-                      <span>Form 67 & DTAA map (how, when, deadlines)</span>
-                    </div>
+                <div className="mb-6">
+                  <div className="text-3xl font-bold text-primary mb-2">Starting at $2/minute</div>
+                  <div className="text-sm text-muted-foreground">30-minute minimum • 1-hour recommended</div>
+                </div>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">✓</span>
+                    <span>RNOR date strategy & tax optimization</span>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-2">
-                      <span className="text-primary mt-1">✓</span>
-                      <span>Tax-efficient transfer strategy (timing, documentation, compliance)</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-primary mt-1">✓</span>
-                      <span>Live 1-hour consultation with cross-border Chartered Accountant</span>
-                    </div>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">✓</span>
+                    <span>Asset-by-asset planning & transfer strategy</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">✓</span>
+                    <span>Live consultation with cross-border experts</span>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
-                  <Button size="lg" className="w-full" asChild>
-                    <Link href="/book">Buy Full Report + 1-hour consult — $549</Link>
+                  <Button 
+                    size="lg" 
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                    asChild
+                  >
+                    <Link href="/services/return-to-india-financial-planning/">Book Your Risk-Free Consultation</Link>
                   </Button>
-                  
-                  <div>
-                    <Link href="mailto:hello@settleline.com" className="text-sm text-muted-foreground hover:text-foreground underline">
-                      Not ready? Email me my free estimate
-                    </Link>
+                  <div className="text-sm text-muted-foreground">
+                    <span className="text-green-600 font-medium">100% refund if we can't help</span>
                   </div>
-                  
-                  <div>
-                    <Link href="/experts" className="text-sm text-primary hover:text-primary/80 underline">
-                      Meet our experts
-                    </Link>
-                  </div>
-                  
-                  <p className="text-xs text-muted-foreground">
-                    Guarantee: &quot;If we can&apos;t add RNOR value, we&apos;ll refund you.&quot; <br/>
-                    <em>Professional cross-border CA will verify dates using passport stamps for accurate calculations.</em>
-                  </p>
                 </div>
               </CardContent>
             </Card>

@@ -32,7 +32,7 @@ export default function QAPage() {
     { name: "Services", href: "/services", description: "Services overview" },
     { name: "Blog", href: "/blog", description: "Blog listing" },
     { name: "Planner", href: "/tools/free-return-to-india-planner", description: "RNOR planner tool" },
-    { name: "Book", href: "/book", description: "Consultation booking" },
+    { name: "Book", href: "/#services", description: "Consultation booking" },
     { name: "About", href: "/about", description: "About page" },
     { name: "Privacy", href: "/legal/privacy", description: "Privacy policy" },
     { name: "Thanks", href: "/thanks", description: "Thank you page" },

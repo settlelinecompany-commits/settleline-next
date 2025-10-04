@@ -293,7 +293,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   </p>
                   <div className="flex flex-col gap-3">
                     <Button asChild size="sm">
-                      <Link href="/book">Book a Consultation</Link>
+                      <Link href="/#services">Book a Consultation</Link>
                     </Button>
                     <Button variant="outline" asChild size="sm">
                       <Link href="/tools/free-return-to-india-planner">Start Free Assessment</Link>
@@ -366,7 +366,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-border p-4 shadow-lg z-50">
         <div className="flex gap-3">
           <Button asChild className="flex-1">
-            <Link href="/book">Book a Consultation</Link>
+            <Link href="/#services">Book a Consultation</Link>
           </Button>
           <Button variant="outline" asChild className="flex-1">
             <Link href="/tools/free-return-to-india-planner">Start Free Assessment</Link>

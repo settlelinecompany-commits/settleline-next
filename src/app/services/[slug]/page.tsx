@@ -55,7 +55,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <p className="text-lg text-gray-600 mb-6">{service.description}</p>
         
         <div className="flex gap-4">
-          <a href={service.ctaHref || '/book'} className="bg-blue-600 text-white px-6 py-3 rounded-lg">
+          <a href={service.ctaHref || '/#services'} className="bg-blue-600 text-white px-6 py-3 rounded-lg">
             {service.ctaText || 'Book Consultation'}
           </a>
           <a href="/tools/free-return-to-india-planner" className="border border-gray-300 px-6 py-3 rounded-lg">

@@ -22,7 +22,7 @@ export default function BlogPage() {
         title="Blog & Resources"
         description="Stay informed with the latest updates on US-India tax laws, RNOR planning strategies, and financial transition tips."
         ctaText="Book Consultation"
-        ctaHref="/book"
+        ctaHref="/#services"
       />
       
       <Container className="py-16">

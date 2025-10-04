@@ -232,7 +232,7 @@ export default function ReviewsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="secondary">
-                <Link href="/book">Book Consultation</Link>
+                <Link href="/#services">Book Consultation</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 <Link href="/tools/free-return-to-india-planner">Try Free Planner</Link>
