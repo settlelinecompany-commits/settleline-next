@@ -26,9 +26,10 @@ export default function DashboardPage() {
       
       const { data, error } = await supabase
         .from('consultations')
-        .select('*')
+        .select('id, first_name, last_name, email, phone, service_type, duration_minutes, amount_paid, payment_status, status, created_at, razorpay_order_id')
         .eq('email', user?.email)
         .order('created_at', { ascending: false })
+        .limit(50) // Limit to 50 most recent consultations
 
       if (error) {
         console.error('Error fetching consultations:', error)
