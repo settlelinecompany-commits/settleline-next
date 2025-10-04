@@ -23,6 +23,9 @@ export function getSupabaseServiceClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   
+  console.log('🔍 Debug - supabaseUrl:', supabaseUrl ? 'Found' : 'Missing')
+  console.log('🔍 Debug - supabaseServiceKey:', supabaseServiceKey ? 'Found' : 'Missing')
+  
   if (!supabaseUrl || !supabaseServiceKey) {
     throw new Error('Missing Supabase service role environment variables')
   }

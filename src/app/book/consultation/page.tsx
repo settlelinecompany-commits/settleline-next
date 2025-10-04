@@ -85,7 +85,14 @@ function ConsultationFormContent() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          serviceType: urlServiceType,
+          duration: urlDuration,
+          country: '',
+          state: '',
+          city: ''
+        }),
       });
 
       const result = await response.json();
