@@ -43,7 +43,7 @@ export function SiteHeader() {
           <div className="flex items-center space-x-4">
             <UserMenu />
             <Button asChild>
-              <Link href="/#services">Speak with Cross-Border Experts</Link>
+              <Link href="/#services-grid">Speak with Cross-Border Experts</Link>
             </Button>
           </div>
         </div>

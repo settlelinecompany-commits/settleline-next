@@ -41,7 +41,7 @@ const services = [
 
 export function ServiceExplainerCard() {
   return (
-    <Section className="py-16 bg-muted/20">
+    <Section id="services-grid" className="py-16 bg-muted/20">
       <Container>
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-4">

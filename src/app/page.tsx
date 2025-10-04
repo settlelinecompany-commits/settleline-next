@@ -35,7 +35,7 @@ export default function Home() {
         ctaText="Start for Free"
         ctaHref="/tools/free-return-to-india-planner"
         secondaryCtaText="Get Expert Help"
-        secondaryCtaHref="/#services"
+        secondaryCtaHref="/#services-grid"
         variant="complex"
       />
       
@@ -74,7 +74,7 @@ export default function Home() {
         title="Ready to Plan Your Return to India?"
         description="Get expert guidance tailored to your unique situation. Book a consultation with our specialists today."
         ctaText="Get Expert Help"
-        ctaHref="/#services"
+        ctaHref="/#services-grid"
         secondaryCtaText="Start for Free"
         secondaryCtaHref="/tools/free-return-to-india-planner"
       />

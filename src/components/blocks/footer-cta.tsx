@@ -16,7 +16,7 @@ export function FooterCTA({
   title = "Ready to get started?",
   description = "Book a consultation with our experts to plan your return to India.",
   ctaText = "Book Consultation",
-  ctaHref = "/#services",
+  ctaHref = "/#services-grid",
   secondaryCtaText,
   secondaryCtaHref,
   background = "primary",

@@ -590,7 +590,7 @@ export default function BusinessHiringStructuresPage() {
         title="Ready to Set Up Your Business?"
         description="Start with a 30-minute risk-free consultation. If we can't help you, we'll refund it."
         ctaText="Book Risk-Free Consultation"
-        ctaHref="/#services"
+        ctaHref="/#services-grid"
         secondaryCtaText="Try Free Planner"
         secondaryCtaHref="/tools/free-return-to-india-planner"
       />
