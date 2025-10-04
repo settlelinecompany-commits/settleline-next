@@ -13,12 +13,8 @@ export const SITE_CONFIG = {
 
 export const NAVIGATION = [
   { name: "Services", href: "/services" },
-  { name: "Tools", href: "/tools/free-return-to-india-planner" },
-  { name: "Blog", href: "/blog" },
-  { name: "Reviews", href: "/reviews" },
-  { name: "About", href: "/about" },
-  { name: "Book", href: "/book" },
-] as const
+  { name: "Resources", href: "/resources" },
+]
 
 export const FOOTER_LINKS = {
   services: [

@@ -3,51 +3,26 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
-const serviceCategories = [
+const services = [
   {
-    title: "Tax Filing & Compliance",
-    services: [
-      {
-        title: "Indian Tax Filing",
-        href: "/services/indian-tax-filing",
-        description: "ITR preparation, DTAA guidance, capital gains optimization"
-      },
-      {
-        title: "Notices Handling",
-        href: "/services/notices-handling",
-        description: "Tax notice responses and representation services"
-      }
-    ]
+    title: "We plan your return to India",
+    href: "/services/return-to-india-financial-planning/",
+    description: "Get a complete roadmap for your financial transition with tax optimization and retirement planning."
   },
   {
-    title: "Tax Planning & Strategy",
-    services: [
-      {
-        title: "Tax Consultancy Services", 
-        href: "/services/tax-consultancy",
-        description: "Cross-border tax planning and NRI tax strategy"
-      },
-      {
-        title: "NRI Returning India Tax Plan",
-        href: "/services/nri-returning-tax-plan",
-        description: "Tax residency advisory and wealth structuring"
-      }
-    ]
+    title: "We protect your Indian property", 
+    href: "/services/property-real-estate-advisory/",
+    description: "Buy, sell, or manage Indian property with full tax efficiency and compliance."
   },
   {
-    title: "Investment & Financial Services",
-    services: [
-      {
-        title: "Investment Advisory",
-        href: "/services/investment-advisory", 
-        description: "Portfolio management and tax-efficient investing"
-      },
-      {
-        title: "Repatriation of Funds",
-        href: "/services/repatriation-of-funds",
-        description: "NRO to NRE transfers and RBI compliance"
-      }
-    ]
+    title: "We move your money safely",
+    href: "/services/repatriation-money-movement/", 
+    description: "Repatriate funds across borders legally and efficiently with expert guidance."
+  },
+  {
+    title: "We set up your business and hire",
+    href: "/services/business-hiring-structures/",
+    description: "Establish your business in India and set up compliant offshore hiring structures to work with global talent."
   }
 ];
 
@@ -93,44 +68,78 @@ export function ServicesDropdown() {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-96 bg-white border border-border/20 rounded-lg shadow-lg z-50">
+        <div className="absolute top-full left-0 mt-2 w-[700px] bg-white border border-border/20 rounded-lg shadow-lg z-50">
           <div className="p-6">
             <div className="grid grid-cols-3 gap-6">
-              {serviceCategories.map((category, categoryIndex) => (
-                <div key={categoryIndex} className="space-y-3">
-                  <div className="pb-2 border-b border-border/20">
-                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                      {category.title}
-                    </h3>
-                  </div>
-                  <div className="space-y-2">
-                    {category.services.map((service, serviceIndex) => (
-                      <Link
-                        key={serviceIndex}
-                        href={service.href}
-                        className="block p-2 rounded-md hover:bg-muted/30 transition-colors group"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <div className="font-medium text-sm text-foreground group-hover:text-primary transition-colors">
-                          {service.title}
-                        </div>
-                        <div className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                          {service.description}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+              {/* Left Column - 4 Service Cards (2/3 width) */}
+              <div className="col-span-2">
+                <h3 className="text-base font-semibold text-foreground mb-4">
+                  Expert services for cross-border professionals
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {services.map((service, index) => (
+                    <Link
+                      key={index}
+                      href={service.href}
+                      className="block p-3 rounded-md hover:bg-muted/20 transition-colors group"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <div className="font-medium text-sm text-foreground group-hover:text-primary transition-colors mb-1">
+                        {service.title}
+                      </div>
+                      <div className="text-xs text-muted-foreground leading-relaxed">
+                        {service.description}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div className="mt-6 pt-4 border-t border-border/20">
-              <Link
-                href="/services"
-                className="block text-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                View All Services →
-              </Link>
+              </div>
+              
+              {/* Right Column - Case Studies (1/3 width) */}
+              <div className="col-span-1">
+                <h3 className="text-base font-semibold text-foreground mb-4">Success Stories</h3>
+                <div className="space-y-4">
+                  <Link
+                    href="/case-studies/microsoft-manager-save-lakhs"
+                    className="block p-2 rounded-md hover:bg-muted/20 transition-colors group"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <h4 className="font-medium text-sm text-foreground group-hover:text-primary transition-colors mb-1">Microsoft Manager</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Saved ₹30L+ through strategic RNOR planning and tax optimization.
+                    </p>
+                  </Link>
+                  <Link
+                    href="/case-studies/customer-story-business-setup-india-offshore-compliance"
+                    className="block p-2 rounded-md hover:bg-muted/20 transition-colors group"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <h4 className="font-medium text-sm text-foreground group-hover:text-primary transition-colors mb-1">Tech Entrepreneur</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Set up compliant business structure with offshore hiring capabilities.
+                    </p>
+                  </Link>
+                  <Link
+                    href="/case-studies/customer-story-buying-property-investing-india"
+                    className="block p-2 rounded-md hover:bg-muted/20 transition-colors group"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <h4 className="font-medium text-sm text-foreground group-hover:text-primary transition-colors mb-1">Property Owner</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Optimized property sale and repatriated funds efficiently.
+                    </p>
+                  </Link>
+                </div>
+                <div className="mt-4">
+                  <Link
+                    href="/case-studies"
+                    className="text-xs font-medium text-primary hover:underline inline-flex items-center"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    See all case studies →
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 interface SectionProps {
   children: React.ReactNode
   className?: string
+  id?: string
   spacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl"
   background?: "default" | "muted" | "primary" | "secondary"
 }
@@ -10,11 +11,13 @@ interface SectionProps {
 export function Section({ 
   children, 
   className, 
+  id,
   spacing = "lg",
   background = "default"
 }: SectionProps) {
   return (
     <section
+      id={id}
       className={cn(
         "w-full",
         {

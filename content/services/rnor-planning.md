@@ -24,7 +24,7 @@ ctaHref: "/book?service=rnor-planning"
 
 # RNOR Tax Planning Service
 
-Our comprehensive RNOR (Resident but Not Ordinarily Resident) tax planning service is designed to help you maximize the tax benefits available during your return to India. This service is specifically tailored for US-India cross-border professionals who want to optimize their tax situation during the critical transition period.
+Our comprehensive RNOR (Resident but Not Ordinarily Resident) tax planning service is designed to help you maximize the tax benefits available during your return to India. This service is specifically tailored for cross-border professionals who want to optimize their tax situation during the critical transition period.
 
 ## What's Included
 
@@ -81,7 +81,7 @@ Our comprehensive RNOR (Resident but Not Ordinarily Resident) tax planning servi
 
 This service is ideal for:
 
-- **US-India Cross-Border Professionals**: Individuals returning to India after working in the US
+- **Cross-Border Professionals**: Individuals returning to India after working abroad
 - **High-Income Individuals**: Those with significant assets or complex income situations
 - **Business Owners**: Entrepreneurs with business interests in both countries
 - **Investors**: Individuals with substantial investment portfolios

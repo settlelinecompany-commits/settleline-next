@@ -21,7 +21,7 @@ export default function NotFound() {
               <Link href="/tools/free-return-to-india-planner">Free Planner</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/services">Our Services</Link>
+              <Link href="/services/return-to-india-financial-planning/">Our Services</Link>
             </Button>
             <Button variant="outline" asChild>
               <Link href="/blog">Blog</Link>

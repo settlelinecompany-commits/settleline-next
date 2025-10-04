@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Container } from "@/components/layout/container"
 import { NAVIGATION } from "@/lib/constants"
 import { ServicesDropdown } from "./services-dropdown"
+import { ResourcesDropdown } from "./resources-dropdown"
 import { UserMenu } from "@/components/auth/user-menu"
 
 export function SiteHeader() {
@@ -25,6 +26,8 @@ export function SiteHeader() {
               {NAVIGATION.map((item) => (
                 item.name === "Services" ? (
                   <ServicesDropdown key={item.name} />
+                ) : item.name === "Resources" ? (
+                  <ResourcesDropdown key={item.name} />
                 ) : (
                   <Link
                     key={item.name}

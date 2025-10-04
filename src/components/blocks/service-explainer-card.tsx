@@ -6,82 +6,36 @@ import Link from "next/link";
 
 const services = [
   {
-    title: "Residency, Tax & Investment Planning",
-    description: "Plan your return with clarity—RNOR years, DTAA relief, Form 67, and global asset exits made simple.",
-    tags: ["RNOR & Residency Planning", "Double Taxation Relief (Form 67 / DTAA)", "Investment & RSU Tax Planning", "Compliance & Global Disclosures"],
-    ctaText: "Plan Your Taxes & Investments →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-      </svg>
-    )
+    title: "We plan your return to India",
+    description: "Get a complete roadmap for your financial transition with tax optimization and retirement planning.",
+    ctaText: "Start Your Planning",
+    ctaHref: "/services/return-to-india-financial-planning/",
+    image: "/images/services/return-planning.webp",
+    overlay: "Free assessment"
   },
   {
-    title: "Property & Real Estate Advisory",
-    description: "Buy, sell, rent, or maintain Indian property without stress—secure, tax-efficient, and FEMA compliant.",
-    tags: ["Property Sale & Taxation", "Rental Income & Tenant Management", "Property Protection & Maintenance", "Repatriation of Sale Proceeds"],
-    ctaText: "Get Property Advisory →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9,22 9,12 15,12 15,22"/>
-      </svg>
-    )
+    title: "We protect your Indian property",
+    description: "Buy, sell, or manage Indian property with full tax efficiency and compliance.",
+    ctaText: "Secure Your Assets",
+    ctaHref: "/services/property-real-estate-advisory/",
+    image: "/images/services/property-management.webp",
+    overlay: "Tax optimized"
   },
   {
-    title: "Repatriation & Money Movement",
-    description: "Move your money across borders—property, rent, or inheritance—FEMA compliant and penalty-free.",
-    tags: ["Property Sale & Rental Repatriation", "Inheritance & Gift Transfers", "$1M Desk & RBI Approvals", "Form 15CA/CB & Bank Coordination"],
-    ctaText: "Repatriate Funds Safely →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-        <line x1="8" y1="21" x2="16" y2="21"/>
-        <line x1="12" y1="17" x2="12" y2="21"/>
-        <path d="M7 7l5 5 5-5"/>
-      </svg>
-    )
+    title: "We move your money safely",
+    description: "Repatriate funds across borders legally and efficiently with expert guidance.",
+    ctaText: "Get Transfer Help",
+    ctaHref: "/services/repatriation-money-movement/",
+    image: "/images/services/money-movement.webp",
+    overlay: "100% compliant"
   },
   {
-    title: "Business & Hiring Structures",
-    description: "Set up or expand your business in India with tax-efficient structures, payroll, and global compliance.",
-    tags: ["Entity Incorporation & Structuring", "FEMA & RBI Compliance", "Employer of Record / Hiring Advisory", "Transfer Pricing & Cross-Border Tax"],
-    ctaText: "Start or Scale Your Business →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-        <path d="M18 8l2 2-2 2"/>
-      </svg>
-    )
-  },
-  {
-    title: "Wealth & Retirement Planning",
-    description: "Protect your future—retirement accounts, pensions, trusts, and estate planning tailored for global Indians.",
-    tags: ["Global Retirement Accounts (401k, Roth, UK pensions)", "Safe Withdrawal & Asset Allocation", "Estate & Family Trust Planning", "Succession & Inheritance Advisory"],
-    ctaText: "Plan Your Wealth & Retirement →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14,2 14,8 20,8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
-      </svg>
-    )
-  },
-  {
-    title: "Compliance & Risk Assurance",
-    description: "Stay audit-ready and penalty-free with strong internal controls, Schedule FA reporting, and risk defense.",
-    tags: ["Internal Controls & Reporting", "Technology & Cyber Assurance", "Black Money Act & Schedule FA", "Regulatory Risk & Penalty Defense"],
-    ctaText: "Protect Your Compliance →",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        <path d="M13 8H7"/>
-        <path d="M17 12H7"/>
-      </svg>
-    )
+    title: "We set up your business and hire",
+    description: "Establish your business in India and set up compliant offshore hiring structures to work with global talent.",
+    ctaText: "Start Your Business",
+    ctaHref: "/services/business-hiring-structures/",
+    image: "/images/services/business-setup.webp",
+    overlay: "Full support"
   }
 ];
 
@@ -98,45 +52,58 @@ export function ServiceExplainerCard() {
           </p>
         </div>
         
-        {/* 3x2 Grid - Mobile Responsive with Equal Heights */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+        {/* 2x2 Grid - Clean TurboTax Style */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
-            <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-              {/* Icon Section */}
-              <div className="flex items-start gap-4 mb-4">
-                {/* Icon Container */}
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    {service.icon}
-                  </div>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-lg font-bold text-foreground leading-tight">
-                  {service.title}
-                </h3>
-              </div>
+            <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-border/20 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+              {/* Title */}
+              <h3 className="text-xl font-bold text-foreground mb-4 leading-tight">
+                {service.title}
+              </h3>
               
               {/* Description */}
-              <p className="text-muted-foreground mb-4 leading-relaxed text-sm flex-grow">
+              <p className="text-muted-foreground mb-6 leading-relaxed flex-grow">
                 {service.description}
               </p>
               
-              {/* Service Tags */}
-              <div className="grid grid-cols-2 gap-2 mb-6">
-                {service.tags.map((tag, tagIndex) => (
-                  <div key={tagIndex} className="bg-blue-50 border border-border/50 rounded-lg w-full h-16 flex items-center justify-center">
-                    <span className="text-xs font-medium text-foreground text-center leading-tight">{tag}</span>
-                  </div>
-                ))}
-              </div>
-              
               {/* CTA Button */}
-              <Button size="sm" className="w-full" asChild>
-                <Link href={`/services/${service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`}>
+              <Button size="lg" className="w-full mb-4" asChild>
+                <Link href={service.ctaHref}>
                   {service.ctaText}
                 </Link>
               </Button>
+              
+              {/* Learn More Link */}
+              <Link 
+                href={service.ctaHref}
+                className="text-sm text-primary hover:underline text-center"
+              >
+                See how {service.title.toLowerCase()} works
+              </Link>
+              
+              {/* Large Image with Overlay */}
+              <div className="mt-6 relative">
+                <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                      </svg>
+                    </div>
+                    <p className="text-sm text-muted-foreground">Service Image</p>
+                  </div>
+                </div>
+                {/* Overlay Badge */}
+                {index === 0 ? (
+                  <Link href="/tools/free-return-to-india-planner" className="absolute bottom-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">
+                    {service.overlay}
+                  </Link>
+                ) : (
+                  <div className="absolute bottom-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                    {service.overlay}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>

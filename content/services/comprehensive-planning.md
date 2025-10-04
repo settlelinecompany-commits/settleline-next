@@ -1,7 +1,7 @@
 ---
 title: "Comprehensive Tax & Financial Planning"
 slug: "comprehensive-planning"
-description: "Complete tax and financial planning service for US-India cross-border professionals, covering all aspects of your transition and ongoing compliance."
+description: "Complete tax and financial planning service for cross-border professionals, covering all aspects of your transition and ongoing compliance."
 priceFrom: "$5,000"
 bullets:
   - "Complete tax optimization strategy"
@@ -24,7 +24,7 @@ ctaHref: "/book?service=comprehensive-planning"
 
 # Comprehensive Tax & Financial Planning
 
-Our comprehensive tax and financial planning service provides complete support for your US-India transition, covering all aspects of tax optimization, investment planning, and ongoing compliance.
+Our comprehensive tax and financial planning service provides complete support for your cross-border transition, covering all aspects of tax optimization, investment planning, and ongoing compliance.
 
 ## What's Included
 
@@ -56,4 +56,4 @@ The investment includes comprehensive assessment, complete strategy development,
 
 ## Getting Started
 
-Ready to get comprehensive support for your US-India transition? Contact us today to schedule a consultation.
+Ready to get comprehensive support for your cross-border transition? Contact us today to schedule a consultation.
